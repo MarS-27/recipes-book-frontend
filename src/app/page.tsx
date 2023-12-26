@@ -1,9 +1,12 @@
-import Image from "next/image";
+import { Auth } from "@/components/auth/Auth";
+import { type FC } from "react";
 
-export default function Home() {
+const Home: FC = () => {
   return (
-    <main className="p-24">
-      <p>Hello!</p>
-    </main>
+    <>
+      <Auth />
+    </>
   );
-}
+};
+
+export default Home;
