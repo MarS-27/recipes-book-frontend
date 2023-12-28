@@ -3,24 +3,23 @@ import { getRecipes } from "@/utils/getRecipes";
 import { redirect } from "next/navigation";
 import { ROUTE } from "@/utils/routes";
 import { RecipeCategories } from "@/types/recipe";
+import { Pagination } from "@/components/ui/Pagination";
 
 type TSearchParams = {
   category: RecipeCategories;
-  page: number;
-  limit: number;
+  page: string;
 };
 
 const Recipes: FC<{ searchParams: TSearchParams }> = async ({
   searchParams,
 }) => {
   if (Object.keys(searchParams).length === 0) {
-    redirect(ROUTE.RECIPES);
+    redirect(ROUTE.RECIPES_START);
   }
 
   const recipesData = await getRecipes(
     searchParams.category,
-    searchParams.page,
-    searchParams.limit
+    Number(searchParams.page)
   );
 
   return (
@@ -30,6 +29,13 @@ const Recipes: FC<{ searchParams: TSearchParams }> = async ({
       ) : (
         <p>{recipesData.results[0].title}</p>
       )}
+
+      {recipesData.pagesCount && recipesData.pagesCount > 1 ? (
+        <Pagination
+          activePageNumber={recipesData.pageNum}
+          pagesCount={recipesData.pagesCount}
+        />
+      ) : null}
     </>
   );
 };

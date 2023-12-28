@@ -9,7 +9,7 @@ const Home: FC = async () => {
   const session = await getServerSession(authOptions);
 
   if (session?.user.token) {
-    redirect(ROUTE.RECIPES);
+    redirect(ROUTE.RECIPES_START);
   }
 
   return (

@@ -5,10 +5,10 @@ import { getServerSession } from "next-auth";
 
 export const getRecipes = async (
   category: RecipeCategories,
-  page: number,
-  limit: number
+  page: number
 ): Promise<TPaginatedResult<TRecipe>> => {
   const session = await getServerSession(authOptions);
+  const limit = 3;
 
   try {
     const skip = (page - 1) * limit;
@@ -21,7 +21,7 @@ export const getRecipes = async (
           "Content-Type": "application/json",
           Authorization: `Bearer ${session?.user.token}`,
         },
-        next: { tags: ["recipes"] },
+        next: { tags: [`${category}+${page}`] },
       }
     );
 

@@ -29,6 +29,7 @@ const config: Config = {
         lg64: ["64px", "normal"],
       },
       backgroundColor: {
+        lightBlue: "#ECF4F7",
         mainBlue: "#45AAB8",
         darkBlue: "#378893",
         mainGreen: "#B4CCB9",

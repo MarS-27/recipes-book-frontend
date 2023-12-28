@@ -1,4 +1,5 @@
 export const ROUTE = {
   HOME: "/",
-  RECIPES: "/recipes?category=All&page=1&limit=12",
+  RECIPES: "/recipes",
+  RECIPES_START: "/recipes?category=All&page=1",
 };
