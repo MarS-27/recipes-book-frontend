@@ -56,7 +56,7 @@ export const Auth: FC = () => {
   };
 
   return (
-    <section className="relative max-w-loginContainer mx-auto w-full px-6 text-black py-10 bg-mainYellow bg-opacity-[0.3] rounded-md border border-grayStroke-80">
+    <section className="relative max-w-loginContainer m-auto w-full px-6 py-10 bg-mainYellow bg-opacity-[0.3] rounded-md border border-grayStroke-80">
       <div className="text-center border-b border-grayStroke-100 border-opacity-20 pb-5 mb-7">
         <h3 className="mb-2 font-semibold text-md26">
           {isLogin ? "Sign In" : "Create account"}

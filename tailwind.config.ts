@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       width: {},
-      height: {},
+      height: { recipeCard: "200px" },
       maxWidth: {
         container: "1280px",
         loginContainer: "500px",

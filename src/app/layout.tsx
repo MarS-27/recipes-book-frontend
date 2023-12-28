@@ -20,10 +20,15 @@ const RootLayout: FC<{
 }> = ({ children }) => {
   return (
     <html lang="en">
-      <body className={clsx(rubik.className, "bg-grayStroke-30 bg-opacity-20")}>
+      <body
+        className={clsx(
+          rubik.className,
+          "bg-grayStroke-30 bg-opacity-20 text-black"
+        )}
+      >
         <div className="min-h-dvh flex flex-col justify-between items-center max-w-container mx-auto px-4">
           <Header />
-          <main className="w-full">{children}</main>
+          <main className="w-full grow flex">{children}</main>
           <Footer />
         </div>
         <ToastContainer

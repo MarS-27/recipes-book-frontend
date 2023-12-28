@@ -8,7 +8,7 @@ export const getRecipes = async (
   page: number
 ): Promise<TPaginatedResult<TRecipe>> => {
   const session = await getServerSession(authOptions);
-  const limit = 3;
+  const limit = 6;
 
   try {
     const skip = (page - 1) * limit;
@@ -21,7 +21,7 @@ export const getRecipes = async (
           "Content-Type": "application/json",
           Authorization: `Bearer ${session?.user.token}`,
         },
-        next: { tags: [`${category}+${page}`] },
+        next: { tags: ["recipes"] },
       }
     );
 
