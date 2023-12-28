@@ -11,3 +11,17 @@ export type TError = {
   message: string;
   statusCode: number;
 };
+
+export type TPaginatedResult<TData> = {
+  pagesCount?: number;
+  error?: string;
+  pageNum: number;
+  results: TData[];
+};
+
+export type TPaginatedResponse<TData> = {
+  total: number;
+  limit: number;
+  skip: number;
+  results: TData[];
+};

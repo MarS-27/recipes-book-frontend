@@ -1,12 +1,12 @@
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import clsx from "clsx";
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
-import "./globals.css";
 import type { FC, ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Header } from "@/components/layout/Header";
-import clsx from "clsx";
-import { Footer } from "@/components/layout/Footer";
+import "./globals.css";
 
 const rubik = Rubik({ weight: "400", subsets: ["latin"] });
 
@@ -27,7 +27,7 @@ const RootLayout: FC<{
           <Footer />
         </div>
         <ToastContainer
-          className="z-50 toast-container"
+          className="z-50"
           position="bottom-left"
           autoClose={2000}
         />
