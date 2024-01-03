@@ -24,6 +24,7 @@ export const LogoutButton: FC = () => {
         height={40}
         src="/images/logout-icon.svg"
         alt="logout"
+        className="min-w-10"
       />
     </button>
   );

@@ -6,7 +6,7 @@ import { RecipeCategories } from "@/types/recipe";
 import { Pagination } from "@/components/ui/Pagination";
 import { WarningMessage } from "@/components/ui/WarningMessage";
 import { RecipeCard } from "@/components/recipes-page/RecipeCard";
-import { AsidePanel } from "@/components/recipes-page/AsidePanel";
+import { FilterPanel } from "@/components/recipes-page/FilterPanel";
 
 type TSearchParams = {
   category: RecipeCategories;
@@ -26,11 +26,8 @@ const Recipes: FC<{ searchParams: TSearchParams }> = async ({
   );
 
   return (
-    <section className="flex flex-col justify-between w-full p-5">
-      <AsidePanel />
-      <h3 className="text-md26 font-semibold pb-5 border-b-2 border-grayStroke-100 border-opacity-20">
-        {searchParams.category}
-      </h3>
+    <section className="flex flex-col justify-between w-full py-5">
+      <FilterPanel category={searchParams.category} />
       {recipesData.error && !recipesData.results.length ? (
         <p>{recipesData.error}</p>
       ) : (

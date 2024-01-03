@@ -10,9 +10,13 @@ const config: Config = {
     extend: {
       width: {},
       height: { recipeCard: "200px" },
+      maxHeight: {
+        filterBar: "400px",
+      },
       maxWidth: {
         container: "1280px",
         loginContainer: "500px",
+        filterBar: "320px",
       },
       fontSize: {
         xs10: ["10px", "12px"],
@@ -30,10 +34,12 @@ const config: Config = {
       },
       backgroundColor: {
         lightBlue: "#ECF4F7",
+        pageBg: "#fafbfb",
         mainBlue: "#45AAB8",
         darkBlue: "#378893",
         mainGreen: "#B4CCB9",
         mainYellow: "#F9EBB2",
+        lightYellow: "#faf6e5",
         mainRed: "#F76D57",
       },
       colors: {

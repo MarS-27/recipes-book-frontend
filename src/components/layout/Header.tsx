@@ -14,7 +14,7 @@ export const Header: FC = async () => {
   return (
     <header
       className={clsx(
-        "flex items-center py-2 w-full",
+        "flex items-center py-2 w-full sticky top-0 z-50 bg-pageBg",
         session?.user.token ? "justify-between" : "justify-center"
       )}
     >
