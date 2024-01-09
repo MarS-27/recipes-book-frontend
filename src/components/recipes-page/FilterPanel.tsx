@@ -1,6 +1,7 @@
 import { RecipeCategories } from "@/types/recipe";
 import { type FC } from "react";
 import { SelectCategory } from "./SelectCategory";
+import { SearchBar } from "./SearchBar";
 
 type FilterPanelProps = {
   category: RecipeCategories;
@@ -8,8 +9,9 @@ type FilterPanelProps = {
 
 export const FilterPanel: FC<FilterPanelProps> = ({ category }) => {
   return (
-    <div className="px-5">
+    <div className="px-5 flex gap-5 justify-between">
       <SelectCategory category={category} />
+      <SearchBar />
     </div>
   );
 };

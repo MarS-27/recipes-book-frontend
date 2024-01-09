@@ -17,6 +17,7 @@ const config: Config = {
         container: "1280px",
         loginContainer: "500px",
         filterBar: "320px",
+        searchBar: "450px",
       },
       fontSize: {
         xs10: ["10px", "12px"],

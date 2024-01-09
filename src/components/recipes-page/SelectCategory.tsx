@@ -15,7 +15,7 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
   const categories = Object.values(RecipeCategories);
 
   return (
-    <div className="relative max-w-filterBar">
+    <div className="relative w-full max-w-filterBar">
       <div
         className={clsx(
           "flex justify-between items-center gap-2 p-2 bg-lightYellow rounded-md border-2 transition-all duration-200",
