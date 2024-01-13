@@ -1,8 +1,9 @@
 "use client";
+import { getUserProfile } from "@/utils/getUserProfile";
 import { ROUTE } from "@/utils/routes";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
-import { type FC } from "react";
+import { useEffect, type FC } from "react";
 import { toast } from "react-toastify";
 
 export const LogoutButton: FC = () => {
@@ -13,6 +14,10 @@ export const LogoutButton: FC = () => {
       toast.error("Log out error. Try again.");
     }
   };
+
+  useEffect(() => {
+    getUserProfile();
+  }, []);
 
   return (
     <button

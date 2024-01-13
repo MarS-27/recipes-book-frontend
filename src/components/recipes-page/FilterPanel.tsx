@@ -9,7 +9,7 @@ type FilterPanelProps = {
 
 export const FilterPanel: FC<FilterPanelProps> = ({ category }) => {
   return (
-    <div className="px-5 flex gap-5 justify-between">
+    <div className="px-5 flex gap-5 justify-between pb-5 border-b-2 border-b-mainBLue">
       <SelectCategory category={category} />
       <SearchBar />
     </div>

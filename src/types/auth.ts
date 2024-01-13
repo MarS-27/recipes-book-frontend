@@ -10,3 +10,10 @@ export type TLogin = {
   userName: string;
   token: string;
 };
+
+export type TUserProfile = {
+  id: number;
+  email: string;
+  imgPath: string;
+  userName: string;
+};

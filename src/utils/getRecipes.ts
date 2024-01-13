@@ -21,6 +21,7 @@ export const getRecipes = async (
           "Content-Type": "application/json",
           Authorization: `Bearer ${session?.user.token}`,
         },
+        cache: "force-cache",
         next: { tags: ["recipes"] },
       }
     );

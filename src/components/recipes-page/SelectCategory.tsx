@@ -39,8 +39,15 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
           alt="Open select categories"
         />
       </div>
-      {isOpenOrder ? (
-        <div className="w-full p-2 absolute top-[105%] left-0 flex flex-col gap-2 bg-pageBg rounded-md border border-grayStroke-80 max-h-filterBar">
+      <div
+        className={clsx(
+          "w-full absolute top-[105%] left-0 grid transition-all duration-200 max-h-filterBar",
+          isOpenOrder
+            ? "p-2 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
+            : "grid-rows-[0fr]"
+        )}
+      >
+        <div className="flex flex-col gap-2 overflow-hidden">
           {categories.map((item) => (
             <Link
               href={`${ROUTE.RECIPES}?category=${item}&page=1`}
@@ -59,7 +66,7 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
             </Link>
           ))}
         </div>
-      ) : null}
+      </div>
     </div>
   );
 };

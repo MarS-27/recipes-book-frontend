@@ -1,31 +1,18 @@
 "use client";
-import { useDebounceValue } from "@/hooks/useDebounce";
 import { useSearch } from "@/hooks/useSearch";
 import clsx from "clsx";
 import Link from "next/link";
-import {
-  useEffect,
-  useState,
-  type Dispatch,
-  type FC,
-  type SetStateAction,
-} from "react";
+import { type FC } from "react";
 
 export const SearchBar: FC = () => {
-  const { isOpenSearch, searchedRecipes, setDebouncedSearch, setToggleSearch } =
-    useSearch();
-  //   const { pathname, query } = useRouter();
-  const [searchValue, setSearchValue] = useState("");
-  const debouncedValue = useDebounceValue(searchValue.trim(), 500);
-  console.log(searchedRecipes);
-
-  useEffect(() => {
-    setDebouncedSearch(debouncedValue);
-  }, [debouncedValue]);
-
-  //   useEffect(() => {
-  //     setSearchValue('');
-  //   }, [pathname, query]);
+  const {
+    searchValue,
+    setSearchValue,
+    debouncedValue,
+    isOpenSearch,
+    searchedRecipes,
+    setToggleSearch,
+  } = useSearch();
 
   return (
     <div className="relative w-full max-w-searchBar">
@@ -47,19 +34,29 @@ export const SearchBar: FC = () => {
         className="w-7 h-7 min-w-[28px] ml-auto cursor-pointer md:absolute md:top-1/2 md:right-2 md:-translate-y-1/2"
         onClick={() => setToggleSearch(!isOpenSearch)}
       />
-      {debouncedValue && isOpenSearch && searchedRecipes?.length ? (
-        <div className="w-full p-2 absolute top-[105%] left-0 flex flex-col gap-2 bg-pageBg rounded-md border border-grayStroke-80 max-h-filterBar">
+      <div
+        className={clsx(
+          "w-full absolute top-[105%] left-0 grid transition-all duration-200 max-h-filterBar",
+          debouncedValue && isOpenSearch && searchedRecipes?.length
+            ? "p-2 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
+            : "grid-rows-[0fr]"
+        )}
+      >
+        <div className="flex flex-col gap-2 overflow-hidden">
           {searchedRecipes.map((recipe) => (
             <Link
               key={recipe.id}
               href={`/recipe/${recipe.id}`}
               onClick={() => setToggleSearch(false)}
+              className={
+                "pb-2 px-2 relative transition-all duration-200 border-b-2 border-b-grayStroke-80 hover:text-darkBlue"
+              }
             >
               {recipe.title}
             </Link>
           ))}
         </div>
-      ) : null}
+      </div>
     </div>
   );
 };
