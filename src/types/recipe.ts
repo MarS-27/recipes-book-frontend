@@ -24,3 +24,8 @@ export type TRecipe = {
   ingredients: string[];
   stages: TRecipeStage[];
 };
+
+export type TGetRecipeByIdResult = {
+  error?: string;
+  result: TRecipe | null;
+};
