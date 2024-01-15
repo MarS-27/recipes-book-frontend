@@ -15,7 +15,7 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
   const categories = Object.values(RecipeCategories);
 
   return (
-    <div className="relative w-full max-w-filterBar">
+    <div className="relative w-full md:max-w-filterBar">
       <div
         className={clsx(
           "flex justify-between items-center gap-2 p-2 bg-lightYellow rounded-md border-2 transition-all duration-200",
@@ -27,7 +27,7 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
           setOpenOrder(!isOpenOrder);
         }}
       >
-        <h3 className="sm:text-md26 text-md20 font-semibold">{category}</h3>
+        <h3 className="md:text-md20 text-s14 font-semibold">{category}</h3>
         <Image
           width={24}
           height={24}
@@ -41,7 +41,7 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
       </div>
       <div
         className={clsx(
-          "w-full absolute top-[105%] left-0 grid transition-all duration-200 max-h-filterBar",
+          "w-full absolute top-[105%] left-0 grid transition-all duration-200 max-h-filterBar z-10",
           isOpenOrder
             ? "p-2 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
             : "grid-rows-[0fr]"

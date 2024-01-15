@@ -9,9 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       width: {},
-      height: { recipeCard: "200px" },
+      height: { recipeCard: "240px" },
       maxHeight: {
         filterBar: "400px",
+        recipeTitleImage: "400px",
+        recipeStageImage: "200px",
       },
       maxWidth: {
         container: "1280px",

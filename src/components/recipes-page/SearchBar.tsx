@@ -15,10 +15,10 @@ export const SearchBar: FC = () => {
   } = useSearch();
 
   return (
-    <div className="relative w-full max-w-searchBar">
+    <div className="relative w-full md:max-w-searchBar">
       <input
         className={clsx(
-          "w-full p-2 sm:text-md26 text-md20 font-normal bg-lightYellow rounded-md border-2 placeholder:text-grayStroke-70 placeholder:font-light outline-none",
+          "w-full p-2 md:text-md20 text-s14 font-normal bg-lightYellow rounded-md border-2 placeholder:text-grayStroke-70 placeholder:font-light outline-none",
           isOpenSearch ? "border-mainBLue" : "border-grayStroke-80"
         )}
         type="text"
@@ -31,12 +31,12 @@ export const SearchBar: FC = () => {
       <img
         src={!isOpenSearch ? "/images/search.svg" : "/images/close.svg"}
         alt="search icon"
-        className="w-7 h-7 min-w-[28px] ml-auto cursor-pointer md:absolute md:top-1/2 md:right-2 md:-translate-y-1/2"
+        className="w-7 h-7 min-w-[28px] ml-auto cursor-pointer absolute top-1/2 right-2 -translate-y-1/2"
         onClick={() => setToggleSearch(!isOpenSearch)}
       />
       <div
         className={clsx(
-          "w-full absolute top-[105%] left-0 grid transition-all duration-200 max-h-filterBar",
+          "w-full absolute top-[105%] left-0 grid transition-all duration-200 max-h-filterBar z-10",
           debouncedValue && isOpenSearch && searchedRecipes?.length
             ? "p-2 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
             : "grid-rows-[0fr]"
