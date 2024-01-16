@@ -16,33 +16,29 @@ export const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
   return (
     <Link
       href={`/recipe/${recipe.id}`}
-      className="rounded-md border-2 border-grayStroke-80 h-recipeCard shadow-lg hover:scale-105 transition-all duration-200"
+      className={clsx(
+        "relative rounded-md h-recipeCard shadow-lg hover:scale-105 transition-all duration-200",
+        !titleImgPath ? "p-2 bg-lightBlue" : "p-0"
+      )}
     >
-      <div
+      <Image
+        src={
+          titleImgPath
+            ? `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${titleImgPath}`
+            : "/images/meal-icon.svg"
+        }
         className={clsx(
-          "max-h-40",
-          !titleImgPath ? "p-2 bg-lightYellow" : "p-0"
+          "w-full rounded-md",
+          !titleImgPath ? "h-40 object-center" : "object-cover h-recipeCard"
         )}
-      >
-        <Image
-          src={
-            titleImgPath
-              ? `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${titleImgPath}`
-              : "/images/meal-icon.svg"
-          }
-          className={clsx(
-            "w-full h-auto",
-            !titleImgPath ? "object-center max-h-36" : "object-cover max-h-40"
-          )}
-          width={300}
-          height={300}
-          alt="Recipe title image"
-        />
-      </div>
+        width={300}
+        height={300}
+        alt="Recipe title image"
+      />
       <p
         className={clsx(
           pacifico.className,
-          "text-md20 sm:text-md26 font-medium tracking-wider p-2"
+          "absolute bottom-0 left-0 w-full bg-lightYellow bg-opacity-70 text-md20 md:text-md26 font-medium p-2 leading-[34px] md:leading-[44px] line-clamp-1 hover:line-clamp-none"
         )}
       >
         {title}

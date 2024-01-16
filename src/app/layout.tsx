@@ -19,7 +19,12 @@ const RootLayout: FC<{
 }> = async ({ children }) => {
   return (
     <html lang="en">
-      <body className={clsx(rubik.className, "bg-pageBg text-black")}>
+      <body
+        className={clsx(
+          rubik.className,
+          "bg-pageBg text-black text-xs12 sm:text-sm16"
+        )}
+      >
         <div className="min-h-dvh flex flex-col justify-between items-center max-w-container mx-auto px-4">
           <Header />
           <main className="w-full grow flex">{children}</main>

@@ -23,6 +23,12 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
         <WarningMessage>{error}</WarningMessage>
       ) : (
         <div className="flex gap-5">
+          <ul className="flex flex-col gap-3 w-1/4 p-2 pl-5 list-image-checkmark">
+            <p className="text-s14 sm:text-md20 font-semibold">Ingredients:</p>
+            {result?.ingredients.map((ingredient) => (
+              <li key={ingredient}>{ingredient};</li>
+            ))}
+          </ul>
           <div className="w-full flex flex-col gap-3">
             <h3
               className={clsx(
@@ -35,7 +41,7 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
             {result?.titleImgPath ? (
               <Image
                 src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${result?.titleImgPath}`}
-                className="w-full max-h-recipeTitleImage object-cover rounded-md border-2 border-grayStroke-80"
+                className="w-full max-h-recipeTitleImage object-cover rounded-md"
                 width={200}
                 height={200}
                 alt="Recipe title image"
@@ -58,7 +64,7 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
                   {stage.imgPath ? (
                     <Image
                       src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${stage.imgPath}`}
-                      className="w-1/3 max-h-recipeStageImage object-cover rounded-md border-2 border-grayStroke-80"
+                      className="w-1/3 max-h-recipeStageImage object-cover rounded-md"
                       width={200}
                       height={200}
                       alt="Recipe stage image"
@@ -68,12 +74,6 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
               ))}
             </div>
           </div>
-          <ul className="flex flex-col gap-3 w-1/4 p-2">
-            <p className="font-semibold">Ingredients:</p>
-            {result?.ingredients.map((ingredient) => (
-              <li key={ingredient}>{ingredient}</li>
-            ))}
-          </ul>
         </div>
       )}
     </section>

@@ -63,6 +63,9 @@ const config: Config = {
           30: "#e9ecef",
         },
       },
+      listStyleImage: {
+        checkmark: 'url("/images/checkmark.svg")',
+      },
     },
   },
   plugins: [],
