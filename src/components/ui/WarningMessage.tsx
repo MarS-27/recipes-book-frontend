@@ -11,7 +11,12 @@ export const WarningMessage: FC<WarningMessageProps> = ({
   classNameModificator,
 }) => {
   return (
-    <div className={clsx("text-md24 font-semibold", classNameModificator)}>
+    <div
+      className={clsx(
+        "text-sm16 sm:text-md24 font-semibold",
+        classNameModificator
+      )}
+    >
       {children}
     </div>
   );

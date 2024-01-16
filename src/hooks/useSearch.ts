@@ -14,10 +14,13 @@ export const useSearch = () => {
   const debouncedValue = useDebounceValue(searchValue.trim(), 800);
   const [searchedRecipes, setSearchedRecipes] = useState<TRecipe[]>([]);
   const [isOpenSearch, setToggleSearch] = useState(false);
+  const [isLoadingSearch, setLoadingSearch] = useState(false);
 
   const controller = new AbortController();
 
   const getSearchedRecipes = async () => {
+    setLoadingSearch(true);
+
     try {
       if (!searchCache[debouncedValue]) {
         const session = await getSession();
@@ -49,6 +52,8 @@ export const useSearch = () => {
     } catch (error: any) {
       toast.error(error);
     }
+
+    setLoadingSearch(false);
   };
 
   useEffect(() => {
@@ -64,6 +69,7 @@ export const useSearch = () => {
 
   return {
     searchValue,
+    isLoadingSearch,
     setSearchValue,
     debouncedValue,
     searchedRecipes,

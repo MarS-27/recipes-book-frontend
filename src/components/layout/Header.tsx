@@ -5,6 +5,7 @@ import { Pacifico } from "next/font/google";
 import Image from "next/image";
 import { type FC } from "react";
 import { LogoutButton } from "../ui/LogoutButton";
+import { AddRecipeButton } from "./AddRecipeButton";
 
 const pacifico = Pacifico({ weight: "400", subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export const Header: FC = async () => {
       </div>
       {session?.user.token ? (
         <div className="flex gap-5">
+          <AddRecipeButton />
           <LogoutButton />
         </div>
       ) : null}
