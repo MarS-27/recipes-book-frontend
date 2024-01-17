@@ -1,10 +1,12 @@
+import { type FC } from "react";
 import { FilterPanel } from "@/components/recipes-page/FilterPanel";
+import { IngredientsList } from "@/components/single-recipe-page/Ingredients";
 import { WarningMessage } from "@/components/ui/WarningMessage";
 import { getRecipeById } from "@/utils/getRecipeById";
 import clsx from "clsx";
 import { Pacifico } from "next/font/google";
 import Image from "next/image";
-import { type FC } from "react";
+import { RecipeStagesList } from "@/components/single-recipe-page/RecipeStagesList";
 
 type TParams = {
   id: string;
@@ -22,14 +24,11 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
       {error ? (
         <WarningMessage>{error}</WarningMessage>
       ) : (
-        <div className="flex gap-5">
-          <ul className="flex flex-col gap-3 w-1/4 p-2 pl-5 list-image-checkmark">
-            <p className="text-s14 sm:text-md20 font-semibold">Ingredients:</p>
-            {result?.ingredients.map((ingredient) => (
-              <li key={ingredient}>{ingredient};</li>
-            ))}
-          </ul>
-          <div className="w-full flex flex-col gap-3">
+        <div className="">
+          {result?.ingredients ? (
+            <IngredientsList ingredients={result.ingredients} />
+          ) : null}
+          <div className="w-full flex flex-col gap-3 md:pl-64">
             <h3
               className={clsx(
                 pacifico.className,
@@ -47,32 +46,10 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
                 alt="Recipe title image"
               />
             ) : null}
-
             <p>{result?.description}</p>
-
-            <div className="flex flex-col gap-2">
-              <p className="font-semibold">Stages:</p>
-              {result?.stages.map((stage) => (
-                <div
-                  className="flex gap-3 pb-2 border-b"
-                  key={stage.stageNumber}
-                >
-                  <p className="w-full">
-                    <span className="font-semibold">{stage.stageNumber}.</span>{" "}
-                    {stage.description}
-                  </p>
-                  {stage.imgPath ? (
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${stage.imgPath}`}
-                      className="w-1/3 max-h-recipeStageImage object-cover rounded-md"
-                      width={200}
-                      height={200}
-                      alt="Recipe stage image"
-                    />
-                  ) : null}
-                </div>
-              ))}
-            </div>
+            {result?.stages ? (
+              <RecipeStagesList stages={result.stages} />
+            ) : null}
           </div>
         </div>
       )}

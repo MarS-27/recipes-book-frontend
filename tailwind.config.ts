@@ -8,7 +8,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      width: {},
+      width: { ingredientsList: "250px" },
       height: { recipeCard: "240px", searchImg: "60px" },
       maxHeight: {
         filterBar: "300px",
