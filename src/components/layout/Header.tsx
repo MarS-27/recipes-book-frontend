@@ -4,8 +4,9 @@ import { getServerSession } from "next-auth";
 import { Pacifico } from "next/font/google";
 import Image from "next/image";
 import { type FC } from "react";
-import { LogoutButton } from "../ui/LogoutButton";
+import { LogoutButton } from "./LogoutButton";
 import { AddRecipeButton } from "./AddRecipeButton";
+import { UserAccountButton } from "./UserAccountButton";
 
 const pacifico = Pacifico({ weight: "400", subsets: ["latin"] });
 
@@ -24,14 +25,15 @@ export const Header: FC = async () => {
         <h1
           className={clsx(
             pacifico.className,
-            "text-l32 sm:text-xL40 font-medium tracking-wider"
+            "text-md24 sm:text-l32 md:text-xL40 font-medium tracking-wider"
           )}
         >
           Personal Recipes Book
         </h1>
       </div>
       {session?.user.token ? (
-        <div className="flex gap-5">
+        <div className="flex items-center gap-5">
+          <UserAccountButton />
           <AddRecipeButton />
           <LogoutButton />
         </div>

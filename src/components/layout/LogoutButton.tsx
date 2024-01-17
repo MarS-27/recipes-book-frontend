@@ -1,9 +1,9 @@
 "use client";
-import { getUserProfile } from "@/utils/getUserProfile";
 import { ROUTE } from "@/utils/routes";
+import clsx from "clsx";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
-import { useEffect, type FC } from "react";
+import { type FC } from "react";
 import { toast } from "react-toastify";
 
 export const LogoutButton: FC = () => {
@@ -15,14 +15,13 @@ export const LogoutButton: FC = () => {
     }
   };
 
-  useEffect(() => {
-    getUserProfile();
-  }, []);
-
   return (
     <button
       onClick={handleSignOut}
-      className="hover:scale-125 transition-all duration-200"
+      className={clsx(
+        "relative hover:scale-125 transition-all duration-200",
+        "after:content-['Sign_Out'] after:absolute after:top-[105%] after:-left-1 after:text-xs10 after:whitespace-nowrap after:opacity-0 hover:after:opacity-100 after:transition-all after:duration-200"
+      )}
     >
       <Image
         width={40}
