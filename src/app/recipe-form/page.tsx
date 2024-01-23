@@ -1,7 +1,12 @@
+import { RecipeForm } from "@/components/recipe-form/RecipeForm";
 import { type FC } from "react";
 
-const RecipeForm: FC = async () => {
-  return <section className="w-full py-5">Add</section>;
+const AddRecipe: FC = () => {
+  return (
+    <section className="w-full py-5">
+      <RecipeForm />
+    </section>
+  );
 };
 
-export default RecipeForm;
+export default AddRecipe;

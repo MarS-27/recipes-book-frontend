@@ -4,12 +4,13 @@ import axios, { type AxiosError, type AxiosResponse } from "axios";
 import clsx from "clsx";
 import { signIn } from "next-auth/react";
 import { useState, type FC } from "react";
-import { type SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm, FieldError } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Button } from "../ui/Button";
 import type { TError } from "@/types/types";
 import { Loader } from "../ui/Loader";
 import { useRouter } from "next/navigation";
+import { FormInput } from "../ui/FormInput";
 
 export const Auth: FC = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
@@ -67,46 +68,26 @@ export const Auth: FC = () => {
       </div>
       <form onSubmit={handleSubmit(loginFormSubmit)}>
         <div className="flex flex-col justify-center items-stretch gap-6">
-          <label className="relative">
-            <input
-              className={clsx(
-                "w-full py-1.5 px-3.5 text-s14 font-medium outline-grayStroke-70 rounded-md border border-grayStroke-100 border-opacity-20",
-                errors.email ? "border-mainRed outline-mainRed" : null
-              )}
-              type="email"
-              placeholder="Email Address"
-              {...register("email", {
-                required: "Email is required!",
-              })}
-            />
-            {errors.email ? (
-              <span className="absolute left-1 -top-3 text-mainRed text-xs10">
-                * {errors.email.message}
-              </span>
-            ) : null}
-          </label>
-          <label className="relative">
-            <input
-              className={clsx(
-                "w-full py-1.5 px-3.5 text-s14 font-medium outline-grayStroke-70 rounded-md border border-grayStroke-100 border-opacity-20",
-                errors.password ? "border-mainRed outline-mainRed" : null
-              )}
-              type="password"
-              placeholder="Password"
-              {...register("password", {
-                required: "Password is required!",
-                minLength: {
-                  value: 6,
-                  message: "Password should be at least 6 chars",
-                },
-              })}
-            />
-            {errors.password ? (
-              <span className="absolute left-1 -top-3 text-mainRed text-xs10">
-                * {errors.password.message}
-              </span>
-            ) : null}
-          </label>
+          <FormInput
+            type="email"
+            placeholder="Email Address"
+            register={register("email", {
+              required: "Email is required!",
+            })}
+            error={errors.email as FieldError}
+          />
+          <FormInput
+            type="password"
+            placeholder="Password"
+            register={register("password", {
+              required: "Password is required!",
+              minLength: {
+                value: 6,
+                message: "Password should be at least 6 chars",
+              },
+            })}
+            error={errors.password as FieldError}
+          />
           <Button
             disabled={isSubmitting}
             type="submit"
