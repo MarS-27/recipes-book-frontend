@@ -18,6 +18,7 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
   const recipeData = await getRecipeById(Number(params.id));
 
   const { result, error } = recipeData;
+
   return (
     <section className="w-full py-5">
       <FilterPanel />

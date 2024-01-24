@@ -1,14 +1,15 @@
+import { TGetRecipeInForm } from "@/types/recipe";
 import { type FC } from "react";
 import { FieldError, useFieldArray, useFormContext } from "react-hook-form";
-import { FormInput } from "../ui/FormInput";
-import { TRecipe } from "@/types/recipe";
+import { AddFileInput } from "../ui/AddFileInput";
+import { TextArea } from "../ui/TextArea";
 
 export const RecipeStages: FC = () => {
   const {
     register,
     control,
     formState: { errors },
-  } = useFormContext<TRecipe>();
+  } = useFormContext<TGetRecipeInForm>();
 
   const { fields, remove, append } = useFieldArray({
     control,
@@ -33,14 +34,14 @@ export const RecipeStages: FC = () => {
       {fields.map((field, i) => (
         <div className="flex" key={field.id}>
           <p>{field.stageNumber}</p>
-          <FormInput
-            type="text"
+          <TextArea
             placeholder="Stage"
             register={register(`stages.${i}.description`, {
               required: "Add stage description!",
             })}
             error={errors.stages?.[i]?.description as FieldError}
           />
+          <AddFileInput fieldName={`stages.${i}.imgPath`} />
           <button type="button" onClick={() => remove(i)}>
             -
           </button>

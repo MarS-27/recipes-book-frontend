@@ -1,27 +1,24 @@
-import { TRecipe } from "@/types/recipe";
+import { TGetRecipeInForm, TRecipe } from "@/types/recipe";
 import { type FC } from "react";
-import {
-  useFormContext,
-  useFieldArray,
-  FieldError,
-  FieldValues,
-} from "react-hook-form";
+import { FieldError, useFieldArray, useFormContext } from "react-hook-form";
 import { FormInput } from "../ui/FormInput";
-
-// type TRecipeWithIngredients = TRecipe & { ingredients: { value: string }[] };
 
 export const RecipeIngredients: FC = () => {
   const {
     register,
     control,
     formState: { errors },
-  } = useFormContext<TRecipe>();
+  } = useFormContext<TGetRecipeInForm>();
 
-  const { fields, remove, append } = useFieldArray({
+  const { fields, remove, append } = useFieldArray<
+    TRecipe,
+    //@ts-ignore
+    "ingredients",
+    "id"
+  >({
     control,
     name: "ingredients",
   });
-  console.log(fields);
 
   return (
     <>

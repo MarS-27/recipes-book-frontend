@@ -1,41 +1,30 @@
 "use client";
-import { RecipeCategories, TRecipe } from "@/types/recipe";
-import clsx from "clsx";
+import { RecipeCategories, TGetRecipeInForm, TRecipe } from "@/types/recipe";
 import { type FC } from "react";
-import {
-  FieldError,
-  SubmitHandler,
-  FormProvider,
-  UseFieldArrayProps,
-  useFieldArray,
-  useForm,
-} from "react-hook-form";
+import { FieldError, FormProvider, useForm } from "react-hook-form";
+import { AddFileInput } from "../ui/AddFileInput";
 import { Button } from "../ui/Button";
 import { FormInput } from "../ui/FormInput";
-import { RecipeStages } from "./RecipeStages";
+import { TextArea } from "../ui/TextArea";
 import { RecipeIngredients } from "./RecipeIngredients";
+import { RecipeStages } from "./RecipeStages";
+import { recipeFormSubmit } from "@/utils/recipeFormSubmit";
 
 type TRecipeFormProps = {
   updatedRecipe?: TRecipe;
 };
 
 export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
-  const methods = useForm<TRecipe>({ defaultValues: updatedRecipe });
+  const methods = useForm<TGetRecipeInForm>({ defaultValues: updatedRecipe });
   const {
     register,
     handleSubmit,
-    control,
-    reset,
     formState: { errors, isSubmitting },
   } = methods;
 
   const categories = Object.values(RecipeCategories).filter(
     (value) => value !== RecipeCategories.All
   );
-
-  const recipeFormSubmit: SubmitHandler<TRecipe> = async (data) => {
-    console.log(data);
-  };
 
   return (
     <section className="relative max-w-loginContainer m-auto w-full px-6 py-10 bg-mainYellow bg-opacity-[0.3] rounded-md border border-grayStroke-80">
@@ -58,9 +47,8 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
                 </option>
               ))}
             </select>
-
-            <FormInput
-              type="text"
+            <AddFileInput fieldName="titleImgPath" />
+            <TextArea
               placeholder="Recipe description"
               register={register("description", {
                 required: "Description is required!",

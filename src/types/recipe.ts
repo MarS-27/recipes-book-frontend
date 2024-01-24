@@ -13,13 +13,17 @@ export enum RecipeCategories {
   Others = "Others",
 }
 
+export type TRecipeFiles = {
+  recipeFiles?: File[];
+};
+
 export type TRecipe = {
   id: number;
   createdAt: string;
   updatedAt: string;
   title: string;
   category: RecipeCategories;
-  titleImgPath: string;
+  titleImgPath: string | null;
   description: string;
   ingredients: string[];
   stages: TRecipeStage[];
@@ -27,5 +31,7 @@ export type TRecipe = {
 
 export type TGetRecipeByIdResult = {
   error?: string;
-  result: TRecipe | null;
+  result: TRecipe | undefined;
 };
+
+export type TGetRecipeInForm = TRecipe & TRecipeFiles;

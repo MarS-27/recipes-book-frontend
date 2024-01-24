@@ -34,7 +34,7 @@ export const getRecipeById = async (
     };
   } catch (error: any) {
     return {
-      result: null,
+      result: undefined,
       error: error?.message,
     };
   }
