@@ -88,18 +88,15 @@ export const Auth: FC = () => {
             })}
             error={errors.password as FieldError}
           />
-          <Button
-            disabled={isSubmitting}
-            type="submit"
-            classNameModificator="bg-mainBlue text-white text-sm14 hover:bg-darkBlue transition-all duration-200"
-          >
+          <Button disabled={isSubmitting} type="submit" variant="contained">
             {isSubmitting ? <Loader /> : isLogin ? "Sign In" : "Create account"}
           </Button>
         </div>
       </form>
       <Button
         onClick={() => setIsLogin(!isLogin)}
-        classNameModificator="text-xs14 text-mainBLue mt-4 hover:text-darkBlue transition-all duration-20"
+        variant="text"
+        classNameModificator="mt-4"
       >
         {isLogin ? "You don't have an account?" : "Already have an account?"}
       </Button>

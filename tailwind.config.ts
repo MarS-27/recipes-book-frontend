@@ -20,6 +20,8 @@ const config: Config = {
         loginContainer: "500px",
         filterBar: "320px",
         searchBar: "450px",
+        recipeForm: "1024px",
+        button: "300px",
       },
       fontSize: {
         xs10: ["10px", "12px"],

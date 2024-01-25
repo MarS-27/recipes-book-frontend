@@ -4,6 +4,7 @@ import React, { FC, ReactNode } from "react";
 type ButtonProps = {
   classNameModificator?: string;
   children: string | ReactNode;
+  variant: "outlined" | "contained" | "text";
   onClick?: () => void;
   type?: "submit" | "button";
   disabled?: boolean;
@@ -11,6 +12,7 @@ type ButtonProps = {
 
 export const Button: FC<ButtonProps> = ({
   children,
+  variant,
   onClick,
   classNameModificator,
   type = "button",
@@ -22,7 +24,16 @@ export const Button: FC<ButtonProps> = ({
       disabled={disabled}
       type={type}
       className={clsx(
-        "flex justify-center items-center w-full font-semibold text-sm16 rounded-[0.25rem] border border-transparent py-1.5 px-4",
+        "flex justify-center items-center w-full font-semibold rounded-[0.25rem] py-1.5 px-4 transition-all duration-200",
+        variant === "contained"
+          ? "bg-mainBlue text-sm16 text-white hover:bg-darkBlue"
+          : null,
+        variant === "outlined"
+          ? "border-2 border-mainBLue text-grayStroke-70 text-sm16 hover:bg-lightBlue hover:border-darkBlue"
+          : null,
+        variant === "text"
+          ? "text-s14 text-mainBLue hover:text-darkBlue"
+          : null,
         classNameModificator
       )}
     >

@@ -7,48 +7,50 @@ import { toast } from "react-toastify";
 export const recipeFormSubmit: SubmitHandler<TGetRecipeInForm> = async (
   data
 ) => {
-  const session = await getSession();
+  console.log(data);
 
-  const {
-    title,
-    titleImgPath,
-    description,
-    category,
-    ingredients,
-    stages,
-    recipeFiles,
-  } = data;
+  // const session = await getSession();
 
-  const formData = new FormData();
-  formData.append("title", title);
-  formData.append("titleImgPath", JSON.stringify(titleImgPath));
-  formData.append("description", description);
-  formData.append("category", category);
-  formData.append("ingredients", JSON.stringify(ingredients));
-  formData.append("stages", JSON.stringify(stages));
-  recipeFiles?.forEach((file) => formData.append("files", file));
+  // const {
+  //   title,
+  //   titleImgPath,
+  //   description,
+  //   category,
+  //   ingredients,
+  //   stages,
+  //   recipeFiles,
+  // } = data;
 
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/recipe/create`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${session?.user.token}`,
-        },
-        body: formData,
-      }
-    );
+  // const formData = new FormData();
+  // formData.append("title", title);
+  // formData.append("titleImgPath", JSON.stringify(titleImgPath));
+  // formData.append("description", description);
+  // formData.append("category", category);
+  // formData.append("ingredients", JSON.stringify(ingredients));
+  // formData.append("stages", JSON.stringify(stages));
+  // recipeFiles?.forEach((file) => formData.append("files", file));
 
-    if (!res.ok) {
-      const errorData: TError = await res.json();
-      throw new Error(errorData.message);
-    }
+  // try {
+  //   const res = await fetch(
+  //     `${process.env.NEXT_PUBLIC_SERVER_URL}/recipe/create`,
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         Authorization: `Bearer ${session?.user.token}`,
+  //       },
+  //       body: formData,
+  //     }
+  //   );
 
-    const data: TMessage = await res.json();
+  //   if (!res.ok) {
+  //     const errorData: TError = await res.json();
+  //     throw new Error(errorData.message);
+  //   }
 
-    toast.success(data.message);
-  } catch (error: any) {
-    toast.error(error.message);
-  }
+  //   const data: TMessage = await res.json();
+
+  //   toast.success(data.message);
+  // } catch (error: any) {
+  //   toast.error(error.message);
+  // }
 };

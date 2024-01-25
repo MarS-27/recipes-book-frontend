@@ -18,7 +18,7 @@ export const FormInput: FC<TFormInputProps> = ({
   disabled = false,
 }) => {
   return (
-    <label className="relative">
+    <label className="relative w-full">
       <input
         className={clsx(
           "w-full py-1.5 px-3.5 text-s14 font-medium outline-grayStroke-70 rounded-md border border-grayStroke-100 border-opacity-20",

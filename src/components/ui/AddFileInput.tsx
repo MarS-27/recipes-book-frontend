@@ -3,6 +3,8 @@ import clsx from "clsx";
 import { type FC } from "react";
 import { useDropzone } from "react-dropzone";
 import { useFormContext } from "react-hook-form";
+import { Button } from "./Button";
+import Image from "next/image";
 
 type TAddFileInputProps = {
   fieldName: "titleImgPath" | `stages.${number}.imgPath`;
@@ -34,15 +36,27 @@ export const AddFileInput: FC<TAddFileInputProps> = ({ fieldName }) => {
   });
 
   return (
-    <div className="flex gap-2">
-      {/* <p className="text-sm16 text-center text-grayStroke-70 mb-1">
-        Drop files here or click here to upload
-      </p>
-      <p className="text-xs12 text-center text-grayStroke-70">
-        Only: png | jpg | jpeg | webp
-      </p> */}
-      <button type="button" {...getRootProps()}>
-        Upload image
+    <div className="flex items-center gap-2">
+      <div className="w-full">
+        <p className="text-s14 text-center text-grayStroke-70 mb-1">
+          Upload image
+        </p>
+        <p className="text-xs10 text-center text-grayStroke-70">
+          Only: png | jpg | jpeg | webp
+        </p>
+      </div>
+
+      <button
+        {...getRootProps()}
+        className="w-8 h-8 hover:scale-125 transition-all duration-200"
+      >
+        <Image
+          width={32}
+          height={32}
+          src="/images/upload-icon.svg"
+          alt="Upload image"
+          className="min-w-8"
+        />
       </button>
       <input {...getInputProps()} />
     </div>
