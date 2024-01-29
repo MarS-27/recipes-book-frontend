@@ -1,53 +1,53 @@
-import { TGetRecipeInForm, TRecipe } from "@/types/recipe";
+import { TGetRecipeInForm } from "@/types/recipe";
 import { type FC } from "react";
-import { FieldError, useFieldArray, useFormContext } from "react-hook-form";
+import { FieldError, useFormContext } from "react-hook-form";
 import { FormInput } from "../ui/FormInput";
-import { DeleteButton } from "../ui/DeleteButton";
-import { Button } from "../ui/Button";
+import { IconButton } from "../ui/IconButton";
 
 export const RecipeIngredients: FC = () => {
   const {
     register,
-    control,
+    watch,
+    setValue,
     formState: { errors },
   } = useFormContext<TGetRecipeInForm>();
 
-  const { fields, remove, append } = useFieldArray<
-    TRecipe,
-    //@ts-ignore
-    "ingredients",
-    "id"
-  >({
-    control,
-    name: "ingredients",
-  });
+  const { ingredients } = watch();
 
   return (
     <div className="w-full flex flex-col gap-4">
-      <p>Ingredients:</p>
-      {fields.map((field, i) => (
-        <div className="flex items-center gap-2" key={field.id}>
+      <div className="flex items-center gap-3 pb-2 border-b-2 border-b-mainBLue">
+        <IconButton
+          iconSrc="/images/add-icon.svg"
+          classNameModificator="w-9 h-9 min-w-9"
+          onClick={() => setValue("ingredients", [...ingredients, ""])}
+        />
+        <p className="font-semibold">Ingredients:</p>
+      </div>
+
+      {ingredients.map((_, i) => (
+        <div className="flex items-center gap-2" key={i}>
           <FormInput
             type="text"
             placeholder="Ingredient"
             register={register(`ingredients.${i}`, {
-              required: "Add or remove ingredient!",
+              required: "Add ingredient!",
             })}
             error={errors.ingredients?.[i] as FieldError}
           />
-          <DeleteButton
+          <IconButton
+            iconSrc="/images/delete-icon.svg"
             classNameModificator="w-7 h-7 min-w-7"
-            onClick={() => remove(i)}
+            onClick={() =>
+              setValue(
+                "ingredients",
+                ingredients.filter((_, index) => i !== index)
+              )
+            }
+            disabled={ingredients.length === 1}
           />
         </div>
       ))}
-      <Button
-        onClick={() => append("")}
-        variant="outlined"
-        classNameModificator="w-full max-w-button self-center"
-      >
-        Add ingredient
-      </Button>
     </div>
   );
 };

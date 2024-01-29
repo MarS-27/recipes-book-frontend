@@ -8,6 +8,7 @@ type TTextAreaProps = {
   register: UseFormRegisterReturn<string>;
   placeholder?: string;
   disabled?: boolean;
+  rows: number;
 };
 
 export const TextArea: FC<TTextAreaProps> = ({
@@ -15,6 +16,7 @@ export const TextArea: FC<TTextAreaProps> = ({
   error,
   placeholder,
   disabled,
+  rows,
 }) => {
   return (
     <label className="relative w-full">
@@ -23,7 +25,7 @@ export const TextArea: FC<TTextAreaProps> = ({
           "w-full py-1.5 px-3.5 text-s14 font-medium outline-grayStroke-70 rounded-md border border-grayStroke-100 border-opacity-20",
           error ? "border-mainRed outline-mainRed" : null
         )}
-        rows={8}
+        rows={rows}
         placeholder={placeholder}
         disabled={disabled}
         {...register}

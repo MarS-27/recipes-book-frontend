@@ -16,7 +16,20 @@ type TRecipeFormProps = {
 };
 
 export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
-  const methods = useForm<TGetRecipeInForm>({ defaultValues: updatedRecipe });
+  const defaultValues = updatedRecipe
+    ? updatedRecipe
+    : {
+        ingredients: [""],
+        stages: [
+          {
+            stageNumber: "1",
+            description: "",
+            imgPath: null,
+          },
+        ],
+      };
+
+  const methods = useForm<TGetRecipeInForm>({ defaultValues });
   const {
     register,
     handleSubmit,
@@ -53,7 +66,10 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
                     </option>
                   ))}
                 </select>
-                <AddFileInput fieldName="titleImgPath" />
+                <AddFileInput
+                  fieldName="titleImgPath"
+                  updatedImgPath={updatedRecipe?.titleImgPath}
+                />
               </div>
               <TextArea
                 placeholder="Recipe description"
@@ -61,6 +77,7 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
                   required: "Description is required!",
                 })}
                 error={errors.description as FieldError}
+                rows={8}
               />
             </div>
 

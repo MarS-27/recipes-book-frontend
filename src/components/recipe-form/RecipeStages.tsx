@@ -3,8 +3,7 @@ import { type FC } from "react";
 import { FieldError, useFieldArray, useFormContext } from "react-hook-form";
 import { AddFileInput } from "../ui/AddFileInput";
 import { TextArea } from "../ui/TextArea";
-import { DeleteButton } from "../ui/DeleteButton";
-import { Button } from "../ui/Button";
+import { IconButton } from "../ui/IconButton";
 
 export const RecipeStages: FC = () => {
   const {
@@ -19,37 +18,50 @@ export const RecipeStages: FC = () => {
   });
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-2">
+      <div className="flex items-center gap-3">
+        <IconButton
+          iconSrc="/images/add-icon.svg"
+          classNameModificator="w-9 h-9 min-w-9"
+          onClick={() =>
+            append({
+              stageNumber: String(fields.length + 1),
+              description: "",
+              imgPath: null,
+            })
+          }
+        />
+        <p className="font-semibold">Stages:</p>
+      </div>
       {fields.map((field, i) => (
-        <div className="flex" key={field.id}>
-          <p>{field.stageNumber}</p>
+        <div
+          className="flex flex-col gap-3 border-t-2 border-t-mainBLue pt-2"
+          key={field.id}
+        >
+          <div className="flex items-center justify-end gap-2">
+            <p className="text-s14">Stage {field.stageNumber}</p>
+            <IconButton
+              iconSrc="/images/delete-icon.svg"
+              classNameModificator="w-5 h-5 min-w-5"
+              onClick={() => remove(i)}
+              disabled={fields.length === 1}
+            />
+          </div>
+
           <TextArea
             placeholder="Stage"
             register={register(`stages.${i}.description`, {
               required: "Add stage description!",
             })}
             error={errors.stages?.[i]?.description as FieldError}
+            rows={3}
           />
-          <AddFileInput fieldName={`stages.${i}.imgPath`} />
-          <DeleteButton
-            classNameModificator="w-7 h-7 min-w-7"
-            onClick={() => remove(i)}
+          <AddFileInput
+            fieldName={`stages.${i}.imgPath`}
+            updatedImgPath={field.imgPath}
           />
         </div>
       ))}
-      <Button
-        onClick={() =>
-          append({
-            stageNumber: String(fields.length + 1),
-            description: "",
-            imgPath: null,
-          })
-        }
-        variant="outlined"
-        classNameModificator="w-full max-w-button self-center"
-      >
-        Add stage
-      </Button>
     </div>
   );
 };
