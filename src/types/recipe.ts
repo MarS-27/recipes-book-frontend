@@ -13,8 +13,10 @@ export enum RecipeCategories {
   Others = "Others",
 }
 
+export type TCustomFile = File & { preview: string; fileId: string };
+
 export type TRecipeFiles = {
-  recipeFiles?: File[];
+  recipeFiles?: TCustomFile[];
 };
 
 export type TRecipe = {

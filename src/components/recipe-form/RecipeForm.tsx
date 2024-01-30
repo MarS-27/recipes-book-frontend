@@ -35,7 +35,10 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
+    watch,
   } = methods;
+
+  const { titleImgPath } = watch();
 
   const categories = Object.values(RecipeCategories).filter(
     (value) => value !== RecipeCategories.All
@@ -68,7 +71,7 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
                 </select>
                 <AddFileInput
                   fieldName="titleImgPath"
-                  updatedImgPath={updatedRecipe?.titleImgPath}
+                  updatedImgPath={titleImgPath}
                 />
               </div>
               <TextArea

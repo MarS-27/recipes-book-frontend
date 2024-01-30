@@ -10,7 +10,10 @@ export const RecipeStages: FC = () => {
     register,
     control,
     formState: { errors },
+    watch,
   } = useFormContext<TGetRecipeInForm>();
+
+  const { stages } = watch();
 
   const { fields, remove, append } = useFieldArray({
     control,
@@ -58,7 +61,7 @@ export const RecipeStages: FC = () => {
           />
           <AddFileInput
             fieldName={`stages.${i}.imgPath`}
-            updatedImgPath={field.imgPath}
+            updatedImgPath={stages[i].imgPath}
           />
         </div>
       ))}

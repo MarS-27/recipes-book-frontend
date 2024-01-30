@@ -1,6 +1,6 @@
-import { type TGetRecipeInForm } from "@/types/recipe";
+import { TCustomFile, type TGetRecipeInForm } from "@/types/recipe";
 import Image from "next/image";
-import { useState, type FC } from "react";
+import { useState, type FC, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { useFormContext } from "react-hook-form";
 import { IconButton } from "./IconButton";
@@ -14,27 +14,26 @@ export const AddFileInput: FC<TAddFileInputProps> = ({
   fieldName,
   updatedImgPath,
 }) => {
-  const [uploadFilePreview, setUploadFilePreview] = useState<
-    (File & { preview: string }) | null
-  >(null);
+  const [uploadFilePreview, setUploadFilePreview] =
+    useState<TCustomFile | null>(null);
   const { setValue, watch } = useFormContext<TGetRecipeInForm>();
-  console.log(updatedImgPath);
 
   const { recipeFiles } = watch();
 
   const onDrop = (acceptedFiles: File[]) => {
-    setUploadFilePreview(
-      Object.assign(acceptedFiles[0], {
-        preview: URL.createObjectURL(acceptedFiles[0]),
-      })
-    );
+    const customFile: TCustomFile = Object.assign(acceptedFiles[0], {
+      preview: URL.createObjectURL(acceptedFiles[0]),
+      fileId: crypto.randomUUID(),
+    });
 
-    setValue(fieldName, acceptedFiles[0].name);
+    setUploadFilePreview(customFile);
+
+    setValue(fieldName, customFile.name);
 
     if (recipeFiles?.length) {
-      setValue("recipeFiles", [...recipeFiles, ...acceptedFiles]);
+      setValue("recipeFiles", [...recipeFiles, customFile]);
     } else {
-      setValue("recipeFiles", acceptedFiles);
+      setValue("recipeFiles", [customFile]);
     }
   };
 
@@ -42,7 +41,7 @@ export const AddFileInput: FC<TAddFileInputProps> = ({
     if (recipeFiles?.length) {
       setValue(
         "recipeFiles",
-        recipeFiles.filter((file) => file.name !== uploadFilePreview?.name)
+        recipeFiles.filter((file) => file.fileId !== uploadFilePreview?.fileId)
       );
     } else {
       setValue("recipeFiles", []);
@@ -62,6 +61,14 @@ export const AddFileInput: FC<TAddFileInputProps> = ({
     },
   });
 
+  useEffect(() => {
+    return () => {
+      if (uploadFilePreview) {
+        URL.revokeObjectURL(uploadFilePreview.preview);
+      }
+    };
+  }, []);
+
   return (
     <div className="flex items-center justify-center gap-2">
       {uploadFilePreview || updatedImgPath ? (
@@ -76,6 +83,11 @@ export const AddFileInput: FC<TAddFileInputProps> = ({
             }
             alt="Upload image"
             className="w-36 h-28 object-cover rounded-md"
+            onLoad={() => {
+              if (uploadFilePreview) {
+                URL.revokeObjectURL(uploadFilePreview.preview);
+              }
+            }}
           />
 
           <IconButton
@@ -84,29 +96,33 @@ export const AddFileInput: FC<TAddFileInputProps> = ({
             onClick={() => removeImg()}
           />
         </div>
-      ) : null}
-      <div>
-        <p className="text-s14 text-center text-grayStroke-70 mb-1">
-          Upload image
-        </p>
-        <p className="text-xs10 text-center text-grayStroke-70">
-          Only: png | jpg | jpeg | webp
-        </p>
-      </div>
+      ) : (
+        <>
+          <div>
+            <p className="text-s14 text-center text-grayStroke-70 mb-1">
+              Upload image
+            </p>
+            <p className="text-xs10 text-center text-grayStroke-70">
+              Only: png | jpg | jpeg | webp
+            </p>
+          </div>
 
-      <button
-        {...getRootProps()}
-        className="w-8 h-8 hover:scale-125 transition-all duration-200"
-      >
-        <Image
-          width={32}
-          height={32}
-          src="/images/upload-icon.svg"
-          alt="Upload image"
-          className="min-w-8"
-        />
-      </button>
-      <input {...getInputProps()} />
+          <button
+            {...getRootProps()}
+            className="w-8 h-8 hover:scale-125 transition-all duration-200"
+            type="button"
+          >
+            <Image
+              width={32}
+              height={32}
+              src="/images/upload-icon.svg"
+              alt="Upload image"
+              className="min-w-8"
+            />
+          </button>
+          <input {...getInputProps()} />
+        </>
+      )}
     </div>
   );
 };
