@@ -11,6 +11,7 @@ import type { TError } from "@/types/types";
 import { Loader } from "../ui/Loader";
 import { useRouter } from "next/navigation";
 import { FormInput } from "../ui/FormInput";
+import { PasswordInput } from "./PasswordInput";
 
 export const Auth: FC = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
@@ -76,9 +77,7 @@ export const Auth: FC = () => {
             })}
             error={errors.email as FieldError}
           />
-          <FormInput
-            type="password"
-            placeholder="Password"
+          <PasswordInput
             register={register("password", {
               required: "Password is required!",
               minLength: {

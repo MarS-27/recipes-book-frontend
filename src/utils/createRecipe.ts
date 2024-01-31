@@ -4,9 +4,7 @@ import { getSession } from "next-auth/react";
 import { SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 
-export const recipeFormSubmit: SubmitHandler<TGetRecipeInForm> = async (
-  data
-) => {
+export const createRecipe: SubmitHandler<TGetRecipeInForm> = async (data) => {
   console.log(data);
 
   // const session = await getSession();

@@ -8,8 +8,9 @@ import { FormInput } from "../ui/FormInput";
 import { TextArea } from "../ui/TextArea";
 import { RecipeIngredients } from "./RecipeIngredients";
 import { RecipeStages } from "./RecipeStages";
-import { recipeFormSubmit } from "@/utils/recipeFormSubmit";
+import { createRecipe } from "@/utils/createRecipe";
 import { Loader } from "../ui/Loader";
+import { updateRecipe } from "@/utils/updateRecipe";
 
 type TRecipeFormProps = {
   updatedRecipe?: TRecipe;
@@ -50,7 +51,13 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
         {updatedRecipe ? "Change recipe" : "Create recipe"}
       </h3>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(recipeFormSubmit)}>
+        <form
+          onSubmit={
+            !updatedRecipe
+              ? handleSubmit(createRecipe)
+              : handleSubmit(updateRecipe)
+          }
+        >
           <div className="flex flex-col justify-center items-stretch gap-4">
             <div className="flex gap-4">
               <div className="flex flex-col gap-4 w-full">
