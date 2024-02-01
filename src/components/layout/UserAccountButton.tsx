@@ -5,9 +5,9 @@ import clsx from "clsx";
 import Image from "next/image";
 
 export const UserAccountButton: FC = () => {
-  useEffect(() => {
-    getUserProfile();
-  }, []);
+  // useEffect(() => {
+  //   getUserProfile();
+  // }, []);
 
   return (
     <div

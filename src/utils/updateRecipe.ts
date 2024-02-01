@@ -1,12 +1,16 @@
-import { TGetRecipeInForm } from "@/types/recipe";
-import { TError, TMessage } from "@/types/types";
+import { type TGetRecipeInForm } from "@/types/recipe";
+import { type TError, type TMessage } from "@/types/types";
+import { QueryClient } from "@tanstack/react-query";
+import axios, { type AxiosError, type AxiosResponse } from "axios";
 import { getSession } from "next-auth/react";
-import { revalidatePath } from "next/cache";
-import { SubmitHandler } from "react-hook-form";
+import { redirect } from "next/navigation";
+import { type SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
+import { ROUTE } from "./routes";
 
 export const updateRecipe: SubmitHandler<TGetRecipeInForm> = async (data) => {
   const session = await getSession();
+  const queryClient = new QueryClient();
 
   const {
     title,
@@ -18,6 +22,7 @@ export const updateRecipe: SubmitHandler<TGetRecipeInForm> = async (data) => {
     recipeFiles,
     id,
   } = data;
+  console.log(stages);
 
   const formData = new FormData();
   formData.append("title", title);
@@ -28,28 +33,22 @@ export const updateRecipe: SubmitHandler<TGetRecipeInForm> = async (data) => {
   formData.append("stages", JSON.stringify(stages));
   recipeFiles?.forEach((file) => formData.append("files", file));
 
-  try {
-    const res = await fetch(
+  await axios
+    .put(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/recipe/update/${id}`,
+      formData,
       {
-        method: "PUT",
         headers: {
           Authorization: `Bearer ${session?.user.token}`,
         },
-        body: formData,
       }
-    );
-
-    if (!res.ok) {
-      const errorData: TError = await res.json();
-      throw new Error(errorData.message);
-    }
-
-    const data: TMessage = await res.json();
-
-    revalidatePath(`/recipe/${id}`, "page");
-    toast.success(data.message);
-  } catch (error: any) {
-    toast.error(error.message);
-  }
+    )
+    .then((resp: AxiosResponse<TMessage>) => {
+      queryClient.invalidateQueries({ queryKey: ["recipe", `${id}`] });
+      toast.success(resp.data.message);
+      redirect(`${ROUTE.RECIPE}${id}`);
+    })
+    .catch((data: AxiosError<TError>) => {
+      toast.error(data.response?.data.message);
+    });
 };

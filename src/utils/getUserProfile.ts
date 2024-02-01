@@ -1,33 +1,19 @@
-import { TUserProfile } from "@/types/auth";
-import { TError } from "@/types/types";
+import { type TUserProfile } from "@/types/auth";
+import { type TError } from "@/types/types";
+import axios, { type AxiosError, type AxiosResponse } from "axios";
 import { getSession, signOut } from "next-auth/react";
 
 export const getUserProfile = async (): Promise<TUserProfile | undefined> => {
   const session = await getSession();
 
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/profile`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session?.user.token}`,
-        },
-        cache: "force-cache",
-        next: { tags: ["user-profile"] },
-      }
-    );
+  const result = await axios
+    .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/profile`, {
+      headers: {
+        Authorization: `Bearer ${session?.user.token}`,
+      },
+    })
+    .then((resp: AxiosResponse<TUserProfile>) => resp.data)
+    .catch((data: AxiosError<TError>) => signOut({ redirect: true }));
 
-    if (!res.ok) {
-      const errorData: TError = await res.json();
-      throw new Error(errorData.message);
-    }
-
-    const data: TUserProfile = await res.json();
-
-    return data;
-  } catch (error: any) {
-    await signOut({ redirect: true });
-  }
+  return result;
 };
