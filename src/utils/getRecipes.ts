@@ -1,6 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { RecipeCategories, TRecipe } from "@/types/recipe";
 import { TError, TPaginatedResponse, TPaginatedResult } from "@/types/types";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { getServerSession } from "next-auth";
 
 export const getRecipes = async (
@@ -9,41 +10,33 @@ export const getRecipes = async (
 ): Promise<TPaginatedResult<TRecipe>> => {
   const session = await getServerSession(authOptions);
   const limit = 6;
+  const skip = (page - 1) * limit;
 
-  try {
-    const skip = (page - 1) * limit;
-
-    const res = await fetch(
+  const result = await axios
+    .get(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/recipe/paginated-recipes?category=${category}&limit=${limit}&skip=${skip}`,
       {
-        method: "GET",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${session?.user.token}`,
         },
-        cache: "force-cache",
-        next: { tags: ["recipes"] },
       }
-    );
+    )
+    .then((resp: AxiosResponse<TPaginatedResponse<TRecipe>>) => {
+      const pagesCount = Math.ceil(resp.data.total / limit);
 
-    if (!res.ok) {
-      const errorData: TError = await res.json();
-      throw new Error(errorData.message);
-    }
+      return {
+        results: resp.data.results,
+        pageNum: page,
+        pagesCount,
+      };
+    })
+    .catch((data: AxiosError<TError>) => {
+      return {
+        results: [],
+        pageNum: page,
+        error: data.response?.data.message,
+      };
+    });
 
-    const data: TPaginatedResponse<TRecipe> = await res.json();
-    const pagesCount = Math.ceil(data.total / limit);
-
-    return {
-      results: data.results,
-      pageNum: page,
-      pagesCount,
-    };
-  } catch (error: any) {
-    return {
-      results: [],
-      pageNum: page,
-      error: error?.message,
-    };
-  }
+  return result;
 };

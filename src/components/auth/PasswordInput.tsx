@@ -1,11 +1,6 @@
-import { TUserLoginInfo } from "@/types/auth";
 import clsx from "clsx";
 import { useState, type FC } from "react";
-import {
-  useFormContext,
-  type FieldError,
-  type UseFormRegisterReturn,
-} from "react-hook-form";
+import { type FieldError, type UseFormRegisterReturn } from "react-hook-form";
 import { IconButton } from "../ui/IconButton";
 
 type TPasswordInputProps = {

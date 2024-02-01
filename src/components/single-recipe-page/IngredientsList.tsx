@@ -2,6 +2,7 @@
 import { useState, type FC } from "react";
 import Image from "next/image";
 import clsx from "clsx";
+import { useQuery } from "@tanstack/react-query";
 
 type TIngredientsListProps = {
   ingredients: string[];
@@ -9,6 +10,9 @@ type TIngredientsListProps = {
 
 export const IngredientsList: FC<TIngredientsListProps> = ({ ingredients }) => {
   const [isOpenMobileIngredients, toggleMobileIngredients] = useState(false);
+
+  // const { data } = useQuery({ queryKey: ["recipe", "12"] });
+  // console.log(data);
 
   return (
     <div className="fixed top-[154px]">

@@ -20,6 +20,7 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
   const defaultValues = updatedRecipe
     ? updatedRecipe
     : {
+        titleImgPath: null,
         ingredients: [""],
         stages: [
           {

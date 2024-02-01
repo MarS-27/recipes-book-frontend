@@ -1,12 +1,11 @@
 import { TGetRecipeInForm } from "@/types/recipe";
 import { TError, TMessage } from "@/types/types";
 import { getSession } from "next-auth/react";
+import { revalidatePath } from "next/cache";
 import { SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export const updateRecipe: SubmitHandler<TGetRecipeInForm> = async (data) => {
-  console.log(data);
-
   const session = await getSession();
 
   const {
@@ -48,6 +47,7 @@ export const updateRecipe: SubmitHandler<TGetRecipeInForm> = async (data) => {
 
     const data: TMessage = await res.json();
 
+    revalidatePath(`/recipe/${id}`, "page");
     toast.success(data.message);
   } catch (error: any) {
     toast.error(error.message);

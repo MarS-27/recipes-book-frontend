@@ -4,6 +4,7 @@ import Image from "next/image";
 import { type FC } from "react";
 import clsx from "clsx";
 import { Pacifico } from "next/font/google";
+import { ROUTE } from "@/utils/routes";
 
 type RecipeCardProps = {
   recipe: TRecipe;
@@ -13,9 +14,10 @@ const pacifico = Pacifico({ weight: "400", subsets: ["latin"] });
 
 export const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
   const { title, titleImgPath } = recipe;
+
   return (
     <Link
-      href={`/recipe/${recipe.id}`}
+      href={`${ROUTE.RECIPE}/${recipe.id}`}
       className={clsx(
         "relative rounded-md h-recipeCard shadow-lg hover:scale-105 transition-all duration-200",
         !titleImgPath ? "p-2 bg-lightBlue" : "p-0"

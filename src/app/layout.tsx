@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import type { FC, ReactNode } from "react";
 import "./globals.css";
+import { Providers } from "./providers";
 
 const rubik = Rubik({ weight: "400", subsets: ["latin"] });
 
@@ -25,12 +26,14 @@ const RootLayout: FC<{
           "bg-pageBg text-black text-xs12 sm:text-sm16"
         )}
       >
-        <div className="min-h-dvh flex flex-col justify-between items-center max-w-container mx-auto px-4">
-          <Header />
-          <main className="w-full grow flex">{children}</main>
-          <Footer />
-        </div>
-        <ToastClientComponent />
+        <Providers>
+          <div className="min-h-dvh flex flex-col justify-between items-center max-w-container mx-auto px-4">
+            <Header />
+            <main className="w-full grow flex">{children}</main>
+            <Footer />
+          </div>
+          <ToastClientComponent />
+        </Providers>
       </body>
     </html>
   );
