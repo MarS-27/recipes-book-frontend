@@ -1,7 +1,6 @@
 "use client";
 import type { TUserLoginInfo } from "@/types/auth";
 import axios, { type AxiosError, type AxiosResponse } from "axios";
-import clsx from "clsx";
 import { signIn } from "next-auth/react";
 import { useState, type FC } from "react";
 import { type SubmitHandler, useForm, FieldError } from "react-hook-form";
@@ -88,7 +87,13 @@ export const Auth: FC = () => {
             error={errors.password as FieldError}
           />
           <Button disabled={isSubmitting} type="submit" variant="contained">
-            {isSubmitting ? <Loader /> : isLogin ? "Sign In" : "Create account"}
+            {isSubmitting ? (
+              <Loader classNameModificator="border-t-white" />
+            ) : isLogin ? (
+              "Sign In"
+            ) : (
+              "Create account"
+            )}
           </Button>
         </div>
       </form>

@@ -8,25 +8,29 @@ import { FormInput } from "../ui/FormInput";
 import { TextArea } from "../ui/TextArea";
 import { RecipeIngredients } from "./RecipeIngredients";
 import { RecipeStages } from "./RecipeStages";
-import { createRecipe } from "@/utils/createRecipe";
+import { useCreateRecipe } from "@/hooks/useCreateRecipe";
 import { Loader } from "../ui/Loader";
 import { updateRecipe } from "@/utils/updateRecipe";
+import { redirect } from "next/navigation";
+import { ROUTE } from "@/utils/routes";
 
 type TRecipeFormProps = {
   updatedRecipe?: TRecipe;
 };
 
 export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
+  const { createRecipe } = useCreateRecipe();
+
   const defaultValues = updatedRecipe
     ? updatedRecipe
     : {
-        titleImgPath: null,
+        titleImgPath: "",
         ingredients: [""],
         stages: [
           {
             stageNumber: "1",
             description: "",
-            imgPath: null,
+            imgPath: "",
           },
         ],
       };
@@ -36,7 +40,7 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
     watch,
   } = methods;
 
@@ -45,6 +49,12 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
   const categories = Object.values(RecipeCategories).filter(
     (value) => value !== RecipeCategories.All
   );
+
+  if (isSubmitSuccessful) {
+    updatedRecipe
+      ? redirect(`${ROUTE.RECIPE}/${updatedRecipe.id}`)
+      : redirect(ROUTE.RECIPES_START);
+  }
 
   return (
     <section className="relative w-full p-6 bg-mainYellow bg-opacity-[0.3] rounded-md border border-grayStroke-80">
@@ -98,7 +108,11 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
             </div>
             <div className="flex justify-center gap-3">
               <Button disabled={isSubmitting} type="submit" variant="contained">
-                {isSubmitting ? <Loader /> : "Submit"}
+                {isSubmitting ? (
+                  <Loader classNameModificator="border-t-white" />
+                ) : (
+                  "Submit"
+                )}
               </Button>
               <Button variant="outlined" onClick={() => reset()}>
                 Reset

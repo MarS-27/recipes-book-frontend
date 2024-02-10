@@ -2,7 +2,6 @@
 import { useState, type FC } from "react";
 import Image from "next/image";
 import clsx from "clsx";
-import { useQuery } from "@tanstack/react-query";
 
 type TIngredientsListProps = {
   ingredients: string[];
@@ -11,11 +10,8 @@ type TIngredientsListProps = {
 export const IngredientsList: FC<TIngredientsListProps> = ({ ingredients }) => {
   const [isOpenMobileIngredients, toggleMobileIngredients] = useState(false);
 
-  // const { data } = useQuery({ queryKey: ["recipe", "12"] });
-  // console.log(data);
-
   return (
-    <div className="fixed top-[154px]">
+    <div className="fixed bottom-7 md:top-[154px]">
       <Image
         width={40}
         height={40}
@@ -26,17 +22,13 @@ export const IngredientsList: FC<TIngredientsListProps> = ({ ingredients }) => {
       />
       <div
         className={clsx(
-          "grid w-ingredientsList transition-all duration-200 ",
+          "grid md:grid-rows-[1fr] w-ingredientsList transition-all duration-200",
           isOpenMobileIngredients
             ? "grid-rows-[1fr] max-md:bg-lightBlue rounded-md max-md:border-2 border-grayStroke-80"
             : "grid-rows-[0fr]"
         )}
       >
-        <ul
-          className={clsx(
-            "flex flex-col gap-2 pl-6 pr-3 list-image-checkmark max-md:overflow-hidden"
-          )}
-        >
+        <ul className="flex flex-col gap-2 pl-6 pr-3 list-image-checkmark max-h-ingredientsList overflow-y-auto">
           <p className="text-s14 sm:text-md20 font-semibold pt-2">
             Ingredients:
           </p>

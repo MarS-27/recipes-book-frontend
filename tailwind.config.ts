@@ -14,6 +14,7 @@ const config: Config = {
         filterBar: "300px",
         recipeTitleImage: "400px",
         recipeStageImage: "200px",
+        ingredientsList: "calc(100dvh - 180px)",
       },
       maxWidth: {
         container: "1280px",

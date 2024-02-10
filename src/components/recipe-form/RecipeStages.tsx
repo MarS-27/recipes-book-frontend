@@ -4,6 +4,7 @@ import { FieldError, useFieldArray, useFormContext } from "react-hook-form";
 import { AddFileInput } from "../ui/AddFileInput";
 import { TextArea } from "../ui/TextArea";
 import { IconButton } from "../ui/IconButton";
+import { toast } from "react-toastify";
 
 export const RecipeStages: FC = () => {
   const {
@@ -30,7 +31,7 @@ export const RecipeStages: FC = () => {
             append({
               stageNumber: String(fields.length + 1),
               description: "",
-              imgPath: null,
+              imgPath: "",
             })
           }
         />
@@ -46,7 +47,11 @@ export const RecipeStages: FC = () => {
             <IconButton
               iconSrc="/images/delete-icon.svg"
               classNameModificator="w-5 h-5 min-w-5"
-              onClick={() => remove(i)}
+              onClick={() => {
+                i === fields.length - 1
+                  ? remove(i)
+                  : toast.warning("Delete the previous stage!");
+              }}
               disabled={fields.length === 1}
             />
           </div>

@@ -1,18 +1,19 @@
-import { type FC } from "react";
 import { FilterPanel } from "@/components/recipes-page/FilterPanel";
+import { ControlRecipeButtons } from "@/components/single-recipe-page/ControlRecipeButtons";
 import { IngredientsList } from "@/components/single-recipe-page/IngredientsList";
-import { WarningMessage } from "@/components/ui/WarningMessage";
-import { getRecipeById } from "@/utils/getRecipeById";
-import clsx from "clsx";
-import { Pacifico } from "next/font/google";
-import Image from "next/image";
 import { RecipeStagesList } from "@/components/single-recipe-page/RecipeStagesList";
+import { WarningMessage } from "@/components/ui/WarningMessage";
+import { TGetRecipeByIdResult } from "@/types/recipe";
+import { getRecipeById } from "@/utils/getRecipeById";
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
-import { TGetRecipeByIdResult, TRecipe } from "@/types/recipe";
+import clsx from "clsx";
+import { Pacifico } from "next/font/google";
+import Image from "next/image";
+import { type FC } from "react";
 
 type TParams = {
   id: string;
@@ -43,19 +44,22 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
         {error ? (
           <WarningMessage>{error}</WarningMessage>
         ) : (
-          <div className="">
+          <>
             {result?.ingredients ? (
               <IngredientsList ingredients={result.ingredients} />
             ) : null}
             <div className="w-full flex flex-col gap-3 md:pl-64">
-              <h3
-                className={clsx(
-                  pacifico.className,
-                  "text-md26 sm:text-l36 font-medium tracking-wider p-2 text-center"
-                )}
-              >
-                {result?.title}
-              </h3>
+              <div className="flex gap-2 items-center justify-center">
+                <h3
+                  className={clsx(
+                    pacifico.className,
+                    "text-md26 sm:text-l36 font-medium tracking-wider p-2 text-center"
+                  )}
+                >
+                  {result?.title}
+                </h3>
+                <ControlRecipeButtons />
+              </div>
               {result?.titleImgPath ? (
                 <Image
                   src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${result.titleImgPath}`}
@@ -70,7 +74,7 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
                 <RecipeStagesList stages={result.stages} />
               ) : null}
             </div>
-          </div>
+          </>
         )}
       </section>
     </HydrationBoundary>

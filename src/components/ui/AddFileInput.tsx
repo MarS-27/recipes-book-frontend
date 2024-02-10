@@ -16,6 +16,7 @@ export const AddFileInput: FC<TAddFileInputProps> = ({
 }) => {
   const [uploadFilePreview, setUploadFilePreview] =
     useState<TCustomFile | null>(null);
+
   const { setValue, watch } = useFormContext<TGetRecipeInForm>();
 
   const { recipeFiles } = watch();
@@ -48,7 +49,7 @@ export const AddFileInput: FC<TAddFileInputProps> = ({
     }
 
     setUploadFilePreview(null);
-    setValue(fieldName, null);
+    setValue(fieldName, "");
   };
 
   const { getRootProps, getInputProps } = useDropzone({
