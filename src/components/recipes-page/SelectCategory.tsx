@@ -47,13 +47,13 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
             : "grid-rows-[0fr]"
         )}
       >
-        <div className="flex flex-col gap-2 overflow-hidden">
+        <div className="flex flex-col gap-1.5 overflow-hidden">
           {categories.map((item) => (
             <Link
               href={`${ROUTE.RECIPES}?category=${item}&page=1`}
               key={item}
               className={clsx(
-                "pb-2 px-2 relative transition-all duration-200 after:absolute after:top-full after:left-0 after:w-0 after:h-px after:transition-all after:duration-200 after:bg-darkBlue",
+                "pb-1 px-2 mb-0.5 relative transition-all duration-200 after:absolute after:top-full after:left-0 after:w-0 after:h-px after:transition-all after:duration-200 after:bg-darkBlue",
                 category === item
                   ? "pointer-events-none after:w-full text-darkBlue"
                   : "hover:text-darkBlue hover:after:w-full"

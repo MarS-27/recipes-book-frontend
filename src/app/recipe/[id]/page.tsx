@@ -49,11 +49,11 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
               <IngredientsList ingredients={result.ingredients} />
             ) : null}
             <div className="w-full flex flex-col gap-3 md:pl-64">
-              <div className="flex gap-2 items-center justify-center">
+              <div className="flex gap-2 items-center justify-between">
                 <h3
                   className={clsx(
                     pacifico.className,
-                    "text-md26 sm:text-l36 font-medium tracking-wider p-2 text-center"
+                    "w-full text-md26 sm:text-l36 font-medium tracking-wider p-2 text-center"
                   )}
                 >
                   {result?.title}

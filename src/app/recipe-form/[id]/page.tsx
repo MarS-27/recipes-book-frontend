@@ -35,7 +35,7 @@ const UpdateRecipe: FC<{ params: TParams }> = async ({ params }) => {
         {error ? (
           <WarningMessage>{error}</WarningMessage>
         ) : (
-          <RecipeForm updatedRecipe={result} />
+          <RecipeForm updatedRecipeData={result} />
         )}
       </section>
     </HydrationBoundary>

@@ -1,46 +1,31 @@
 "use client";
-import { RecipeCategories, TGetRecipeInForm, TRecipe } from "@/types/recipe";
+import { useRecipeForm } from "@/hooks/useRecipeForm";
+import { RecipeCategories, type TRecipe } from "@/types/recipe";
+import { ROUTE } from "@/utils/routes";
+import { redirect } from "next/navigation";
 import { type FC } from "react";
-import { FieldError, FormProvider, useForm } from "react-hook-form";
+import { type FieldError, FormProvider } from "react-hook-form";
 import { AddFileInput } from "../ui/AddFileInput";
 import { Button } from "../ui/Button";
 import { FormInput } from "../ui/FormInput";
+import { Loader } from "../ui/Loader";
 import { TextArea } from "../ui/TextArea";
 import { RecipeIngredients } from "./RecipeIngredients";
 import { RecipeStages } from "./RecipeStages";
-import { useCreateRecipe } from "@/hooks/useCreateRecipe";
-import { Loader } from "../ui/Loader";
-import { updateRecipe } from "@/utils/updateRecipe";
-import { redirect } from "next/navigation";
-import { ROUTE } from "@/utils/routes";
 
 type TRecipeFormProps = {
-  updatedRecipe?: TRecipe;
+  updatedRecipeData?: TRecipe;
 };
 
-export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
-  const { createRecipe } = useCreateRecipe();
+export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
+  const { methods, createRecipe, updateRecipe } =
+    useRecipeForm(updatedRecipeData);
 
-  const defaultValues = updatedRecipe
-    ? updatedRecipe
-    : {
-        titleImgPath: "",
-        ingredients: [""],
-        stages: [
-          {
-            stageNumber: "1",
-            description: "",
-            imgPath: "",
-          },
-        ],
-      };
-
-  const methods = useForm<TGetRecipeInForm>({ defaultValues });
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isSubmitting },
     watch,
   } = methods;
 
@@ -50,21 +35,15 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipe }) => {
     (value) => value !== RecipeCategories.All
   );
 
-  if (isSubmitSuccessful) {
-    updatedRecipe
-      ? redirect(`${ROUTE.RECIPE}/${updatedRecipe.id}`)
-      : redirect(ROUTE.RECIPES_START);
-  }
-
   return (
     <section className="relative w-full p-6 bg-mainYellow bg-opacity-[0.3] rounded-md border border-grayStroke-80">
       <h3 className="font-semibold text-md26 pb-2 mb-4 border-b-2 border-b-mainBLue">
-        {updatedRecipe ? "Change recipe" : "Create recipe"}
+        {methods ? "Change recipe" : "Create recipe"}
       </h3>
       <FormProvider {...methods}>
         <form
           onSubmit={
-            !updatedRecipe
+            !updatedRecipeData
               ? handleSubmit(createRecipe)
               : handleSubmit(updateRecipe)
           }

@@ -1,5 +1,5 @@
 "use client";
-import { type FC } from "react";
+import { useState, type FC } from "react";
 import { ROUTE } from "@/utils/routes";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,34 +7,64 @@ import { useParams } from "next/navigation";
 import { IconButton } from "../ui/IconButton";
 import { useDeleteRecipe } from "@/hooks/useDeleteRecipe";
 import { Loader } from "../ui/Loader";
+import clsx from "clsx";
+import { Button } from "../ui/Button";
 
 export const ControlRecipeButtons: FC = () => {
+  const [isOpenOptions, toggleOptions] = useState(false);
   const params = useParams<{ id: string }>();
   const { isDeleting, deleteRecipe } = useDeleteRecipe(params.id);
 
   return (
-    <div className="flex items-center gap-2">
-      <Link
-        href={`${ROUTE.RECIPE_FORM}/${params.id}`}
-        className="hover:scale-125 transition-all duration-200"
+    <div className="relative h-6">
+      <IconButton
+        iconSrc={isOpenOptions ? "/images/close.svg" : "/images/gear-icon.svg"}
+        classNameModificator="w-6 h-6 min-w-6"
+        onClick={() => toggleOptions(!isOpenOptions)}
+      />
+      <div
+        className={clsx(
+          "w-32 grid absolute top-[105%] right-0 transition-all duration-200 z-10",
+          isOpenOptions
+            ? "p-2 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
+            : "grid-rows-[0fr]"
+        )}
       >
-        <Image
-          width={24}
-          height={24}
-          src="/images/edit-icon.svg"
-          alt="Edit recipe"
-          className="min-w-6"
-        />
-      </Link>
-      {isDeleting ? (
-        <Loader classNameModificator="border-t-mainBLue" />
-      ) : (
-        <IconButton
-          iconSrc="/images/delete-icon.svg"
-          classNameModificator="w-6 h-6 min-w-6"
-          onClick={() => deleteRecipe()}
-        />
-      )}
+        <div className="flex flex-col gap-2 overflow-hidden">
+          <Link href={`${ROUTE.RECIPE_FORM}/${params.id}`}>
+            <Button variant="contained">
+              <Image
+                width={24}
+                height={24}
+                src="/images/edit-icon.svg"
+                alt="Edit recipe"
+                className="min-w-6 ml-1"
+              />
+              <p className="w-full">Edit</p>
+            </Button>
+          </Link>
+          <Button
+            variant="outlined"
+            onClick={() => deleteRecipe()}
+            disabled={isDeleting}
+          >
+            {isDeleting ? (
+              <Loader classNameModificator="border-t-mainBLue" />
+            ) : (
+              <>
+                <Image
+                  width={24}
+                  height={24}
+                  src="/images/delete-icon.svg"
+                  alt="Delete recipe"
+                  className="min-w-6 mr-1"
+                />
+                <p className="w-full">Delete</p>
+              </>
+            )}
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

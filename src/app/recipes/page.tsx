@@ -2,7 +2,7 @@ import { type FC } from "react";
 import { getRecipes } from "@/utils/getRecipes";
 import { redirect } from "next/navigation";
 import { ROUTE } from "@/utils/routes";
-import { RecipeCategories, TRecipe } from "@/types/recipe";
+import { RecipeCategories, type TRecipe } from "@/types/recipe";
 import { Pagination } from "@/components/ui/Pagination";
 import { WarningMessage } from "@/components/ui/WarningMessage";
 import { RecipeCard } from "@/components/recipes-page/RecipeCard";
@@ -12,7 +12,7 @@ import {
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
-import { TPaginatedResult } from "@/types/types";
+import { type TPaginatedResult } from "@/types/types";
 
 type TSearchParams = {
   category: RecipeCategories;

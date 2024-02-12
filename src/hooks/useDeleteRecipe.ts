@@ -1,6 +1,5 @@
 import { type TError, type TMessage } from "@/types/types";
 import { ROUTE } from "@/utils/routes";
-import { useQueryClient } from "@tanstack/react-query";
 import axios, { type AxiosError, type AxiosResponse } from "axios";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -8,8 +7,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 export const useDeleteRecipe = (recipeId: string) => {
-  const queryClient = useQueryClient();
-  const router = useRouter();
+  const { push, refresh } = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
 
   const deleteRecipe = async () => {
@@ -26,9 +24,9 @@ export const useDeleteRecipe = (recipeId: string) => {
         }
       )
       .then((resp: AxiosResponse<TMessage>) => {
-        queryClient.invalidateQueries({ queryKey: ["recipes"] });
-        router.push(ROUTE.RECIPES_START);
         toast.success(resp.data.message);
+        push(ROUTE.RECIPES_START);
+        refresh();
         setIsDeleting(false);
       })
       .catch((data: AxiosError<TError>) => {
