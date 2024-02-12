@@ -39,7 +39,7 @@ const Recipes: FC<{ searchParams: TSearchParams }> = async ({
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <section className="flex flex-col justify-between w-full py-5">
+      <section className="flex flex-col justify-between w-full pb-5">
         <FilterPanel category={searchParams.category} />
         {recipesData?.error && !recipesData.results.length ? (
           <WarningMessage>{recipesData.error}</WarningMessage>

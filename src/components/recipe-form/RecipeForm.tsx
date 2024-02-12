@@ -1,10 +1,8 @@
 "use client";
 import { useRecipeForm } from "@/hooks/useRecipeForm";
 import { RecipeCategories, type TRecipe } from "@/types/recipe";
-import { ROUTE } from "@/utils/routes";
-import { redirect } from "next/navigation";
 import { type FC } from "react";
-import { type FieldError, FormProvider } from "react-hook-form";
+import { FormProvider, type FieldError } from "react-hook-form";
 import { AddFileInput } from "../ui/AddFileInput";
 import { Button } from "../ui/Button";
 import { FormInput } from "../ui/FormInput";
@@ -36,8 +34,8 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
   );
 
   return (
-    <section className="relative w-full p-6 bg-mainYellow bg-opacity-[0.3] rounded-md border border-grayStroke-80">
-      <h3 className="font-semibold text-md26 pb-2 mb-4 border-b-2 border-b-mainBLue">
+    <div className="relative w-full p-3 md:p-6 bg-mainYellow bg-opacity-[0.3] rounded-md border border-grayStroke-80">
+      <h3 className="font-semibold text-md20 sm:text-md26 pb-2 mb-4 border-b-2 border-b-mainBLue">
         {methods ? "Change recipe" : "Create recipe"}
       </h3>
       <FormProvider {...methods}>
@@ -49,7 +47,7 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
           }
         >
           <div className="flex flex-col justify-center items-stretch gap-4">
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex flex-col gap-4 w-full">
                 <FormInput
                   type="text"
@@ -81,7 +79,7 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
               />
             </div>
 
-            <div className="flex justify-between gap-3">
+            <div className="flex flex-col sm:flex-row justify-between gap-3">
               <RecipeIngredients />
               <RecipeStages />
             </div>
@@ -100,6 +98,6 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
           </div>
         </form>
       </FormProvider>
-    </section>
+    </div>
   );
 };

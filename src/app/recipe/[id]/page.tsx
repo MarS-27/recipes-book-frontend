@@ -39,7 +39,7 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <section className="w-full py-5">
+      <section className="w-full pb-5">
         <FilterPanel />
         {error ? (
           <WarningMessage>{error}</WarningMessage>

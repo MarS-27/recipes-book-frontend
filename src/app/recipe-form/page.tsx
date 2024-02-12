@@ -3,7 +3,7 @@ import { type FC } from "react";
 
 const AddRecipe: FC = () => {
   return (
-    <section className="w-full py-5">
+    <section className="w-full pb-5">
       <RecipeForm />
     </section>
   );
