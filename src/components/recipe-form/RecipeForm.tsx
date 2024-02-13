@@ -1,6 +1,6 @@
 "use client";
 import { useRecipeForm } from "@/hooks/useRecipeForm";
-import { RecipeCategories, type TRecipe } from "@/types/recipe";
+import { type TRecipe } from "@/types/recipe";
 import { type FC } from "react";
 import { FormProvider, type FieldError } from "react-hook-form";
 import { AddFileInput } from "../ui/AddFileInput";
@@ -10,6 +10,7 @@ import { Loader } from "../ui/Loader";
 import { TextArea } from "../ui/TextArea";
 import { RecipeIngredients } from "./RecipeIngredients";
 import { RecipeStages } from "./RecipeStages";
+import { InputCategory } from "./InputCategory";
 
 type TRecipeFormProps = {
   updatedRecipeData?: TRecipe;
@@ -25,13 +26,10 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
     reset,
     formState: { errors, isSubmitting },
     watch,
+    setValue,
   } = methods;
 
   const { titleImgPath } = watch();
-
-  const categories = Object.values(RecipeCategories).filter(
-    (value) => value !== RecipeCategories.All
-  );
 
   return (
     <div className="relative w-full p-3 md:p-6 bg-mainYellow bg-opacity-[0.3] rounded-md border border-grayStroke-80">
@@ -57,13 +55,7 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
                   })}
                   error={errors.title as FieldError}
                 />
-                <select {...register("category")}>
-                  {categories.map((item) => (
-                    <option value={item} key={item}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
+                <InputCategory />
                 <AddFileInput
                   fieldName="titleImgPath"
                   updatedImgPath={titleImgPath}
