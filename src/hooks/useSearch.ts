@@ -4,6 +4,7 @@ import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useDebounceValue } from "./useDebounce";
+import axios, { AxiosResponse, AxiosError } from "axios";
 
 const searchCache: Record<string, TRecipe[]> = {
   "": [],
@@ -21,36 +22,27 @@ export const useSearch = () => {
   const getSearchedRecipes = async () => {
     setLoadingSearch(true);
 
-    try {
-      if (!searchCache[debouncedValue]) {
-        const session = await getSession();
-
-        const res = await fetch(
+    if (!searchCache[debouncedValue]) {
+      const session = await getSession();
+      await axios
+        .get(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/recipe/search?q=${debouncedValue}`,
           {
-            method: "GET",
             headers: {
-              "Content-Type": "application/json",
               Authorization: `Bearer ${session?.user.token}`,
             },
             signal: controller.signal,
           }
-        );
-
-        if (!res.ok) {
-          const errorData: TError = await res.json();
-          throw new Error(errorData.message);
-        }
-
-        const data: TRecipe[] = await res.json();
-
-        searchCache[debouncedValue] = data;
-        setSearchedRecipes(data);
-      } else {
-        setSearchedRecipes(searchCache[debouncedValue]);
-      }
-    } catch (error: any) {
-      toast.error(error);
+        )
+        .then((resp: AxiosResponse<TRecipe[]>) => {
+          searchCache[debouncedValue] = resp.data;
+          setSearchedRecipes(resp.data);
+        })
+        .catch((data: AxiosError<TError>) => {
+          toast.error(data.response?.data.message);
+        });
+    } else {
+      setSearchedRecipes(searchCache[debouncedValue]);
     }
 
     setLoadingSearch(false);

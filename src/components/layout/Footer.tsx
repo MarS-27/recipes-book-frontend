@@ -6,7 +6,7 @@ export const Footer: FC = () => {
   const formatDate = new Intl.DateTimeFormat("uk-Ua", { year: "numeric" });
 
   return (
-    <footer className="py-2 w-full">
+    <footer className="py-2 w-full max-w-container mx-auto px-4">
       <div className="flex items-center justify-center gap-5 mb-3">
         <Link
           href="https://www.linkedin.com/in/sergii-marchuk/"

@@ -27,9 +27,11 @@ const RootLayout: FC<{
         )}
       >
         <Providers>
-          <div className="min-h-dvh flex flex-col justify-between items-center max-w-container mx-auto px-4">
+          <div className="min-h-dvh flex flex-col justify-between items-center">
             <Header />
-            <main className="w-full grow flex">{children}</main>
+            <main className="w-full grow flex max-w-container mx-auto px-4">
+              {children}
+            </main>
             <Footer />
           </div>
           <ToastClientComponent />

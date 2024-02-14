@@ -26,7 +26,10 @@ export const InputCategory: FC = () => {
           "flex justify-between items-center py-1.5 px-3.5 rounded-md bg-white",
           !errors.category && isOpenSelect
             ? "border-2 border-grayStroke-70"
-            : "border border-opacity-20 border-grayStroke-100",
+            : null,
+          !errors.category && !isOpenSelect
+            ? "border border-opacity-20 border-grayStroke-100"
+            : null,
           errors.category && isOpenSelect ? "border-2 border-mainRed" : null
         )}
         onClick={() => {
@@ -47,7 +50,7 @@ export const InputCategory: FC = () => {
           alt="Open select categories"
         />
       </div>
-      {errors.category ? (
+      {errors.category && !category ? (
         <span className="absolute left-1 -top-3 text-mainRed text-xs10">
           * {errors.category.message}
         </span>
