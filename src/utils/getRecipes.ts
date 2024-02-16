@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { RecipeCategories, TRecipe } from "@/types/recipe";
 import { TError, TPaginatedResponse, TPaginatedResult } from "@/types/types";
 import axios, { AxiosError, AxiosResponse } from "axios";

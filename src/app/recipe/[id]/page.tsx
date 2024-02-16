@@ -62,10 +62,10 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
               </div>
               {result?.titleImgPath ? (
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${result.titleImgPath}`}
-                  className="w-full max-h-recipeTitleImage object-cover rounded-md"
                   width={200}
                   height={200}
+                  src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${result.titleImgPath}`}
+                  className="w-full h-auto max-h-recipeTitleImage object-cover rounded-md"
                   alt="Recipe title image"
                 />
               ) : null}

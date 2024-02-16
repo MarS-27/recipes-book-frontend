@@ -23,6 +23,7 @@ const config: Config = {
         searchBar: "450px",
         recipeForm: "1024px",
         button: "300px",
+        userProfile: "450px",
       },
       fontSize: {
         xs10: ["10px", "12px"],

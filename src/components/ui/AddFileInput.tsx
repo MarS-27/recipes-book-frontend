@@ -75,7 +75,7 @@ export const AddFileInput: FC<TAddFileInputProps> = ({
       {uploadFilePreview || updatedImgPath ? (
         <div className="relative">
           <Image
-            width={112}
+            width={144}
             height={112}
             src={
               uploadFilePreview
@@ -83,7 +83,7 @@ export const AddFileInput: FC<TAddFileInputProps> = ({
                 : `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${updatedImgPath}`
             }
             alt="Upload image"
-            className="w-36 h-28 object-cover rounded-md"
+            className="w-36 h-auto max-h-28 object-cover rounded-md"
             onLoad={() => {
               if (uploadFilePreview) {
                 URL.revokeObjectURL(uploadFilePreview.preview);

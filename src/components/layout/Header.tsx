@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import clsx from "clsx";
 import { getServerSession } from "next-auth";
 import { Pacifico } from "next/font/google";
@@ -6,7 +6,7 @@ import Image from "next/image";
 import { type FC } from "react";
 import { LogoutButton } from "./LogoutButton";
 import { AddRecipeButton } from "./AddRecipeButton";
-import { UserAccountButton } from "./UserAccountButton";
+import { UserProfileButton } from "./UserProfileButton";
 import Link from "next/link";
 import { ROUTE } from "@/utils/routes";
 
@@ -33,19 +33,27 @@ export const Header: FC = async () => {
               : "cursor-pointer max-sm:after:content-['Personal_Recipes_Book'] max-sm:after:absolute max-sm:after:-top-6 max-sm:after:left-0 max-sm:after:text-s14 max-sm:after:whitespace-nowrap"
           )}
         >
-          <Image src="/images/logo.svg" alt="logo" width={40} height={40} />
+          <Image
+            src="/images/logo.svg"
+            alt="logo"
+            width={40}
+            height={40}
+            className="w-10 h-10 min-w-10"
+          />
           <h1
             className={clsx(
+              "text-md24 sm:text-l32 md:text-xL40 font-medium tracking-wider",
               pacifico.className,
-              "text-md24 sm:text-l32 md:text-xL40 font-medium tracking-wider hidden sm:block"
+              !session?.user.token ? "block" : "hidden sm:block"
             )}
           >
-            Personal Recipes Book
+            {session?.user.userName ? `${session.user.userName}'s` : "Personal"}{" "}
+            Recipes Book
           </h1>
         </Link>
         {session?.user.token ? (
           <div className="flex items-center gap-3 ">
-            <UserAccountButton />
+            <UserProfileButton userImgPath={session.user.imgPath} />
             <AddRecipeButton />
             <LogoutButton />
           </div>
