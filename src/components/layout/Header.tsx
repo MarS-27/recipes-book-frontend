@@ -53,7 +53,7 @@ export const Header: FC = async () => {
         </Link>
         {session?.user.token ? (
           <div className="flex items-center gap-3 ">
-            <UserProfileButton userImgPath={session.user.imgPath} />
+            <UserProfileButton />
             <AddRecipeButton />
             <LogoutButton />
           </div>

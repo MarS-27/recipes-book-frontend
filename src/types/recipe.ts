@@ -1,3 +1,5 @@
+import { TCustomFile } from "./types";
+
 export type TRecipeStage = {
   stageNumber: string;
   imgPath: string | null;
@@ -12,8 +14,6 @@ export enum RecipeCategories {
   Appetizer = "Appetizer",
   Others = "Others",
 }
-
-export type TCustomFile = File & { preview: string; fileId: string };
 
 export type TRecipeFiles = {
   recipeFiles?: TCustomFile[];

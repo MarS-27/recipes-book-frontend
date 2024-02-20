@@ -7,6 +7,8 @@ import { Rubik } from "next/font/google";
 import type { FC, ReactNode } from "react";
 import "./globals.css";
 import { Providers } from "./providers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 
 const rubik = Rubik({ weight: "400", subsets: ["latin"] });
 
@@ -18,6 +20,8 @@ export const metadata: Metadata = {
 const RootLayout: FC<{
   children: ReactNode;
 }> = async ({ children }) => {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en">
       <body
@@ -26,7 +30,7 @@ const RootLayout: FC<{
           "bg-pageBg text-black text-xs12 sm:text-sm16"
         )}
       >
-        <Providers>
+        <Providers session={session}>
           <div className="min-h-dvh flex flex-col justify-between items-center">
             <Header />
             <main className="w-full grow flex max-w-container mx-auto px-4">

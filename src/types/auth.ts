@@ -1,3 +1,5 @@
+import { TCustomFile } from "./types";
+
 export type TUserLoginInfo = {
   email: string;
   password: string;
@@ -17,3 +19,9 @@ export type TUserProfile = {
   imgPath: string;
   userName: string;
 };
+
+export type TUserImageFile = {
+  userImage?: TCustomFile;
+};
+
+export type TUpdatedUserProfile = TUserProfile & TUserImageFile;

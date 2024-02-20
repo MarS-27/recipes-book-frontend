@@ -1,9 +1,10 @@
-import { TCustomFile, type TGetRecipeInForm } from "@/types/recipe";
+import { type TGetRecipeInForm } from "@/types/recipe";
 import Image from "next/image";
 import { useState, type FC, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { useFormContext } from "react-hook-form";
 import { IconButton } from "./IconButton";
+import { TCustomFile } from "@/types/types";
 
 type TAddFileInputProps = {
   updatedImgPath: string | null | undefined;
@@ -83,7 +84,7 @@ export const AddFileInput: FC<TAddFileInputProps> = ({
                 : `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${updatedImgPath}`
             }
             alt="Upload image"
-            className="w-36 h-auto max-h-28 object-cover rounded-md"
+            className="w-36 h-28 object-cover rounded-md"
             onLoad={() => {
               if (uploadFilePreview) {
                 URL.revokeObjectURL(uploadFilePreview.preview);

@@ -25,3 +25,5 @@ export type TPaginatedResponse<TData> = {
   skip: number;
   results: TData[];
 };
+
+export type TCustomFile = File & { preview: string; fileId: string };

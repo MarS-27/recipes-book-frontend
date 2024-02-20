@@ -70,7 +70,6 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
                 rows={8}
               />
             </div>
-
             <div className="flex flex-col sm:flex-row justify-between gap-3">
               <RecipeIngredients />
               <RecipeStages />
