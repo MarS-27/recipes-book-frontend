@@ -1,18 +1,22 @@
 import { TUpdatedUserProfile, TUserProfile } from "@/types/auth";
 import { type TError, type TMessage } from "@/types/types";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { type AxiosError, type AxiosResponse } from "axios";
 import { getSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 
-export const useUpdateUserProfile = (userProfileData: TUserProfile) => {
+export const useUpdateUserProfile = () => {
+  const { data: userProfile } = useQuery<TUserProfile>({
+    queryKey: ["user-profile"],
+  });
+
   const [isUpdateProfile, toggleUpdateButton] = useState(false);
   const queryClient = useQueryClient();
 
   const methods = useForm<TUpdatedUserProfile>({
-    defaultValues: userProfileData,
+    defaultValues: userProfile,
   });
 
   const updateUserProfile: SubmitHandler<TUpdatedUserProfile> = async (

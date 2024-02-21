@@ -16,7 +16,6 @@ export const UpdateUserImage: FC = () => {
     const customFile = createCustomFile(acceptedFiles[0]);
 
     setUploadFilePreview(customFile);
-
     setValue("userImage", customFile);
   };
 

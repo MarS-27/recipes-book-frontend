@@ -24,6 +24,7 @@ export const AddRecipeImages: FC<TAddRecipeImagesProps> = ({
   const onDrop = (acceptedFiles: File[]) => {
     const customFile = createCustomFile(acceptedFiles[0]);
 
+    setUploadFilePreview(customFile);
     setValue(fieldName, customFile.name);
 
     if (recipeFiles?.length) {

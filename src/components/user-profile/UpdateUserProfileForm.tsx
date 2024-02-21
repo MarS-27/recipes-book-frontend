@@ -13,10 +13,12 @@ import { UpdateUserImage } from "./UpdateUserImage";
 
 type TUpdateUserProfileFormProps = {
   updateUserProfile: SubmitHandler<TUpdatedUserProfile>;
+  cancelUpdateUserProfile: () => void;
 };
 
 export const UpdateUserProfileForm: FC<TUpdateUserProfileFormProps> = ({
   updateUserProfile,
+  cancelUpdateUserProfile,
 }) => {
   const {
     register,
@@ -51,7 +53,7 @@ export const UpdateUserProfileForm: FC<TUpdateUserProfileFormProps> = ({
             "Submit"
           )}
         </Button>
-        <Button variant="outlined" onClick={() => console.log("cancel")}>
+        <Button variant="outlined" onClick={cancelUpdateUserProfile}>
           Cancel
         </Button>
       </div>

@@ -5,15 +5,19 @@ import Image from "next/image";
 import { type FC } from "react";
 import { UserProfileModal } from "../user-profile/UserProfileModal";
 import { Loader } from "../ui/Loader";
+import { useQuery } from "@tanstack/react-query";
+import { TUserProfile } from "@/types/auth";
 
 export const UserProfileButton: FC = () => {
-  const {
-    userProfile,
-    isProfileShow,
-    openUserProfile,
-    closeUserProfile,
-    isLoadingUserProfile,
-  } = useUserProfile();
+  const { isProfileShow, openUserProfile, closeUserProfile, getUserProfile } =
+    useUserProfile();
+
+  const { data: userProfile, isLoading: isLoadingUserProfile } = useQuery<
+    TUserProfile | undefined
+  >({
+    queryKey: ["user-profile"],
+    queryFn: getUserProfile,
+  });
 
   return (
     <>
@@ -47,10 +51,7 @@ export const UserProfileButton: FC = () => {
         </button>
       )}
       {isProfileShow && userProfile ? (
-        <UserProfileModal
-          closeModal={closeUserProfile}
-          userProfileData={userProfile}
-        />
+        <UserProfileModal closeModal={closeUserProfile} />
       ) : null}
     </>
   );

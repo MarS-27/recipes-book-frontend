@@ -1,25 +1,19 @@
 "use client";
 import { useUpdateUserProfile } from "@/hooks/useUpdateUserProfile";
-import { type TUserProfile } from "@/types/auth";
 import Image from "next/image";
 import { type FC } from "react";
 import { FormProvider } from "react-hook-form";
-import { Button } from "../ui/Button";
 import { ModalWindow } from "../ui/ModalWindow";
 import { UpdateUserProfileForm } from "./UpdateUserProfileForm";
+import { UserProfileInfo } from "./UserProfileInfo";
 
 type UserProfileModalProps = {
-  userProfileData: TUserProfile;
   closeModal: () => void;
 };
 
-export const UserProfileModal: FC<UserProfileModalProps> = ({
-  closeModal,
-  userProfileData,
-}) => {
+export const UserProfileModal: FC<UserProfileModalProps> = ({ closeModal }) => {
   const { methods, updateUserProfile, isUpdateProfile, toggleUpdateButton } =
-    useUpdateUserProfile(userProfileData);
-  const { userName, imgPath, email } = userProfileData;
+    useUpdateUserProfile();
 
   return (
     <ModalWindow>
@@ -38,67 +32,15 @@ export const UserProfileModal: FC<UserProfileModalProps> = ({
 
         {isUpdateProfile ? (
           <FormProvider {...methods}>
-            <UpdateUserProfileForm updateUserProfile={updateUserProfile} />
+            <UpdateUserProfileForm
+              updateUserProfile={updateUserProfile}
+              cancelUpdateUserProfile={() => toggleUpdateButton(false)}
+            />
           </FormProvider>
         ) : (
-          <div className="flex flex-col w-full gap-3 mb-3">
-            <Image
-              width={144}
-              height={112}
-              src={
-                imgPath
-                  ? `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${imgPath}`
-                  : "/images/user-icon.svg"
-              }
-              alt="User profile"
-              className="w-36 h-28 object-cover rounded-md mx-auto"
-            />
-            <p>
-              <span className="font-semibold">Email: </span>
-              {email}
-            </p>
-            <p>
-              <span className="font-semibold">User name: </span>
-              {userName ? userName : "---"}
-            </p>
-            <div className="flex justify-center gap-3">
-              <Button
-                variant="contained"
-                type="submit"
-                onClick={() => toggleUpdateButton(true)}
-              >
-                <Image
-                  width={24}
-                  height={24}
-                  src="/images/edit-icon.svg"
-                  alt="Edit recipe"
-                  className="min-w-6"
-                />
-                <p className="w-full">Edit</p>
-              </Button>
-
-              <Button
-                variant="outlined"
-                onClick={() => console.log("del")}
-                // disabled={isDeleting}
-              >
-                {/* {isDeleting ? (
-              <Loader classNameModificator="border-t-mainBLue" />
-            ) : ( */}
-                <>
-                  <Image
-                    width={24}
-                    height={24}
-                    src="/images/delete-icon.svg"
-                    alt="Delete recipe"
-                    className="min-w-6"
-                  />
-                  <p className="w-full">Delete</p>
-                </>
-                {/* // )} */}
-              </Button>
-            </div>
-          </div>
+          <UserProfileInfo
+            openUpdateUserProfile={() => toggleUpdateButton(true)}
+          />
         )}
       </div>
     </ModalWindow>
