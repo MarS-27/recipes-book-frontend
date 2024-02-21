@@ -12,14 +12,13 @@ export const useUserProfile = () => {
     const session = await getSession();
 
     const result = await axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/profile`, {
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/profile`, {
         headers: {
           Authorization: `Bearer ${session?.user.token}`,
         },
       })
       .then((resp: AxiosResponse<TUserProfile>) => resp.data)
       .catch((data: AxiosError<TError>) => signOut({ redirect: true }));
-    console.log(result);
 
     return result;
   };
@@ -27,7 +26,7 @@ export const useUserProfile = () => {
   const openUserProfile = () => toggleProfileButton(true);
   const closeUserProfile = () => toggleProfileButton(false);
 
-  const { data: userProfile } = useQuery({
+  const { data: userProfile, isLoading: isLoadingUserProfile } = useQuery({
     queryKey: ["user-profile"],
     queryFn: getUserProfile,
   });
@@ -37,5 +36,6 @@ export const useUserProfile = () => {
     isProfileShow,
     openUserProfile,
     closeUserProfile,
+    isLoadingUserProfile,
   };
 };

@@ -3,7 +3,6 @@ import { useRecipeForm } from "@/hooks/useRecipeForm";
 import { type TRecipe } from "@/types/recipe";
 import { type FC } from "react";
 import { FormProvider, type FieldError } from "react-hook-form";
-import { AddFileInput } from "../ui/AddFileInput";
 import { Button } from "../ui/Button";
 import { FormInput } from "../ui/FormInput";
 import { Loader } from "../ui/Loader";
@@ -11,6 +10,7 @@ import { TextArea } from "../ui/TextArea";
 import { RecipeIngredients } from "./RecipeIngredients";
 import { RecipeStages } from "./RecipeStages";
 import { InputCategory } from "./InputCategory";
+import { AddRecipeImages } from "./AddRecipeImages";
 
 type TRecipeFormProps = {
   updatedRecipeData?: TRecipe;
@@ -26,7 +26,6 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
     reset,
     formState: { errors, isSubmitting },
     watch,
-    setValue,
   } = methods;
 
   const { titleImgPath } = watch();
@@ -56,7 +55,7 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
                   error={errors.title as FieldError}
                 />
                 <InputCategory />
-                <AddFileInput
+                <AddRecipeImages
                   fieldName="titleImgPath"
                   updatedImgPath={titleImgPath}
                 />

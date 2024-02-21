@@ -1,10 +1,14 @@
-import { TGetRecipeInForm } from "@/types/recipe";
+import { type TGetRecipeInForm } from "@/types/recipe";
 import { type FC } from "react";
-import { FieldError, useFieldArray, useFormContext } from "react-hook-form";
-import { AddFileInput } from "../ui/AddFileInput";
+import {
+  type FieldError,
+  useFieldArray,
+  useFormContext,
+} from "react-hook-form";
 import { TextArea } from "../ui/TextArea";
 import { IconButton } from "../ui/IconButton";
 import { toast } from "react-toastify";
+import { AddRecipeImages } from "./AddRecipeImages";
 
 export const RecipeStages: FC = () => {
   const {
@@ -20,6 +24,12 @@ export const RecipeStages: FC = () => {
     control,
     name: "stages",
   });
+
+  const deleteStage = (i: number) => {
+    i === fields.length - 1
+      ? remove(i)
+      : toast.warning("Delete the previous stage!");
+  };
 
   return (
     <div className="w-full flex flex-col gap-2">
@@ -47,11 +57,7 @@ export const RecipeStages: FC = () => {
             <IconButton
               iconSrc="/images/delete-icon.svg"
               classNameModificator="w-5 h-5 min-w-5"
-              onClick={() => {
-                i === fields.length - 1
-                  ? remove(i)
-                  : toast.warning("Delete the previous stage!");
-              }}
+              onClick={() => deleteStage(i)}
               disabled={fields.length === 1}
             />
           </div>
@@ -64,7 +70,7 @@ export const RecipeStages: FC = () => {
             error={errors.stages?.[i]?.description as FieldError}
             rows={3}
           />
-          <AddFileInput
+          <AddRecipeImages
             fieldName={`stages.${i}.imgPath`}
             updatedImgPath={stages[i].imgPath}
           />

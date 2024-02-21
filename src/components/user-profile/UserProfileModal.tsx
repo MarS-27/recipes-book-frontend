@@ -1,13 +1,11 @@
 "use client";
-import { type FC } from "react";
-import { ModalWindow } from "../ui/ModalWindow";
+import { useUpdateUserProfile } from "@/hooks/useUpdateUserProfile";
 import { type TUserProfile } from "@/types/auth";
 import Image from "next/image";
-import { Button } from "../ui/Button";
-import { Loader } from "../ui/Loader";
-import { useUpdateUserProfile } from "@/hooks/useUpdateUserProfile";
-import clsx from "clsx";
+import { type FC } from "react";
 import { FormProvider } from "react-hook-form";
+import { Button } from "../ui/Button";
+import { ModalWindow } from "../ui/ModalWindow";
 import { UpdateUserProfileForm } from "./UpdateUserProfileForm";
 
 type UserProfileModalProps = {

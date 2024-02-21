@@ -1,6 +1,6 @@
+"use client";
 import { type FC } from "react";
 import { FormInput } from "../ui/FormInput";
-import { AddFileInput } from "../ui/AddFileInput";
 import {
   type FieldError,
   useFormContext,
@@ -9,6 +9,7 @@ import {
 import { type TUpdatedUserProfile } from "@/types/auth";
 import { Button } from "../ui/Button";
 import { Loader } from "../ui/Loader";
+import { UpdateUserImage } from "./UpdateUserImage";
 
 type TUpdateUserProfileFormProps = {
   updateUserProfile: SubmitHandler<TUpdatedUserProfile>;
@@ -20,18 +21,15 @@ export const UpdateUserProfileForm: FC<TUpdateUserProfileFormProps> = ({
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isSubmitting },
   } = useFormContext<TUpdatedUserProfile>();
-
-  const { imgPath } = watch();
 
   return (
     <form
       className="flex flex-col w-full gap-3"
       onSubmit={handleSubmit(updateUserProfile)}
     >
-      <AddFileInput fieldName="titleImgPath" updatedImgPath={imgPath} />
+      <UpdateUserImage />
       <FormInput
         type="email"
         placeholder="User email"

@@ -1,58 +1,23 @@
-import { type TGetRecipeInForm } from "@/types/recipe";
+"use client";
+import { type TCustomFile } from "@/types/types";
 import Image from "next/image";
-import { useState, type FC, useEffect } from "react";
+import { type FC } from "react";
 import { useDropzone } from "react-dropzone";
-import { useFormContext } from "react-hook-form";
 import { IconButton } from "./IconButton";
-import { TCustomFile } from "@/types/types";
 
-type TAddFileInputProps = {
+type TUploadFileInputProps = {
   updatedImgPath: string | null | undefined;
-  fieldName: "titleImgPath" | `stages.${number}.imgPath`;
+  uploadFilePreview: TCustomFile | null;
+  removeImg: () => void;
+  onDrop: (acceptedFiles: File[]) => void;
 };
 
-export const AddFileInput: FC<TAddFileInputProps> = ({
-  fieldName,
+export const UploadFileInput: FC<TUploadFileInputProps> = ({
+  uploadFilePreview,
   updatedImgPath,
+  removeImg,
+  onDrop,
 }) => {
-  const [uploadFilePreview, setUploadFilePreview] =
-    useState<TCustomFile | null>(null);
-
-  const { setValue, watch } = useFormContext<TGetRecipeInForm>();
-
-  const { recipeFiles } = watch();
-
-  const onDrop = (acceptedFiles: File[]) => {
-    const customFile: TCustomFile = Object.assign(acceptedFiles[0], {
-      preview: URL.createObjectURL(acceptedFiles[0]),
-      fileId: crypto.randomUUID(),
-    });
-
-    setUploadFilePreview(customFile);
-
-    setValue(fieldName, customFile.name);
-
-    if (recipeFiles?.length) {
-      setValue("recipeFiles", [...recipeFiles, customFile]);
-    } else {
-      setValue("recipeFiles", [customFile]);
-    }
-  };
-
-  const removeImg = () => {
-    if (recipeFiles?.length) {
-      setValue(
-        "recipeFiles",
-        recipeFiles.filter((file) => file.fileId !== uploadFilePreview?.fileId)
-      );
-    } else {
-      setValue("recipeFiles", []);
-    }
-
-    setUploadFilePreview(null);
-    setValue(fieldName, "");
-  };
-
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     multiple: false,
@@ -62,14 +27,6 @@ export const AddFileInput: FC<TAddFileInputProps> = ({
       "image/webp": [".webp"],
     },
   });
-
-  useEffect(() => {
-    return () => {
-      if (uploadFilePreview) {
-        URL.revokeObjectURL(uploadFilePreview.preview);
-      }
-    };
-  }, []);
 
   return (
     <div className="flex items-center justify-center gap-2">
@@ -95,7 +52,7 @@ export const AddFileInput: FC<TAddFileInputProps> = ({
           <IconButton
             iconSrc="/images/delete-icon.svg"
             classNameModificator="w-6 h-6 min-w-5 absolute top-1.5 right-1.5 rounded-full p-1 bg-mainRed bg-opacity-50"
-            onClick={() => removeImg()}
+            onClick={removeImg}
           />
         </div>
       ) : (
