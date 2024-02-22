@@ -21,7 +21,7 @@ export const PaginationButton: FC<BtnProps> = ({
       href={`${ROUTE.RECIPES}?category=All&page=${page}`}
       className={clsx(
         "w-8 h-8 rounded flex justify-center items-center transition-all duration-300",
-        disabled ? "pointer-events-none" : "hover:bg-mainBLue"
+        disabled ? "pointer-events-none" : "hover:bg-mainBlue"
       )}
     >
       <p

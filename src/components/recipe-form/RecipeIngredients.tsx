@@ -16,7 +16,7 @@ export const RecipeIngredients: FC = () => {
 
   return (
     <div className="w-full flex flex-col gap-4">
-      <div className="flex items-center gap-3 pb-2 border-b-2 border-b-mainBLue">
+      <div className="flex items-center gap-3 pb-2 border-b-2 border-b-mainBlue">
         <IconButton
           iconSrc="/images/add-icon.svg"
           classNameModificator="w-9 h-9 min-w-9"

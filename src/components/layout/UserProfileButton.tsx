@@ -22,7 +22,7 @@ export const UserProfileButton: FC = () => {
   return (
     <>
       {isLoadingUserProfile ? (
-        <Loader classNameModificator="border-t-mainBLue" />
+        <Loader classNameModificator="border-t-mainBlue" />
       ) : (
         <button
           type="button"

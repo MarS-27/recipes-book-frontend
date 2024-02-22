@@ -51,7 +51,7 @@ const config: Config = {
       },
       colors: {
         black: "#231F20",
-        mainBLue: "#45AAB8",
+        mainBlue: "#45AAB8",
         darkBlue: "#378893",
         mainGreen: "#B4CCB9",
         mainYellow: "#F9EBB2",

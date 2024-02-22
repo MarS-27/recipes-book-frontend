@@ -49,7 +49,7 @@ export const RecipeStages: FC = () => {
       </div>
       {fields.map((field, i) => (
         <div
-          className="flex flex-col gap-3 border-t-2 border-t-mainBLue pt-2"
+          className="flex flex-col gap-3 border-t-2 border-t-mainBlue pt-2"
           key={field.id}
         >
           <div className="flex items-center justify-end gap-2">

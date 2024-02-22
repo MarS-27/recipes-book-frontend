@@ -22,6 +22,7 @@ export const IconButton: FC<TIconButtonProps> = ({
       type="button"
       className={clsx(
         "hover:scale-125 transition-all duration-200",
+        disabled ? "pointer-events-none" : null,
         classNameModificator
       )}
     >

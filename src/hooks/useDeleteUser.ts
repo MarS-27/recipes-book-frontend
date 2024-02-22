@@ -1,18 +1,16 @@
 import { type TError, type TMessage } from "@/types/types";
 import axios, { type AxiosError, type AxiosResponse } from "axios";
 import { getSession, signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 export const useDeleteUser = () => {
-  const [userDeletingState, setUserDeletingState] = useState({
-    isLoading: false,
-    isOpenAccept: false,
-  });
+  const [isDeleting, setDeleting] = useState(false);
+  const [isOpenDeletingAccept, setOpenDeletingAccept] = useState(false);
 
   const deleteUser = async () => {
-    setUserDeletingState({ ...userDeletingState, isLoading: true });
+    setOpenDeletingAccept(false);
+    setDeleting(true);
     const session = await getSession();
 
     await axios
@@ -23,23 +21,22 @@ export const useDeleteUser = () => {
       })
       .then((resp: AxiosResponse<TMessage>) => {
         toast.success(resp.data.message);
-        setUserDeletingState({ ...userDeletingState, isLoading: false });
+        setDeleting(false);
         signOut({ redirect: true });
       })
       .catch((data: AxiosError<TError>) => {
         toast.error(data.response?.data.message);
-        setUserDeletingState({ ...userDeletingState, isLoading: false });
+        setDeleting(false);
       });
   };
 
-  const openDeleteAccept = () =>
-    setUserDeletingState({ ...userDeletingState, isOpenAccept: true });
+  const openDeleteAccept = () => setOpenDeletingAccept(true);
 
-  const closeDeleteAccept = () =>
-    setUserDeletingState({ ...userDeletingState, isOpenAccept: false });
+  const closeDeleteAccept = () => setOpenDeletingAccept(false);
 
   return {
-    userDeletingState,
+    isDeleting,
+    isOpenDeletingAccept,
     deleteUser,
     openDeleteAccept,
     closeDeleteAccept,

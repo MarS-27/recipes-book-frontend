@@ -30,11 +30,12 @@ export const Button: FC<ButtonProps> = ({
           ? "bg-mainBlue text-sm16 text-white hover:bg-darkBlue"
           : null,
         variant === "outlined"
-          ? "border-2 border-mainBLue text-grayStroke-70 text-sm16 hover:bg-lightBlue hover:border-darkBlue"
+          ? "border-2 border-mainBlue text-grayStroke-70 text-sm16 hover:bg-lightBlue hover:border-darkBlue"
           : null,
         variant === "text"
-          ? "text-s14 text-mainBLue hover:text-darkBlue"
+          ? "text-s14 text-mainBlue hover:text-darkBlue"
           : null,
+        disabled ? "pointer-events-none" : null,
         classNameModificator
       )}
     >

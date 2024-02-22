@@ -49,7 +49,7 @@ export const ControlRecipeButtons: FC = () => {
             disabled={isDeleting}
           >
             {isDeleting ? (
-              <Loader classNameModificator="border-t-mainBLue" />
+              <Loader classNameModificator="border-t-mainBlue" />
             ) : (
               <>
                 <Image

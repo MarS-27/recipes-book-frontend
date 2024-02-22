@@ -20,8 +20,8 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
         className={clsx(
           "flex justify-between items-center gap-2 p-2 bg-lightYellow rounded-md border-2 transition-all duration-200",
           isOpenSelect
-            ? "border-mainBLue"
-            : "border-grayStroke-80 hover:border-mainBLue"
+            ? "border-mainBlue"
+            : "border-grayStroke-80 hover:border-mainBlue"
         )}
         onClick={() => {
           setOpenSelect(!isOpenSelect);

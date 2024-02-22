@@ -37,8 +37,8 @@ export const Pagination: FC<PaginationProps> = ({
                 className={clsx(
                   "w-8 h-7 rounded border border-grayStroke-60 flex justify-center items-center transition-all duration-300",
                   activePageNumber === item
-                    ? "pointer-events-none bg-mainBLue text-grayStroke-40"
-                    : "bg-lightBlue hover:bg-mainBLue hover:text-grayStroke-40"
+                    ? "pointer-events-none bg-mainBlue text-grayStroke-40"
+                    : "bg-lightBlue hover:bg-mainBlue hover:text-grayStroke-40"
                 )}
               >
                 <p className="font-semibold">{item}</p>

@@ -5,6 +5,7 @@ import { useDeleteUser } from "@/hooks/useDeleteUser";
 import { Loader } from "../ui/Loader";
 import { TUserProfile } from "@/types/auth";
 import { useQuery } from "@tanstack/react-query";
+import clsx from "clsx";
 
 type TUserProfileInfoProps = {
   openUpdateUserProfile: () => void;
@@ -13,13 +14,17 @@ type TUserProfileInfoProps = {
 export const UserProfileInfo: FC<TUserProfileInfoProps> = ({
   openUpdateUserProfile,
 }) => {
-  const { userDeletingState, deleteUser, openDeleteAccept, closeDeleteAccept } =
-    useDeleteUser();
+  const {
+    isDeleting,
+    isOpenDeletingAccept,
+    deleteUser,
+    openDeleteAccept,
+    closeDeleteAccept,
+  } = useDeleteUser();
+
   const { data: userProfile } = useQuery<TUserProfile>({
     queryKey: ["user-profile"],
   });
-
-  const { isLoading, isOpenAccept } = userDeletingState;
 
   return (
     <div className="flex flex-col w-full gap-3 mb-3">
@@ -32,7 +37,10 @@ export const UserProfileInfo: FC<TUserProfileInfoProps> = ({
             : "/images/user-icon.svg"
         }
         alt="User profile"
-        className="w-36 h-28 object-cover rounded-md mx-auto"
+        className={clsx(
+          "w-36 h-28 rounded-md mx-auto",
+          userProfile?.imgPath ? "object-cover" : "object-center"
+        )}
       />
       <p>
         <span className="font-semibold">Email: </span>
@@ -57,15 +65,14 @@ export const UserProfileInfo: FC<TUserProfileInfoProps> = ({
           />
           <p className="w-full">Edit</p>
         </Button>
-
-        {!isOpenAccept ? (
+        <div className="relative w-full">
           <Button
             variant="outlined"
             onClick={openDeleteAccept}
-            disabled={isLoading}
+            disabled={isDeleting || isOpenDeletingAccept}
           >
-            {isLoading ? (
-              <Loader classNameModificator="border-t-mainBLue" />
+            {isDeleting ? (
+              <Loader classNameModificator="border-t-mainBlue" />
             ) : (
               <>
                 <Image
@@ -79,28 +86,30 @@ export const UserProfileInfo: FC<TUserProfileInfoProps> = ({
               </>
             )}
           </Button>
-        ) : (
-          <div className="flex justify-center gap-3 w-full">
-            <Button
-              variant="outlined"
-              classNameModificator="bg-mainRed"
-              onClick={() => {
-                closeDeleteAccept();
-                deleteUser();
-              }}
-              disabled={isLoading}
-            >
-              Yes
-            </Button>
-            <Button
-              variant="outlined"
-              onClick={closeDeleteAccept}
-              classNameModificator="bg-mainGreen"
-            >
-              No
-            </Button>
+          <div
+            className={clsx(
+              "w-full absolute top-[105%] left-0 grid transition-all duration-200 z-10",
+              isOpenDeletingAccept
+                ? "p-0.5 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
+                : "grid-rows-[0fr]"
+            )}
+          >
+            <div className="flex items-center justify-around gap-1.5 text-xs12 text-center overflow-hidden">
+              <p
+                className="w-full p-0.5 underline text-mainRed hover:bg-lightBlue cursor-pointer rounded-md"
+                onClick={deleteUser}
+              >
+                Yes
+              </p>
+              <p
+                className="w-full p-0.5 underline text-mainGreen hover:bg-lightBlue cursor-pointer rounded-md"
+                onClick={closeDeleteAccept}
+              >
+                No
+              </p>
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

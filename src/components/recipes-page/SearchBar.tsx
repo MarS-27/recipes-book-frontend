@@ -23,7 +23,7 @@ export const SearchBar: FC = () => {
       <input
         className={clsx(
           "w-full p-2 md:text-md20 text-s14 font-normal bg-lightYellow rounded-md border-2 placeholder:text-grayStroke-70 placeholder:font-light outline-none",
-          isOpenSearch ? "border-mainBLue" : "border-grayStroke-80"
+          isOpenSearch ? "border-mainBlue" : "border-grayStroke-80"
         )}
         type="text"
         placeholder="Search recipe"
@@ -41,7 +41,7 @@ export const SearchBar: FC = () => {
         />
       ) : (
         <div className="absolute w-6 h-6 ml-auto top-1/2 right-2 -translate-y-1/2">
-          <Loader classNameModificator="border-t-mainBLue" />
+          <Loader classNameModificator="border-t-mainBlue" />
         </div>
       )}
       <div
