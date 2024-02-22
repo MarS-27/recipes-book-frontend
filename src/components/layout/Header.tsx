@@ -30,7 +30,7 @@ export const Header: FC = async () => {
             "flex items-center gap-5 relative",
             !session?.user.token
               ? "pointer-events-none"
-              : "cursor-pointer max-sm:after:content-['Personal_Recipes_Book'] max-sm:after:absolute max-sm:after:-top-6 max-sm:after:left-0 max-sm:after:text-s14 max-sm:after:whitespace-nowrap"
+              : "cursor-pointer max-sm:after:content-['Personal_Recipes_Book'] max-sm:after:absolute max-sm:after:-top-5 max-sm:after:left-0 max-sm:after:text-s14 max-sm:after:whitespace-nowrap"
           )}
         >
           <Image

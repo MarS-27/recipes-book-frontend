@@ -1,6 +1,7 @@
 import { type FC } from "react";
 import Image from "next/image";
 import { TRecipeStage } from "@/types/recipe";
+import { StageImage } from "./StageImage";
 
 type TRecipeStagesListProps = {
   stages: TRecipeStage[];
@@ -19,15 +20,7 @@ export const RecipeStagesList: FC<TRecipeStagesListProps> = ({ stages }) => {
             <span className="font-semibold">{stage.stageNumber}.</span>{" "}
             {stage.description}
           </p>
-          {stage.imgPath ? (
-            <Image
-              width={240}
-              height={240}
-              src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${stage.imgPath}`}
-              className="w-5/12 h-auto max-h-recipeStageImage object-cover rounded-md"
-              alt="Recipe stage image"
-            />
-          ) : null}
+          {stage.imgPath ? <StageImage imgPath={stage.imgPath} /> : null}
         </div>
       ))}
     </div>
