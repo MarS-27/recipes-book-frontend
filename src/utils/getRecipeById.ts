@@ -1,7 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import { TGetRecipeByIdResult, TRecipe } from "@/types/recipe";
-import { TError } from "@/types/types";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import { type TGetRecipeByIdResult, type TRecipe } from "@/types/recipe";
+import { type TError } from "@/types/types";
+import axios, { type AxiosError, type AxiosResponse } from "axios";
 import { getServerSession } from "next-auth";
 
 export const getRecipeById = async (

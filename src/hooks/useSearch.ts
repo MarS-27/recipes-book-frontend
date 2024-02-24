@@ -1,10 +1,10 @@
-import { TRecipe } from "@/types/recipe";
-import { TError } from "@/types/types";
+import { type TRecipe } from "@/types/recipe";
+import { type TError } from "@/types/types";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useDebounceValue } from "./useDebounce";
-import axios, { AxiosResponse, AxiosError } from "axios";
+import axios, { type AxiosResponse, type AxiosError } from "axios";
 
 const searchCache: Record<string, TRecipe[]> = {
   "": [],

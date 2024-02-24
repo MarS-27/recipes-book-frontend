@@ -1,4 +1,4 @@
-import { TGetRecipeInForm } from "@/types/recipe";
+import { type TGetRecipeInForm } from "@/types/recipe";
 
 export const recipeFormDataCreate = (data: TGetRecipeInForm) => {
   const {

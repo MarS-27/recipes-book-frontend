@@ -3,7 +3,7 @@ import { ControlRecipeButtons } from "@/components/single-recipe-page/ControlRec
 import { IngredientsList } from "@/components/single-recipe-page/IngredientsList";
 import { RecipeStagesList } from "@/components/single-recipe-page/RecipeStagesList";
 import { WarningMessage } from "@/components/ui/WarningMessage";
-import { TGetRecipeByIdResult } from "@/types/recipe";
+import { type TGetRecipeByIdResult } from "@/types/recipe";
 import { getRecipeById } from "@/utils/getRecipeById";
 import {
   HydrationBoundary,

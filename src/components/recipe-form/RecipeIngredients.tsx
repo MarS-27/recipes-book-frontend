@@ -1,6 +1,6 @@
-import { TGetRecipeInForm } from "@/types/recipe";
+import { type TGetRecipeInForm } from "@/types/recipe";
 import { type FC } from "react";
-import { FieldError, useFormContext } from "react-hook-form";
+import { type FieldError, useFormContext } from "react-hook-form";
 import { FormInput } from "../ui/FormInput";
 import { IconButton } from "../ui/IconButton";
 

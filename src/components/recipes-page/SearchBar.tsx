@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { WarningMessage } from "../ui/WarningMessage";
 import { Loader } from "../ui/Loader";
+import { IconButton } from "../ui/IconButton";
 
 export const SearchBar: FC = () => {
   const {
@@ -33,11 +34,10 @@ export const SearchBar: FC = () => {
         onBlur={() => setTimeout(() => setToggleSearch(false), 300)}
       />
       {!isLoadingSearch ? (
-        <img
-          src={!isOpenSearch ? "/images/search.svg" : "/images/close.svg"}
-          alt="search icon"
-          className="w-7 h-7 min-w-[28px] ml-auto cursor-pointer absolute top-1/2 right-2 -translate-y-1/2"
+        <IconButton
+          iconSrc={!isOpenSearch ? "/images/search.svg" : "/images/close.svg"}
           onClick={() => setToggleSearch(!isOpenSearch)}
+          classNameModificator="w-6 h-6 min-w-[24px] absolute top-1/2 right-3 -translate-y-1/2"
         />
       ) : (
         <div className="absolute w-6 h-6 ml-auto top-1/2 right-2 -translate-y-1/2">

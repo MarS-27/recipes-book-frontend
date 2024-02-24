@@ -1,7 +1,6 @@
-import { TGetRecipeInForm } from "@/types/recipe";
 import clsx from "clsx";
-import { FC } from "react";
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { type FC } from "react";
+import { type FieldError, UseFormRegisterReturn } from "react-hook-form";
 
 type TTextAreaProps = {
   error?: FieldError;

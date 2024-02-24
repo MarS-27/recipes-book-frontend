@@ -1,5 +1,5 @@
 import { useFilePreview } from "@/hooks/useFilePreview";
-import { TUpdatedUserProfile } from "@/types/auth";
+import { type TUpdatedUserProfile } from "@/types/auth";
 import { useEffect, type FC } from "react";
 import { useFormContext } from "react-hook-form";
 import { UploadFileInput } from "../ui/UploadFileInput";

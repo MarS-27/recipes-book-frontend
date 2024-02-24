@@ -1,4 +1,4 @@
-import { TCustomFile } from "./types";
+import { type TCustomFile } from "./types";
 
 export type TRecipeStage = {
   stageNumber: string;

@@ -1,4 +1,4 @@
-import { TGetRecipeInForm, RecipeCategories } from "@/types/recipe";
+import { type TGetRecipeInForm, RecipeCategories } from "@/types/recipe";
 import clsx from "clsx";
 import { useState, type FC } from "react";
 import { useFormContext } from "react-hook-form";

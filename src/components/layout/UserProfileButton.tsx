@@ -6,7 +6,7 @@ import { type FC } from "react";
 import { UserProfileModal } from "../user-profile/UserProfileModal";
 import { Loader } from "../ui/Loader";
 import { useQuery } from "@tanstack/react-query";
-import { TUserProfile } from "@/types/auth";
+import { type TUserProfile } from "@/types/auth";
 
 export const UserProfileButton: FC = () => {
   const { isProfileShow, openUserProfile, closeUserProfile, getUserProfile } =

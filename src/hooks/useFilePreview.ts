@@ -1,4 +1,4 @@
-import { TCustomFile } from "@/types/types";
+import { type TCustomFile } from "@/types/types";
 import { useState, useEffect } from "react";
 
 export const useFilePreview = () => {

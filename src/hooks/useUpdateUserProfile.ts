@@ -1,4 +1,4 @@
-import { TUpdatedUserProfile, TUserProfile } from "@/types/auth";
+import { type TUpdatedUserProfile, type TUserProfile } from "@/types/auth";
 import { type TError, type TMessage } from "@/types/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { type AxiosError, type AxiosResponse } from "axios";

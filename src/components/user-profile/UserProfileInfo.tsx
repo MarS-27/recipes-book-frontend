@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Button } from "../ui/Button";
 import { useDeleteUser } from "@/hooks/useDeleteUser";
 import { Loader } from "../ui/Loader";
-import { TUserProfile } from "@/types/auth";
+import { type TUserProfile } from "@/types/auth";
 import { useQuery } from "@tanstack/react-query";
 import clsx from "clsx";
 

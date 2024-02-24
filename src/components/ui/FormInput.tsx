@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { type FC } from "react";
-import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { type FieldError, UseFormRegisterReturn } from "react-hook-form";
 
 type TFormInputProps = {
   error?: FieldError;

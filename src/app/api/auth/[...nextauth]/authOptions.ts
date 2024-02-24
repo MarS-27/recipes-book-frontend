@@ -1,6 +1,6 @@
-import { TLogin } from "@/types/auth";
+import { type TLogin } from "@/types/auth";
 import { ROUTE } from "@/utils/routes";
-import axios, { AxiosResponse } from "axios";
+import axios, { type AxiosResponse } from "axios";
 import { type AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 

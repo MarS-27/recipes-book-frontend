@@ -1,4 +1,4 @@
-import { TRecipe } from "@/types/recipe";
+import { type TRecipe } from "@/types/recipe";
 import Link from "next/link";
 import Image from "next/image";
 import { type FC } from "react";

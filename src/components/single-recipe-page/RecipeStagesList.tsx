@@ -1,6 +1,5 @@
 import { type FC } from "react";
-import Image from "next/image";
-import { TRecipeStage } from "@/types/recipe";
+import { type TRecipeStage } from "@/types/recipe";
 import { StageImage } from "./StageImage";
 
 type TRecipeStagesListProps = {

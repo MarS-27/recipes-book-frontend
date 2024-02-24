@@ -1,6 +1,6 @@
 import { RecipeForm } from "@/components/recipe-form/RecipeForm";
 import { WarningMessage } from "@/components/ui/WarningMessage";
-import { TGetRecipeByIdResult } from "@/types/recipe";
+import { type TGetRecipeByIdResult } from "@/types/recipe";
 import { getRecipeById } from "@/utils/getRecipeById";
 import {
   HydrationBoundary,

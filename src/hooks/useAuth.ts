@@ -1,10 +1,10 @@
-import { TUserLoginInfo } from "@/types/auth";
-import { TError } from "@/types/types";
-import axios, { AxiosResponse, AxiosError } from "axios";
+import { type TUserLoginInfo } from "@/types/auth";
+import { type TError } from "@/types/types";
+import axios, { type AxiosResponse, type AxiosError } from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 
 export const useAuth = () => {

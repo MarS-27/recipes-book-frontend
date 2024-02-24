@@ -1,6 +1,6 @@
 "use client";
 import clsx from "clsx";
-import React, { FC, ReactNode } from "react";
+import { type FC, type ReactNode } from "react";
 
 type ButtonProps = {
   classNameModificator?: string;

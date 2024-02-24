@@ -1,7 +1,7 @@
 "use client";
 import { useAuth } from "@/hooks/useAuth";
 import { type FC } from "react";
-import { FieldError } from "react-hook-form";
+import { type FieldError } from "react-hook-form";
 import { Button } from "../ui/Button";
 import { FormInput } from "../ui/FormInput";
 import { Loader } from "../ui/Loader";
