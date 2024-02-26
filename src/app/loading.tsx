@@ -3,7 +3,7 @@ import { type FC } from "react";
 
 const Loading: FC = async () => {
   return (
-    <div className="flex w-full grow justify-center items-center">
+    <section className="flex w-full grow justify-center items-center">
       <p
         className={clsx(
           "w-[98px] h-[90px] relative bg-mainBlue rounded-t-[15%] rounded-b-[35%]",
@@ -12,7 +12,7 @@ const Loading: FC = async () => {
           "loader-animation"
         )}
       ></p>
-    </div>
+    </section>
   );
 };
 

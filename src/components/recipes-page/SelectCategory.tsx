@@ -1,4 +1,5 @@
 "use client";
+import { useClosePopupOnClickOutside } from "@/hooks/useClosePopupOnClickOutside";
 import { RecipeCategories } from "@/types/recipe";
 import { ROUTE } from "@/utils/routes";
 import clsx from "clsx";
@@ -11,20 +12,20 @@ type SelectCategoryProps = {
 };
 
 export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
-  const [isOpenSelect, setOpenSelect] = useState(false);
+  const { ref, isOpenPopup, toggleOpenPopup } = useClosePopupOnClickOutside();
   const categories = Object.values(RecipeCategories);
 
   return (
-    <div className="relative w-full md:max-w-filterBar">
+    <div ref={ref} className="relative w-full md:max-w-filterBar">
       <div
         className={clsx(
           "flex justify-between items-center gap-2 p-2 bg-lightYellow rounded-md border-2 transition-all duration-200",
-          isOpenSelect
+          isOpenPopup
             ? "border-mainBlue"
             : "border-grayStroke-80 hover:border-mainBlue"
         )}
         onClick={() => {
-          setOpenSelect(!isOpenSelect);
+          toggleOpenPopup(!isOpenPopup);
         }}
       >
         <h3 className="md:text-md20 text-s14 font-semibold">{category}</h3>
@@ -33,7 +34,7 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
           height={24}
           className={clsx(
             "min-w-6 transition-all duration-200",
-            isOpenSelect ? "rotate-180" : null
+            isOpenPopup ? "rotate-180" : null
           )}
           src="/images/select-arrow.svg"
           alt="Open select categories"
@@ -42,7 +43,7 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
       <div
         className={clsx(
           "w-full absolute top-[105%] left-0 grid transition-all duration-200 max-h-filterBar z-10",
-          isOpenSelect
+          isOpenPopup
             ? "p-2 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
             : "grid-rows-[0fr]"
         )}
@@ -59,7 +60,7 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
                   : "hover:text-darkBlue hover:after:w-full"
               )}
               onClick={() => {
-                setOpenSelect(!isOpenSelect);
+                toggleOpenPopup(!isOpenPopup);
               }}
             >
               {item}

@@ -46,7 +46,7 @@ export const SearchBar: FC = () => {
       )}
       <div
         className={clsx(
-          "w-full absolute top-[105%] left-0 grid transition-all duration-200 max-h-filterBar z-10",
+          "w-full absolute top-[105%] left-0 grid transition-all duration-200 max-h-filterBar z-50",
           debouncedValue && isOpenSearch
             ? "p-2 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
             : "grid-rows-[0fr]"

@@ -20,3 +20,25 @@
       20px -15px rgba(69, 170, 184, 0), 30px -12px rgba(69, 170, 184, 0);
   }
 }
+
+.eye-animation {
+  animation: eye 4s ease-in-out infinite;
+}
+
+@keyframes eye {
+  0% {
+    height: 0.8rem;
+  }
+  50% {
+    height: 0.8rem;
+  }
+  52% {
+    height: 0.1rem;
+  }
+  54% {
+    height: 0.8rem;
+  }
+  100% {
+    height: 0.8rem;
+  }
+}

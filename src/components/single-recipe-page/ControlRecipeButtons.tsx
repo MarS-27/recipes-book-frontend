@@ -1,31 +1,32 @@
 "use client";
-import { useState, type FC } from "react";
+import { useClosePopupOnClickOutside } from "@/hooks/useClosePopupOnClickOutside";
+import { useDeleteRecipe } from "@/hooks/useDeleteRecipe";
 import { ROUTE } from "@/utils/routes";
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { IconButton } from "../ui/IconButton";
-import { useDeleteRecipe } from "@/hooks/useDeleteRecipe";
-import { Loader } from "../ui/Loader";
-import clsx from "clsx";
+import { type FC } from "react";
 import { Button } from "../ui/Button";
+import { IconButton } from "../ui/IconButton";
+import { Loader } from "../ui/Loader";
 
 export const ControlRecipeButtons: FC = () => {
-  const [isOpenOptions, toggleOptions] = useState(false);
+  const { ref, isOpenPopup, toggleOpenPopup } = useClosePopupOnClickOutside();
   const params = useParams<{ id: string }>();
   const { isDeleting, deleteRecipe } = useDeleteRecipe(params.id);
 
   return (
-    <div className="relative h-6">
+    <div ref={ref} className="relative h-6">
       <IconButton
-        iconSrc={isOpenOptions ? "/images/close.svg" : "/images/gear-icon.svg"}
+        iconSrc={isOpenPopup ? "/images/close.svg" : "/images/gear-icon.svg"}
         classNameModificator="w-6 h-6 min-w-6"
-        onClick={() => toggleOptions(!isOpenOptions)}
+        onClick={() => toggleOpenPopup(!isOpenPopup)}
       />
       <div
         className={clsx(
           "w-32 grid absolute top-[105%] right-0 transition-all duration-200 z-10",
-          isOpenOptions
+          isOpenPopup
             ? "p-2 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
             : "grid-rows-[0fr]"
         )}
