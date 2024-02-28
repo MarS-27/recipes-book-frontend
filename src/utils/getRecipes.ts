@@ -13,7 +13,7 @@ export const getRecipes = async (
   page: number
 ): Promise<TPaginatedResult<TRecipe>> => {
   const session = await getServerSession(authOptions);
-  const limit = 6;
+  const limit = 12;
   const skip = (page - 1) * limit;
 
   const result = await axios
