@@ -12,11 +12,7 @@ const Home: FC = async () => {
     redirect(ROUTE.RECIPES_START);
   }
 
-  return (
-    <>
-      <Auth />
-    </>
-  );
+  return <Auth />;
 };
 
 export default Home;
