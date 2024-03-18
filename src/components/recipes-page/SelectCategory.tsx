@@ -48,7 +48,12 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
             : "grid-rows-[0fr]"
         )}
       >
-        <div className="flex flex-col gap-1.5 overflow-hidden">
+        <div
+          className={clsx(
+            "flex flex-col gap-1.5",
+            isOpenPopup ? "overflow-auto" : "overflow-hidden"
+          )}
+        >
           {categories.map((item) => (
             <Link
               href={`${ROUTE.RECIPES}?category=${item}&page=1`}
