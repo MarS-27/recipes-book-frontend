@@ -63,13 +63,18 @@ export const InputCategory: FC = () => {
       />
       <div
         className={clsx(
-          "w-full absolute top-[105%] left-0 grid transition-all duration-200 z-10",
+          "w-full absolute top-[105%] left-0 grid transition-all duration-200 max-h-52 z-10",
           isOpenSelect
             ? "p-2 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
             : "grid-rows-[0fr]"
         )}
       >
-        <ul className="flex flex-col gap-1 overflow-hidden">
+        <ul
+          className={clsx(
+            "flex flex-col gap-1",
+            isOpenSelect ? "overflow-auto" : "overflow-hidden"
+          )}
+        >
           {categories.map((item) => (
             <li
               key={item}

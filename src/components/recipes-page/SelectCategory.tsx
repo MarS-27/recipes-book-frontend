@@ -5,7 +5,7 @@ import { ROUTE } from "@/utils/routes";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, type FC } from "react";
+import { type FC } from "react";
 
 type SelectCategoryProps = {
   category: RecipeCategories;
