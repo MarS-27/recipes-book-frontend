@@ -33,7 +33,7 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
   return (
     <div className="relative w-full p-3 md:p-6 bg-mainYellow bg-opacity-[0.3] rounded-md border border-grayStroke-80">
       <h3 className="font-semibold text-md20 sm:text-md26 pb-2 mb-4 border-b-2 border-b-mainBlue">
-        {methods ? "Change recipe" : "Create recipe"}
+        {updatedRecipeData ? "Change recipe" : "Create recipe"}
       </h3>
       <FormProvider {...methods}>
         <form
