@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { type FC } from "react";
+import { type FC, KeyboardEvent } from "react";
 import { type FieldError, UseFormRegisterReturn } from "react-hook-form";
 
 type TFormInputProps = {
@@ -8,6 +8,7 @@ type TFormInputProps = {
   type: string;
   placeholder?: string;
   disabled?: boolean;
+  onEnterKeyDown?: () => void;
 };
 
 export const FormInput: FC<TFormInputProps> = ({
@@ -16,7 +17,16 @@ export const FormInput: FC<TFormInputProps> = ({
   type,
   placeholder,
   disabled = false,
+  onEnterKeyDown,
 }) => {
+  const handleEnterDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      if (onEnterKeyDown) onEnterKeyDown();
+    }
+  };
+
   return (
     <label className="relative w-full">
       <input
@@ -27,6 +37,7 @@ export const FormInput: FC<TFormInputProps> = ({
         type={type}
         placeholder={placeholder}
         disabled={disabled}
+        onKeyDown={handleEnterDown}
         {...register}
       />
       {error ? (
