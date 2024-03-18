@@ -35,7 +35,7 @@ export const IngredientsList: FC<TIngredientsListProps> = ({ ingredients }) => {
           </p>
           {ingredients.map((ingredient) => (
             <li key={ingredient} className="last-of-type:pb-2">
-              {ingredient};
+              {ingredient}
             </li>
           ))}
         </ul>
