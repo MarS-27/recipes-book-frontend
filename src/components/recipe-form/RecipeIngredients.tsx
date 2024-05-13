@@ -1,11 +1,13 @@
-import { type TGetRecipeInForm } from "@/types/recipe";
-import { type FC } from "react";
-import { type FieldError, useFormContext } from "react-hook-form";
-import { FormInput } from "../ui/FormInput";
-import { IconButton } from "../ui/IconButton";
+import { type TGetRecipeInForm } from '@/types/recipe';
+import { type FC } from 'react';
+import { type FieldError, useFormContext } from 'react-hook-form';
+import { FormInput } from '../ui/FormInput';
+import { IconButton } from '../ui/IconButton';
 
 export const RecipeIngredients: FC = () => {
   const {
+    getValues,
+    setFocus,
     register,
     watch,
     setValue,
@@ -14,12 +16,20 @@ export const RecipeIngredients: FC = () => {
 
   const { ingredients } = watch();
 
-  const handleAddIngrInput = () =>
-    setValue("ingredients", [...ingredients, ""]);
+  const handleAddIngrInput = () => {
+    setValue('ingredients', [...ingredients, '']);
+
+    const updatedIngredients = getValues().ingredients;
+
+    setTimeout(
+      () => setFocus(`ingredients.${updatedIngredients.length - 1}`),
+      0,
+    );
+  };
 
   return (
-    <div className="w-full flex flex-col gap-4">
-      <div className="flex items-center gap-3 pb-2 border-b-2 border-b-mainBlue">
+    <div className="flex w-full flex-col gap-4">
+      <div className="flex items-center gap-3 border-b-2 border-b-mainBlue pb-2">
         <IconButton
           iconSrc="/images/add-icon.svg"
           classNameModificator="w-9 h-9 min-w-9"
@@ -35,7 +45,7 @@ export const RecipeIngredients: FC = () => {
             placeholder="Ingredient"
             onEnterKeyDown={handleAddIngrInput}
             register={register(`ingredients.${i}`, {
-              required: "Add ingredient!",
+              required: 'Add ingredient!',
             })}
             error={errors.ingredients?.[i] as FieldError}
           />
@@ -44,8 +54,8 @@ export const RecipeIngredients: FC = () => {
             classNameModificator="w-7 h-7 min-w-7"
             onClick={() =>
               setValue(
-                "ingredients",
-                ingredients.filter((_, index) => i !== index)
+                'ingredients',
+                ingredients.filter((_, index) => i !== index),
               )
             }
             disabled={ingredients.length === 1}

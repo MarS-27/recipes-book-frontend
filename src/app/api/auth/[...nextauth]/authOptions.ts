@@ -1,20 +1,20 @@
-import { type TLogin } from "@/types/auth";
-import { ROUTE } from "@/utils/routes";
-import axios, { type AxiosResponse } from "axios";
-import { type AuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import { type TLogin } from '@/types/auth';
+import { ROUTE } from '@/utils/routes';
+import axios, { type AxiosResponse } from 'axios';
+import { type AuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authOptions: AuthOptions = {
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 3 * 24 * 60 * 60,
   },
   providers: [
     CredentialsProvider({
-      type: "credentials",
+      type: 'credentials',
       credentials: {
-        email: { label: "Email", type: "email", required: true },
-        password: { label: "Password", type: "password", required: true },
+        email: { label: 'Email', type: 'email', required: true },
+        password: { label: 'Password', type: 'password', required: true },
       },
       async authorize(credentials) {
         const { email, password } = credentials || {};

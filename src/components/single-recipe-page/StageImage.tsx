@@ -1,8 +1,8 @@
-"use client";
-import { useState, type FC } from "react";
-import Image from "next/image";
-import { ModalWindow } from "../ui/ModalWindow";
-import { IconButton } from "../ui/IconButton";
+'use client';
+import { useState, type FC } from 'react';
+import Image from 'next/image';
+import { ModalWindow } from '../ui/ModalWindow';
+import { IconButton } from '../ui/IconButton';
 
 type TStageImageProps = {
   imgPath: string;
@@ -13,12 +13,12 @@ export const StageImage: FC<TStageImageProps> = ({ imgPath }) => {
 
   return (
     <>
-      <div className="w-5/12 relative">
+      <div className="relative w-5/12">
         <Image
           width={240}
           height={240}
           src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${imgPath}`}
-          className="w-full h-auto max-h-recipeStageImage object-cover rounded-md"
+          className="h-auto max-h-recipeStageImage w-full rounded-md object-cover"
           alt="Recipe stage image"
         />
         <IconButton
@@ -34,7 +34,7 @@ export const StageImage: FC<TStageImageProps> = ({ imgPath }) => {
             width={1280}
             height={720}
             src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${imgPath}`}
-            className="w-full sm:w-4/5 h-auto object-cover mx-auto rounded-md"
+            className="mx-auto h-auto w-full rounded-md object-cover sm:w-4/5"
             alt="Recipe stage image"
           />
           <IconButton

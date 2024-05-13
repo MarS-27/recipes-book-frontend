@@ -1,6 +1,6 @@
-import { type FC } from "react";
-import Image from "next/image";
-import clsx from "clsx";
+import { type FC } from 'react';
+import Image from 'next/image';
+import clsx from 'clsx';
 
 type TIconButtonProps = {
   iconSrc: string;
@@ -21,9 +21,9 @@ export const IconButton: FC<TIconButtonProps> = ({
       disabled={disabled}
       type="button"
       className={clsx(
-        "hover:scale-125 transition-all duration-200",
-        disabled ? "pointer-events-none" : null,
-        classNameModificator
+        'transition-all duration-200 hover:scale-125',
+        disabled ? 'pointer-events-none' : null,
+        classNameModificator,
       )}
     >
       <Image width={100} height={100} src={iconSrc} alt="Button image" />

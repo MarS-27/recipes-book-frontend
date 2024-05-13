@@ -1,12 +1,12 @@
-import { type TGetRecipeInForm, type TRecipe } from "@/types/recipe";
-import { type TError, type TMessage } from "@/types/types";
-import { recipeFormDataCreate } from "@/utils/recipeFormDataCreate";
-import { ROUTE } from "@/utils/routes";
-import axios, { type AxiosError, type AxiosResponse } from "axios";
-import { getSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { toast } from "react-toastify";
+import { type TGetRecipeInForm, type TRecipe } from '@/types/recipe';
+import { type TError, type TMessage } from '@/types/types';
+import { recipeFormDataCreate } from '@/utils/recipeFormDataCreate';
+import { ROUTE } from '@/utils/routes';
+import axios, { type AxiosError, type AxiosResponse } from 'axios';
+import { getSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 export const useRecipeForm = (updatedRecipeData: TRecipe | undefined) => {
   const { push, back, refresh } = useRouter();
@@ -14,13 +14,13 @@ export const useRecipeForm = (updatedRecipeData: TRecipe | undefined) => {
   const defaultValues = updatedRecipeData
     ? updatedRecipeData
     : {
-        titleImgPath: "",
-        ingredients: [""],
+        titleImgPath: '',
+        ingredients: [''],
         stages: [
           {
-            stageNumber: "1",
-            description: "",
-            imgPath: "",
+            stageNumber: '1',
+            description: '',
+            imgPath: '',
           },
         ],
       };
@@ -61,7 +61,7 @@ export const useRecipeForm = (updatedRecipeData: TRecipe | undefined) => {
           headers: {
             Authorization: `Bearer ${session?.user.token}`,
           },
-        }
+        },
       )
       .then((resp: AxiosResponse<TMessage>) => {
         toast.success(resp.data.message);

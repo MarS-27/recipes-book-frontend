@@ -1,4 +1,4 @@
-import { type TCustomFile } from "./types";
+import { type TCustomFile } from './types';
 
 export type TUserLoginInfo = {
   email: string;

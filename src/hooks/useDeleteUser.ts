@@ -1,8 +1,8 @@
-import { type TError, type TMessage } from "@/types/types";
-import axios, { type AxiosError, type AxiosResponse } from "axios";
-import { getSession, signOut } from "next-auth/react";
-import { useState } from "react";
-import { toast } from "react-toastify";
+import { type TError, type TMessage } from '@/types/types';
+import axios, { type AxiosError, type AxiosResponse } from 'axios';
+import { getSession, signOut } from 'next-auth/react';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export const useDeleteUser = () => {
   const [isDeleting, setDeleting] = useState(false);

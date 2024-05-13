@@ -1,13 +1,13 @@
-"use client";
-import { useFilePreview } from "@/hooks/useFilePreview";
-import { type TGetRecipeInForm } from "@/types/recipe";
-import { type FC } from "react";
-import { useFormContext } from "react-hook-form";
-import { UploadFileInput } from "../ui/UploadFileInput";
+'use client';
+import { useFilePreview } from '@/hooks/useFilePreview';
+import { type TGetRecipeInForm } from '@/types/recipe';
+import { type FC } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { UploadFileInput } from '../ui/UploadFileInput';
 
 type TAddRecipeImagesProps = {
   updatedImgPath: string | null | undefined;
-  fieldName: "titleImgPath" | `stages.${number}.imgPath`;
+  fieldName: 'titleImgPath' | `stages.${number}.imgPath`;
 };
 
 export const AddRecipeImages: FC<TAddRecipeImagesProps> = ({
@@ -28,24 +28,24 @@ export const AddRecipeImages: FC<TAddRecipeImagesProps> = ({
     setValue(fieldName, customFile.name);
 
     if (recipeFiles?.length) {
-      setValue("recipeFiles", [...recipeFiles, customFile]);
+      setValue('recipeFiles', [...recipeFiles, customFile]);
     } else {
-      setValue("recipeFiles", [customFile]);
+      setValue('recipeFiles', [customFile]);
     }
   };
 
   const removeImg = () => {
     if (recipeFiles?.length) {
       setValue(
-        "recipeFiles",
-        recipeFiles.filter((file) => file.fileId !== uploadFilePreview?.fileId)
+        'recipeFiles',
+        recipeFiles.filter((file) => file.fileId !== uploadFilePreview?.fileId),
       );
     } else {
-      setValue("recipeFiles", []);
+      setValue('recipeFiles', []);
     }
 
     setUploadFilePreview(null);
-    setValue(fieldName, "");
+    setValue(fieldName, '');
   };
 
   return (

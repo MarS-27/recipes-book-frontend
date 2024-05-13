@@ -1,5 +1,5 @@
-import { type TCustomFile } from "@/types/types";
-import { useState, useEffect } from "react";
+import { type TCustomFile } from '@/types/types';
+import { useState, useEffect } from 'react';
 
 export const useFilePreview = () => {
   const [uploadFilePreview, setUploadFilePreview] =

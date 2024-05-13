@@ -1,36 +1,36 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import clsx from "clsx";
-import { getServerSession } from "next-auth";
-import { Pacifico } from "next/font/google";
-import Image from "next/image";
-import { type FC } from "react";
-import { LogoutButton } from "./LogoutButton";
-import { AddRecipeButton } from "./AddRecipeButton";
-import { UserProfileButton } from "./UserProfileButton";
-import Link from "next/link";
-import { ROUTE } from "@/utils/routes";
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
+import clsx from 'clsx';
+import { getServerSession } from 'next-auth';
+import { Pacifico } from 'next/font/google';
+import Image from 'next/image';
+import { type FC } from 'react';
+import { LogoutButton } from './LogoutButton';
+import { AddRecipeButton } from './AddRecipeButton';
+import { UserProfileButton } from './UserProfileButton';
+import Link from 'next/link';
+import { ROUTE } from '@/utils/routes';
 
-const pacifico = Pacifico({ weight: "400", subsets: ["latin"] });
+const pacifico = Pacifico({ weight: '400', subsets: ['latin'] });
 
 export const Header: FC = async () => {
   const session = await getServerSession(authOptions);
 
   return (
-    <header className="pt-5 sm:pt-2 pb-6 px-4 w-full sticky top-0 z-50 bg-pageBg">
+    <header className="sticky top-0 z-50 w-full bg-pageBg px-4 pb-6 pt-5 sm:pt-2">
       <div
         className={clsx(
-          "flex items-center w-full max-w-container mx-auto",
-          session?.user.token ? "justify-between" : "justify-center"
+          'mx-auto flex w-full max-w-container items-center',
+          session?.user.token ? 'justify-between' : 'justify-center',
         )}
       >
         <Link
           href={ROUTE.RECIPES_START}
           className={clsx(
             pacifico.className,
-            "flex items-center gap-5 relative",
+            'relative flex items-center gap-5',
             !session?.user.token
-              ? "pointer-events-none"
-              : "cursor-pointer max-sm:after:content-['Personal_Recipes_Book'] max-sm:after:absolute max-sm:after:-top-5 max-sm:after:left-0 max-sm:after:text-s14 max-sm:after:whitespace-nowrap"
+              ? 'pointer-events-none'
+              : "cursor-pointer max-sm:after:absolute max-sm:after:-top-5 max-sm:after:left-0 max-sm:after:whitespace-nowrap max-sm:after:text-s14 max-sm:after:content-['Personal_Recipe_Book']",
           )}
         >
           <Image
@@ -38,16 +38,16 @@ export const Header: FC = async () => {
             alt="logo"
             width={40}
             height={40}
-            className="w-10 h-10 min-w-10"
+            className="h-10 w-10 min-w-10"
           />
           <h1
             className={clsx(
-              "text-md24 sm:text-l32 md:text-xL40 font-medium tracking-wider",
+              'text-md24 font-medium tracking-wider sm:text-l32 md:text-xL40',
               pacifico.className,
-              !session?.user.token ? "block" : "hidden sm:block"
+              !session?.user.token ? 'block' : 'hidden sm:block',
             )}
           >
-            Personal Recipes Book
+            Personal Recipe Book
           </h1>
         </Link>
         {session?.user.token ? (

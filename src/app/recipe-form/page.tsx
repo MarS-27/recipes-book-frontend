@@ -1,5 +1,5 @@
-import { RecipeForm } from "@/components/recipe-form/RecipeForm";
-import { type FC } from "react";
+import { RecipeForm } from '@/components/recipe-form/RecipeForm';
+import { type FC } from 'react';
 
 const AddRecipe: FC = () => {
   return (

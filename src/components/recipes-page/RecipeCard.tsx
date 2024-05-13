@@ -1,16 +1,16 @@
-import { type TRecipe } from "@/types/recipe";
-import Link from "next/link";
-import Image from "next/image";
-import { type FC } from "react";
-import clsx from "clsx";
-import { Pacifico } from "next/font/google";
-import { ROUTE } from "@/utils/routes";
+import { type TRecipe } from '@/types/recipe';
+import Link from 'next/link';
+import Image from 'next/image';
+import { type FC } from 'react';
+import clsx from 'clsx';
+import { Pacifico } from 'next/font/google';
+import { ROUTE } from '@/utils/routes';
 
 type RecipeCardProps = {
   recipe: TRecipe;
 };
 
-const pacifico = Pacifico({ weight: "400", subsets: ["latin"] });
+const pacifico = Pacifico({ weight: '400', subsets: ['latin'] });
 
 export const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
   const { title, titleImgPath } = recipe;
@@ -19,19 +19,19 @@ export const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
     <Link
       href={`${ROUTE.RECIPE}/${recipe.id}`}
       className={clsx(
-        "relative rounded-md h-recipeCard shadow-lg hover:scale-105 transition-all duration-200",
-        !titleImgPath ? "p-2 bg-lightBlue" : "p-0"
+        'relative h-recipeCard rounded-md shadow-lg transition-all duration-200 hover:scale-105',
+        !titleImgPath ? 'bg-lightBlue p-2' : 'p-0',
       )}
     >
       <Image
         src={
           titleImgPath
             ? `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${titleImgPath}`
-            : "/images/meal-icon.svg"
+            : '/images/meal-icon.svg'
         }
         className={clsx(
-          "w-full rounded-md",
-          !titleImgPath ? "h-40 object-center" : "object-cover h-recipeCard"
+          'w-full rounded-md',
+          !titleImgPath ? 'h-40 object-center' : 'h-recipeCard object-cover',
         )}
         width={300}
         height={300}
@@ -40,7 +40,7 @@ export const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
       <p
         className={clsx(
           pacifico.className,
-          "absolute bottom-0 left-0 w-full bg-lightYellow bg-opacity-70 text-md20 md:text-md26 font-medium p-2 leading-[34px] md:leading-[44px] line-clamp-1 hover:line-clamp-none"
+          'absolute bottom-0 left-0 line-clamp-1 w-full bg-lightYellow bg-opacity-70 p-2 text-md20 font-medium leading-[34px] hover:line-clamp-none md:text-md26 md:leading-[44px]',
         )}
       >
         {title}

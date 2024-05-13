@@ -1,4 +1,4 @@
-import { type FC, type ReactNode } from "react";
+import { type FC, type ReactNode } from 'react';
 
 type ModalWindowProps = {
   children: string | ReactNode;
@@ -6,7 +6,7 @@ type ModalWindowProps = {
 
 export const ModalWindow: FC<ModalWindowProps> = ({ children }) => {
   return (
-    <div className="fixed top-0 left-0 h-full w-full p-4 z-50 bg-darkBlue bg-opacity-80 flex place-items-center">
+    <div className="fixed left-0 top-0 z-50 flex h-full w-full place-items-center bg-darkBlue bg-opacity-80 p-4">
       {children}
     </div>
   );

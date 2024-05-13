@@ -1,12 +1,12 @@
-"use client";
-import { type FC } from "react";
-import { useSearch } from "@/hooks/useSearch";
-import clsx from "clsx";
-import Link from "next/link";
-import Image from "next/image";
-import { WarningMessage } from "../ui/WarningMessage";
-import { Loader } from "../ui/Loader";
-import { IconButton } from "../ui/IconButton";
+'use client';
+import { type FC } from 'react';
+import { useSearch } from '@/hooks/useSearch';
+import clsx from 'clsx';
+import Link from 'next/link';
+import Image from 'next/image';
+import { WarningMessage } from '../ui/WarningMessage';
+import { Loader } from '../ui/Loader';
+import { IconButton } from '../ui/IconButton';
 
 export const SearchBar: FC = () => {
   const {
@@ -23,8 +23,8 @@ export const SearchBar: FC = () => {
     <div className="relative w-full md:max-w-searchBar">
       <input
         className={clsx(
-          "w-full p-2 md:text-md20 text-s14 font-normal bg-lightYellow rounded-md border-2 placeholder:text-grayStroke-70 placeholder:font-light outline-none",
-          isOpenSearch ? "border-mainBlue" : "border-grayStroke-80"
+          'w-full rounded-md border-2 bg-lightYellow p-2 text-s14 font-normal outline-none placeholder:font-light placeholder:text-grayStroke-70 md:text-md20',
+          isOpenSearch ? 'border-mainBlue' : 'border-grayStroke-80',
         )}
         type="text"
         placeholder="Search recipe"
@@ -35,21 +35,21 @@ export const SearchBar: FC = () => {
       />
       {!isLoadingSearch ? (
         <IconButton
-          iconSrc={!isOpenSearch ? "/images/search.svg" : "/images/close.svg"}
+          iconSrc={!isOpenSearch ? '/images/search.svg' : '/images/close.svg'}
           onClick={() => setToggleSearch(!isOpenSearch)}
           classNameModificator="w-6 h-6 min-w-[24px] absolute top-1/2 right-3 -translate-y-1/2"
         />
       ) : (
-        <div className="absolute w-6 h-6 ml-auto top-1/2 right-2 -translate-y-1/2">
+        <div className="absolute right-2 top-1/2 ml-auto h-6 w-6 -translate-y-1/2">
           <Loader classNameModificator="border-t-mainBlue" />
         </div>
       )}
       <div
         className={clsx(
-          "w-full absolute top-[105%] left-0 grid transition-all duration-200 max-h-filterBar z-50",
+          'absolute left-0 top-[105%] z-50 grid max-h-filterBar w-full transition-all duration-200',
           debouncedValue && isOpenSearch
-            ? "p-2 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
-            : "grid-rows-[0fr]"
+            ? 'grid-rows-[1fr] rounded-md border border-grayStroke-80 bg-pageBg p-2'
+            : 'grid-rows-[0fr]',
         )}
       >
         {searchedRecipes.length ? (
@@ -60,18 +60,18 @@ export const SearchBar: FC = () => {
                 href={`/recipe/${recipe.id}`}
                 onClick={() => setToggleSearch(false)}
                 className={
-                  "flex items-center gap-2 pb-2 px-2 transition-all duration-200 border-b-2 border-b-grayStroke-80 hover:text-darkBlue"
+                  'flex items-center gap-2 border-b-2 border-b-grayStroke-80 px-2 pb-2 transition-all duration-200 hover:text-darkBlue'
                 }
               >
                 <Image
                   src={
                     recipe.titleImgPath
                       ? `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${recipe.titleImgPath}`
-                      : "/images/meal-icon.svg"
+                      : '/images/meal-icon.svg'
                   }
                   className={clsx(
-                    "rounded-md h-searchImg",
-                    !recipe.titleImgPath ? "object-center" : "object-cover"
+                    'h-searchImg rounded-md',
+                    !recipe.titleImgPath ? 'object-center' : 'object-cover',
                   )}
                   width={80}
                   height={60}

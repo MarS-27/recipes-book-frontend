@@ -1,8 +1,8 @@
-"use client";
-import { useClosePopupOnClickOutside } from "@/hooks/useClosePopupOnClickOutside";
-import clsx from "clsx";
-import Image from "next/image";
-import { type FC } from "react";
+'use client';
+import { useClosePopupOnClickOutside } from '@/hooks/useClosePopupOnClickOutside';
+import clsx from 'clsx';
+import Image from 'next/image';
+import { type FC } from 'react';
 
 type TIngredientsListProps = {
   ingredients: string[];
@@ -12,25 +12,25 @@ export const IngredientsList: FC<TIngredientsListProps> = ({ ingredients }) => {
   const { ref, isOpenPopup, toggleOpenPopup } = useClosePopupOnClickOutside();
 
   return (
-    <div ref={ref} className="fixed bottom-7 md:top-[154px] z-20">
+    <div ref={ref} className="fixed bottom-7 z-20 md:top-[154px]">
       <Image
         width={40}
         height={40}
         src="/images/ingredients-icon.svg"
         alt="Ingredients"
-        className="min-w-10 md:hidden opacity-70 hover:scale-125 hover:opacity-100 transition-all duration-200 mb-2"
+        className="mb-2 min-w-10 opacity-70 transition-all duration-200 hover:scale-125 hover:opacity-100 md:hidden"
         onClick={() => toggleOpenPopup(!isOpenPopup)}
       />
       <div
         className={clsx(
-          "grid md:grid-rows-[1fr] w-ingredientsList transition-all duration-200",
+          'grid w-ingredientsList transition-all duration-200 md:grid-rows-[1fr]',
           isOpenPopup
-            ? "grid-rows-[1fr] max-md:bg-lightBlue rounded-md max-md:border-2 border-grayStroke-80"
-            : "grid-rows-[0fr]"
+            ? 'grid-rows-[1fr] rounded-md border-grayStroke-80 max-md:border-2 max-md:bg-lightBlue'
+            : 'grid-rows-[0fr]',
         )}
       >
-        <ul className="flex flex-col gap-2 pl-6 pr-3 list-image-checkmark max-h-ingredientsList overflow-y-auto">
-          <p className="text-s14 sm:text-md20 font-semibold pt-2">
+        <ul className="flex max-h-ingredientsList list-image-checkmark flex-col gap-2 overflow-y-auto pl-6 pr-3">
+          <p className="pt-2 text-s14 font-semibold sm:text-md20">
             Ingredients:
           </p>
           {ingredients.map((ingredient) => (

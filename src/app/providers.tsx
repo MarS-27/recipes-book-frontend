@@ -1,6 +1,6 @@
-"use client";
-import { type FC, type ReactNode, useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+'use client';
+import { type FC, type ReactNode, useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export const Providers: FC<{
   children: ReactNode;
@@ -13,7 +13,7 @@ export const Providers: FC<{
             staleTime: 60 * 1000,
           },
         },
-      })
+      }),
   );
 
   return (

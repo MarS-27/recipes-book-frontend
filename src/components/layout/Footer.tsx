@@ -1,17 +1,17 @@
-import Link from "next/link";
-import Image from "next/image";
-import { type FC } from "react";
+import Link from 'next/link';
+import Image from 'next/image';
+import { type FC } from 'react';
 
 export const Footer: FC = () => {
-  const formatDate = new Intl.DateTimeFormat("uk-Ua", { year: "numeric" });
+  const formatDate = new Intl.DateTimeFormat('uk-Ua', { year: 'numeric' });
 
   return (
-    <footer className="py-2 w-full max-w-container mx-auto px-4">
-      <div className="flex items-center justify-center gap-5 mb-3">
+    <footer className="mx-auto w-full max-w-container px-4 py-2">
+      <div className="mb-3 flex items-center justify-center gap-5">
         <Link
           href="https://www.linkedin.com/in/sergii-marchuk/"
           target="_blank"
-          className="hover:scale-125 transition-all duration-200"
+          className="transition-all duration-200 hover:scale-125"
         >
           <Image
             src="/images/linkedin.svg"
@@ -23,13 +23,13 @@ export const Footer: FC = () => {
         <Link
           href="https://github.com/MarS-27"
           target="_blank"
-          className="hover:scale-125 transition-all duration-200"
+          className="transition-all duration-200 hover:scale-125"
         >
           <Image src="/images/github.svg" alt="github" width={30} height={30} />
         </Link>
       </div>
-      <p className="text-s14 text-grayStroke-70 text-center">{`Created by MarS, ${formatDate.format(
-        new Date()
+      <p className="text-center text-s14 text-grayStroke-70">{`Created by MarS, ${formatDate.format(
+        new Date(),
       )}`}</p>
     </footer>
   );

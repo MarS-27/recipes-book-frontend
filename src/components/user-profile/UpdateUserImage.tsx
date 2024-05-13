@@ -1,8 +1,8 @@
-import { useFilePreview } from "@/hooks/useFilePreview";
-import { type TUpdatedUserProfile } from "@/types/auth";
-import { useEffect, type FC } from "react";
-import { useFormContext } from "react-hook-form";
-import { UploadFileInput } from "../ui/UploadFileInput";
+import { useFilePreview } from '@/hooks/useFilePreview';
+import { type TUpdatedUserProfile } from '@/types/auth';
+import { useEffect, type FC } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { UploadFileInput } from '../ui/UploadFileInput';
 
 export const UpdateUserImage: FC = () => {
   const { uploadFilePreview, createCustomFile, setUploadFilePreview } =
@@ -16,13 +16,13 @@ export const UpdateUserImage: FC = () => {
     const customFile = createCustomFile(acceptedFiles[0]);
 
     setUploadFilePreview(customFile);
-    setValue("userImage", customFile);
+    setValue('userImage', customFile);
   };
 
   const removeImg = () => {
     setUploadFilePreview(null);
-    setValue("userImage", undefined);
-    setValue("imgPath", "");
+    setValue('userImage', undefined);
+    setValue('imgPath', '');
   };
 
   useEffect(() => {

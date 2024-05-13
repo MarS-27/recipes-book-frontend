@@ -1,14 +1,14 @@
-import { type TGetRecipeInForm } from "@/types/recipe";
-import { type FC } from "react";
+import { type TGetRecipeInForm } from '@/types/recipe';
+import { type FC } from 'react';
 import {
   type FieldError,
   useFieldArray,
   useFormContext,
-} from "react-hook-form";
-import { TextArea } from "../ui/TextArea";
-import { IconButton } from "../ui/IconButton";
-import { toast } from "react-toastify";
-import { AddRecipeImages } from "./AddRecipeImages";
+} from 'react-hook-form';
+import { TextArea } from '../ui/TextArea';
+import { IconButton } from '../ui/IconButton';
+import { toast } from 'react-toastify';
+import { AddRecipeImages } from './AddRecipeImages';
 
 export const RecipeStages: FC = () => {
   const {
@@ -22,17 +22,17 @@ export const RecipeStages: FC = () => {
 
   const { fields, remove, append } = useFieldArray({
     control,
-    name: "stages",
+    name: 'stages',
   });
 
   const deleteStage = (i: number) => {
     i === fields.length - 1
       ? remove(i)
-      : toast.warning("Delete the previous stage!");
+      : toast.warning('Delete the previous stage!');
   };
 
   return (
-    <div className="w-full flex flex-col gap-2">
+    <div className="flex w-full flex-col gap-2">
       <div className="flex items-center gap-3">
         <IconButton
           iconSrc="/images/add-icon.svg"
@@ -40,8 +40,8 @@ export const RecipeStages: FC = () => {
           onClick={() =>
             append({
               stageNumber: String(fields.length + 1),
-              description: "",
-              imgPath: "",
+              description: '',
+              imgPath: '',
             })
           }
         />
@@ -65,7 +65,7 @@ export const RecipeStages: FC = () => {
           <TextArea
             placeholder="Stage"
             register={register(`stages.${i}.description`, {
-              required: "Add stage description!",
+              required: 'Add stage description!',
             })}
             error={errors.stages?.[i]?.description as FieldError}
             rows={3}

@@ -1,7 +1,7 @@
-import { type TUserProfile } from "@/types/auth";
-import { type TError } from "@/types/types";
-import axios, { type AxiosError, type AxiosResponse } from "axios";
-import { getSession, signOut } from "next-auth/react";
+import { type TUserProfile } from '@/types/auth';
+import { type TError } from '@/types/types';
+import axios, { type AxiosError, type AxiosResponse } from 'axios';
+import { getSession, signOut } from 'next-auth/react';
 
 export const getUserProfile = async (): Promise<TUserProfile | undefined> => {
   const session = await getSession();

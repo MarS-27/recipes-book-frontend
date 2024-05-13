@@ -1,4 +1,4 @@
-import { type TCustomFile } from "./types";
+import { type TCustomFile } from './types';
 
 export type TRecipeStage = {
   stageNumber: string;
@@ -7,22 +7,22 @@ export type TRecipeStage = {
 };
 
 export enum RecipeCategories {
-  All = "All",
-  Salads = "Salads",
-  Soups = "Soups",
-  Appetizer = "Appetizer",
-  MainCourse = "Main course",
-  SideDishes = "Side dishes",
-  Beverages = "Beverages",
-  Breakfast = "Breakfast",
-  VeganHealthy = "Vegan/Healthy",
-  Cakes = "Cakes",
-  Cookies = "Cookies",
-  PiesAndTarts = "Pies and tarts",
-  Baking = "Baking",
-  Cupcakes = "Cupcakes",
-  OtherDeserts = "Other deserts",
-  Others = "Others",
+  All = 'All',
+  Salads = 'Salads',
+  Soups = 'Soups',
+  Appetizer = 'Appetizer',
+  MainCourse = 'Main course',
+  SideDishes = 'Side dishes',
+  Beverages = 'Beverages',
+  Breakfast = 'Breakfast',
+  VeganHealthy = 'Vegan/Healthy',
+  Cakes = 'Cakes',
+  Cookies = 'Cookies',
+  PiesAndTarts = 'Pies and tarts',
+  Baking = 'Baking',
+  Cupcakes = 'Cupcakes',
+  OtherDeserts = 'Other deserts',
+  Others = 'Others',
 }
 
 export type TRecipeFiles = {

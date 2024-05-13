@@ -1,11 +1,11 @@
-import { type TUserLoginInfo } from "@/types/auth";
-import { type TError } from "@/types/types";
-import axios, { type AxiosResponse, type AxiosError } from "axios";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { toast } from "react-toastify";
+import { type TUserLoginInfo } from '@/types/auth';
+import { type TError } from '@/types/types';
+import axios, { type AxiosResponse, type AxiosError } from 'axios';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 export const useAuth = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
@@ -19,10 +19,10 @@ export const useAuth = () => {
   const { refresh } = useRouter();
 
   const loginFormSubmit: SubmitHandler<TUserLoginInfo> = async (
-    credentials
+    credentials,
   ) => {
     if (isLogin) {
-      const res = await signIn("credentials", {
+      const res = await signIn('credentials', {
         ...credentials,
         redirect: false,
       });
@@ -31,22 +31,22 @@ export const useAuth = () => {
         reset();
         refresh();
       } else {
-        toast.error("Wrong credentials");
+        toast.error('Wrong credentials');
       }
     } else {
       await axios
         .post(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/registration`,
-          credentials
+          credentials,
         )
         .then((resp: AxiosResponse<{ token: string }>) => {
           if (resp.data.token) {
-            toast.success("Registration success.");
+            toast.success('Registration success.');
             setIsLogin(!isLogin);
           }
         })
         .catch((data: AxiosError<TError>) =>
-          toast.error(data.response?.data?.message)
+          toast.error(data.response?.data?.message),
         );
     }
   };

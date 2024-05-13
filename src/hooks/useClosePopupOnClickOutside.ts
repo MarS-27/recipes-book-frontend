@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from 'react';
 
 export const useClosePopupOnClickOutside = () => {
   const [isOpenPopup, toggleOpenPopup] = useState(false);
@@ -11,9 +11,9 @@ export const useClosePopupOnClickOutside = () => {
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside, true);
+    document.addEventListener('click', handleClickOutside, true);
     return () => {
-      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener('click', handleClickOutside, true);
     };
   }, []);
 

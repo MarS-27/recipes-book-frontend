@@ -1,10 +1,10 @@
-import { type TError, type TMessage } from "@/types/types";
-import { ROUTE } from "@/utils/routes";
-import axios, { type AxiosError, type AxiosResponse } from "axios";
-import { getSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "react-toastify";
+import { type TError, type TMessage } from '@/types/types';
+import { ROUTE } from '@/utils/routes';
+import axios, { type AxiosError, type AxiosResponse } from 'axios';
+import { getSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export const useDeleteRecipe = (recipeId: string) => {
   const { push, refresh } = useRouter();
@@ -21,7 +21,7 @@ export const useDeleteRecipe = (recipeId: string) => {
           headers: {
             Authorization: `Bearer ${session?.user.token}`,
           },
-        }
+        },
       )
       .then((resp: AxiosResponse<TMessage>) => {
         toast.success(resp.data.message);

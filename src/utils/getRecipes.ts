@@ -1,16 +1,16 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import { RecipeCategories, type TRecipe } from "@/types/recipe";
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
+import { RecipeCategories, type TRecipe } from '@/types/recipe';
 import {
   type TError,
   type TPaginatedResponse,
   type TPaginatedResult,
-} from "@/types/types";
-import axios, { type AxiosError, type AxiosResponse } from "axios";
-import { getServerSession } from "next-auth";
+} from '@/types/types';
+import axios, { type AxiosError, type AxiosResponse } from 'axios';
+import { getServerSession } from 'next-auth';
 
 export const getRecipes = async (
   category: RecipeCategories,
-  page: number
+  page: number,
 ): Promise<TPaginatedResult<TRecipe>> => {
   const session = await getServerSession(authOptions);
   const limit = 12;
@@ -23,7 +23,7 @@ export const getRecipes = async (
         headers: {
           Authorization: `Bearer ${session?.user.token}`,
         },
-      }
+      },
     )
     .then((resp: AxiosResponse<TPaginatedResponse<TRecipe>>) => {
       const pagesCount = Math.ceil(resp.data.total / limit);

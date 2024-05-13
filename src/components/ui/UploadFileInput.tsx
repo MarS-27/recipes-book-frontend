@@ -1,9 +1,9 @@
-"use client";
-import { type TCustomFile } from "@/types/types";
-import Image from "next/image";
-import { type FC } from "react";
-import { useDropzone } from "react-dropzone";
-import { IconButton } from "./IconButton";
+'use client';
+import { type TCustomFile } from '@/types/types';
+import Image from 'next/image';
+import { type FC } from 'react';
+import { useDropzone } from 'react-dropzone';
+import { IconButton } from './IconButton';
 
 type TUploadFileInputProps = {
   updatedImgPath: string | null | undefined;
@@ -22,9 +22,9 @@ export const UploadFileInput: FC<TUploadFileInputProps> = ({
     onDrop,
     multiple: false,
     accept: {
-      "image/png": [".png"],
-      "image/jpeg": [".jpeg", ".jpg"],
-      "image/webp": [".webp"],
+      'image/png': ['.png'],
+      'image/jpeg': ['.jpeg', '.jpg'],
+      'image/webp': ['.webp'],
     },
   });
 
@@ -41,7 +41,7 @@ export const UploadFileInput: FC<TUploadFileInputProps> = ({
                 : `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${updatedImgPath}`
             }
             alt="Upload image"
-            className="w-36 h-28 object-cover rounded-md"
+            className="h-28 w-36 rounded-md object-cover"
             onLoad={() => {
               if (uploadFilePreview) {
                 URL.revokeObjectURL(uploadFilePreview.preview);
@@ -58,17 +58,17 @@ export const UploadFileInput: FC<TUploadFileInputProps> = ({
       ) : (
         <>
           <div>
-            <p className="text-s14 text-center text-grayStroke-70 mb-1">
+            <p className="mb-1 text-center text-s14 text-grayStroke-70">
               Upload image
             </p>
-            <p className="text-xs10 text-center text-grayStroke-70">
+            <p className="text-center text-xs10 text-grayStroke-70">
               Only: png | jpg | jpeg | webp
             </p>
           </div>
 
           <button
             {...getRootProps()}
-            className="w-8 h-8 hover:scale-125 transition-all duration-200"
+            className="h-8 w-8 transition-all duration-200 hover:scale-125"
             type="button"
           >
             <Image

@@ -1,11 +1,11 @@
-"use client";
-import { useClosePopupOnClickOutside } from "@/hooks/useClosePopupOnClickOutside";
-import { RecipeCategories } from "@/types/recipe";
-import { ROUTE } from "@/utils/routes";
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import { type FC } from "react";
+'use client';
+import { useClosePopupOnClickOutside } from '@/hooks/useClosePopupOnClickOutside';
+import { RecipeCategories } from '@/types/recipe';
+import { ROUTE } from '@/utils/routes';
+import clsx from 'clsx';
+import Image from 'next/image';
+import Link from 'next/link';
+import { type FC } from 'react';
 
 type SelectCategoryProps = {
   category: RecipeCategories;
@@ -19,22 +19,22 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
     <div ref={ref} className="relative w-full md:max-w-filterBar">
       <div
         className={clsx(
-          "flex justify-between items-center gap-2 p-2 bg-lightYellow rounded-md border-2 transition-all duration-200",
+          'flex items-center justify-between gap-2 rounded-md border-2 bg-lightYellow p-2 transition-all duration-200',
           isOpenPopup
-            ? "border-mainBlue"
-            : "border-grayStroke-80 hover:border-mainBlue"
+            ? 'border-mainBlue'
+            : 'border-grayStroke-80 hover:border-mainBlue',
         )}
         onClick={() => {
           toggleOpenPopup(!isOpenPopup);
         }}
       >
-        <h3 className="md:text-md20 text-s14 font-semibold">{category}</h3>
+        <h3 className="text-s14 font-semibold md:text-md20">{category}</h3>
         <Image
           width={24}
           height={24}
           className={clsx(
-            "min-w-6 transition-all duration-200",
-            isOpenPopup ? "rotate-180" : null
+            'min-w-6 transition-all duration-200',
+            isOpenPopup ? 'rotate-180' : null,
           )}
           src="/images/select-arrow.svg"
           alt="Open select categories"
@@ -42,16 +42,16 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
       </div>
       <div
         className={clsx(
-          "w-full absolute top-[105%] left-0 grid transition-all duration-200 max-h-filterBar z-10",
+          'absolute left-0 top-[105%] z-10 grid max-h-filterBar w-full transition-all duration-200',
           isOpenPopup
-            ? "p-2 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
-            : "grid-rows-[0fr]"
+            ? 'grid-rows-[1fr] rounded-md border border-grayStroke-80 bg-pageBg p-2'
+            : 'grid-rows-[0fr]',
         )}
       >
         <div
           className={clsx(
-            "flex flex-col gap-1.5",
-            isOpenPopup ? "overflow-auto" : "overflow-hidden"
+            'flex flex-col gap-1.5',
+            isOpenPopup ? 'overflow-auto' : 'overflow-hidden',
           )}
         >
           {categories.map((item) => (
@@ -59,10 +59,10 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
               href={`${ROUTE.RECIPES}?category=${item}&page=1`}
               key={item}
               className={clsx(
-                "pb-1 px-2 mb-0.5 relative transition-all duration-200 after:absolute after:top-full after:left-0 after:w-0 after:h-px after:transition-all after:duration-200 after:bg-darkBlue",
+                'relative mb-0.5 px-2 pb-1 transition-all duration-200 after:absolute after:left-0 after:top-full after:h-px after:w-0 after:bg-darkBlue after:transition-all after:duration-200',
                 category === item
-                  ? "pointer-events-none after:w-full text-darkBlue"
-                  : "hover:text-darkBlue hover:after:w-full"
+                  ? 'pointer-events-none text-darkBlue after:w-full'
+                  : 'hover:text-darkBlue hover:after:w-full',
               )}
               onClick={() => {
                 toggleOpenPopup(!isOpenPopup);

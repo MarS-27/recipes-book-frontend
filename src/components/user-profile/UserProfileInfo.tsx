@@ -1,11 +1,11 @@
-import { type FC } from "react";
-import Image from "next/image";
-import { Button } from "../ui/Button";
-import { useDeleteUser } from "@/hooks/useDeleteUser";
-import { Loader } from "../ui/Loader";
-import { type TUserProfile } from "@/types/auth";
-import { useQuery } from "@tanstack/react-query";
-import clsx from "clsx";
+import { type FC } from 'react';
+import Image from 'next/image';
+import { Button } from '../ui/Button';
+import { useDeleteUser } from '@/hooks/useDeleteUser';
+import { Loader } from '../ui/Loader';
+import { type TUserProfile } from '@/types/auth';
+import { useQuery } from '@tanstack/react-query';
+import clsx from 'clsx';
 
 type TUserProfileInfoProps = {
   openUpdateUserProfile: () => void;
@@ -23,23 +23,23 @@ export const UserProfileInfo: FC<TUserProfileInfoProps> = ({
   } = useDeleteUser();
 
   const { data: userProfile } = useQuery<TUserProfile>({
-    queryKey: ["user-profile"],
+    queryKey: ['user-profile'],
   });
 
   return (
-    <div className="flex flex-col w-full gap-3 mb-3">
+    <div className="mb-3 flex w-full flex-col gap-3">
       <Image
         width={144}
         height={112}
         src={
           userProfile?.imgPath
             ? `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${userProfile.imgPath}`
-            : "/images/user-icon.svg"
+            : '/images/user-icon.svg'
         }
         alt="User profile"
         className={clsx(
-          "w-36 h-28 rounded-md mx-auto",
-          userProfile?.imgPath ? "object-cover" : "object-center"
+          'mx-auto h-28 w-36 rounded-md',
+          userProfile?.imgPath ? 'object-cover' : 'object-center',
         )}
       />
       <p>
@@ -48,7 +48,7 @@ export const UserProfileInfo: FC<TUserProfileInfoProps> = ({
       </p>
       <p>
         <span className="font-semibold">User name: </span>
-        {userProfile?.userName ? userProfile.userName : "---"}
+        {userProfile?.userName ? userProfile.userName : '---'}
       </p>
       <div className="flex justify-center gap-3">
         <Button
@@ -88,21 +88,21 @@ export const UserProfileInfo: FC<TUserProfileInfoProps> = ({
           </Button>
           <div
             className={clsx(
-              "w-full absolute top-[105%] left-0 grid transition-all duration-200 z-10",
+              'absolute left-0 top-[105%] z-10 grid w-full transition-all duration-200',
               isOpenDeletingAccept
-                ? "p-0.5 grid-rows-[1fr] bg-pageBg rounded-md border border-grayStroke-80"
-                : "grid-rows-[0fr]"
+                ? 'grid-rows-[1fr] rounded-md border border-grayStroke-80 bg-pageBg p-0.5'
+                : 'grid-rows-[0fr]',
             )}
           >
-            <div className="flex items-center justify-around gap-1.5 text-xs12 text-center overflow-hidden">
+            <div className="flex items-center justify-around gap-1.5 overflow-hidden text-center text-xs12">
               <p
-                className="w-full p-0.5 underline text-mainRed hover:bg-lightBlue cursor-pointer rounded-md"
+                className="w-full cursor-pointer rounded-md p-0.5 text-mainRed underline hover:bg-lightBlue"
                 onClick={deleteUser}
               >
                 Yes
               </p>
               <p
-                className="w-full p-0.5 underline text-mainGreen hover:bg-lightBlue cursor-pointer rounded-md"
+                className="w-full cursor-pointer rounded-md p-0.5 text-mainGreen underline hover:bg-lightBlue"
                 onClick={closeDeleteAccept}
               >
                 No

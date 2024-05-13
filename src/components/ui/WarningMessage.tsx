@@ -1,5 +1,5 @@
-import clsx from "clsx";
-import { type FC, type ReactNode } from "react";
+import clsx from 'clsx';
+import { type FC, type ReactNode } from 'react';
 
 type WarningMessageProps = {
   children: ReactNode;
@@ -13,8 +13,8 @@ export const WarningMessage: FC<WarningMessageProps> = ({
   return (
     <div
       className={clsx(
-        "text-sm16 sm:text-md24 font-semibold",
-        classNameModificator
+        'text-sm16 font-semibold sm:text-md24',
+        classNameModificator,
       )}
     >
       {children}

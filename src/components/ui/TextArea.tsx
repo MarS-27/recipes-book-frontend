@@ -1,6 +1,6 @@
-import clsx from "clsx";
-import { type FC } from "react";
-import { type FieldError, UseFormRegisterReturn } from "react-hook-form";
+import clsx from 'clsx';
+import { type FC } from 'react';
+import { type FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 type TTextAreaProps = {
   error?: FieldError;
@@ -21,8 +21,8 @@ export const TextArea: FC<TTextAreaProps> = ({
     <label className="relative w-full">
       <textarea
         className={clsx(
-          "w-full py-1.5 px-3.5 text-s14 font-medium outline-grayStroke-70 rounded-md border border-grayStroke-100 border-opacity-20",
-          error ? "border-mainRed outline-mainRed" : null
+          'w-full rounded-md border border-grayStroke-100 border-opacity-20 px-3.5 py-1.5 text-s14 font-medium outline-grayStroke-70',
+          error ? 'border-mainRed outline-mainRed' : null,
         )}
         rows={rows}
         placeholder={placeholder}
@@ -30,7 +30,7 @@ export const TextArea: FC<TTextAreaProps> = ({
         {...register}
       />
       {error ? (
-        <span className="absolute left-1 -top-3 text-mainRed text-xs10">
+        <span className="absolute -top-3 left-1 text-xs10 text-mainRed">
           * {error.message}
         </span>
       ) : null}

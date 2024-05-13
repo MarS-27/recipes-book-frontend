@@ -1,18 +1,18 @@
-import { type FC } from "react";
-import { getRecipes } from "@/utils/getRecipes";
-import { redirect } from "next/navigation";
-import { ROUTE } from "@/utils/routes";
-import { RecipeCategories, type TRecipe } from "@/types/recipe";
-import { Pagination } from "@/components/ui/Pagination";
-import { WarningMessage } from "@/components/ui/WarningMessage";
-import { RecipeCard } from "@/components/recipes-page/RecipeCard";
-import { FilterPanel } from "@/components/recipes-page/FilterPanel";
+import { type FC } from 'react';
+import { getRecipes } from '@/utils/getRecipes';
+import { redirect } from 'next/navigation';
+import { ROUTE } from '@/utils/routes';
+import { RecipeCategories, type TRecipe } from '@/types/recipe';
+import { Pagination } from '@/components/ui/Pagination';
+import { WarningMessage } from '@/components/ui/WarningMessage';
+import { RecipeCard } from '@/components/recipes-page/RecipeCard';
+import { FilterPanel } from '@/components/recipes-page/FilterPanel';
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
-} from "@tanstack/react-query";
-import { type TPaginatedResult } from "@/types/types";
+} from '@tanstack/react-query';
+import { type TPaginatedResult } from '@/types/types';
 
 type TSearchParams = {
   category: RecipeCategories;
@@ -29,22 +29,22 @@ const Recipes: FC<{ searchParams: TSearchParams }> = async ({
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["recipes"],
+    queryKey: ['recipes'],
     queryFn: () => getRecipes(searchParams.category, Number(searchParams.page)),
   });
 
   const recipesData = queryClient.getQueryData<TPaginatedResult<TRecipe>>([
-    "recipes",
+    'recipes',
   ]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <section className="flex flex-col justify-between w-full pb-5">
+      <section className="flex w-full flex-col justify-between pb-5">
         <FilterPanel category={searchParams.category} />
         {recipesData?.error && !recipesData.results.length ? (
           <WarningMessage>{recipesData.error}</WarningMessage>
         ) : (
-          <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex-auto py-5">
+          <div className="grid flex-auto grid-cols-1 gap-5 py-5 md:grid-cols-2 lg:grid-cols-3">
             {recipesData?.results.length ? (
               recipesData.results.map((recipe) => (
                 <RecipeCard key={recipe.id} recipe={recipe} />

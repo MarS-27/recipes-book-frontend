@@ -1,17 +1,17 @@
-"use client";
-import { ROUTE } from "@/utils/routes";
-import clsx from "clsx";
-import { signOut } from "next-auth/react";
-import Image from "next/image";
-import { type FC } from "react";
-import { toast } from "react-toastify";
+'use client';
+import { ROUTE } from '@/utils/routes';
+import clsx from 'clsx';
+import { signOut } from 'next-auth/react';
+import Image from 'next/image';
+import { type FC } from 'react';
+import { toast } from 'react-toastify';
 
 export const LogoutButton: FC = () => {
   const handleSignOut = async () => {
     try {
       await signOut({ redirect: true, callbackUrl: ROUTE.HOME });
     } catch (err) {
-      toast.error("Log out error. Try again.");
+      toast.error('Log out error. Try again.');
     }
   };
 
@@ -19,8 +19,8 @@ export const LogoutButton: FC = () => {
     <button
       onClick={handleSignOut}
       className={clsx(
-        "relative hover:scale-125 transition-all duration-200",
-        "after:content-['Sign_Out'] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:text-xs10 after:whitespace-nowrap after:opacity-0 hover:after:opacity-100 after:transition-all after:duration-200"
+        'relative transition-all duration-200 hover:scale-125',
+        "after:absolute after:left-1/2 after:top-full after:-translate-x-1/2 after:whitespace-nowrap after:text-xs10 after:opacity-0 after:transition-all after:duration-200 after:content-['Sign_Out'] hover:after:opacity-100",
       )}
     >
       <Image
@@ -28,7 +28,7 @@ export const LogoutButton: FC = () => {
         height={40}
         src="/images/logout-icon.svg"
         alt="logout"
-        className="w-7 h-7 sm:w-10 sm:h-10 min-w-7"
+        className="h-7 w-7 min-w-7 sm:h-10 sm:w-10"
       />
     </button>
   );

@@ -1,16 +1,16 @@
-"use client";
-import { useRecipeForm } from "@/hooks/useRecipeForm";
-import { type TRecipe } from "@/types/recipe";
-import { type FC } from "react";
-import { FormProvider, type FieldError } from "react-hook-form";
-import { Button } from "../ui/Button";
-import { FormInput } from "../ui/FormInput";
-import { Loader } from "../ui/Loader";
-import { TextArea } from "../ui/TextArea";
-import { RecipeIngredients } from "./RecipeIngredients";
-import { RecipeStages } from "./RecipeStages";
-import { InputCategory } from "./InputCategory";
-import { AddRecipeImages } from "./AddRecipeImages";
+'use client';
+import { useRecipeForm } from '@/hooks/useRecipeForm';
+import { type TRecipe } from '@/types/recipe';
+import { type FC } from 'react';
+import { FormProvider, type FieldError } from 'react-hook-form';
+import { Button } from '../ui/Button';
+import { FormInput } from '../ui/FormInput';
+import { Loader } from '../ui/Loader';
+import { TextArea } from '../ui/TextArea';
+import { RecipeIngredients } from './RecipeIngredients';
+import { RecipeStages } from './RecipeStages';
+import { InputCategory } from './InputCategory';
+import { AddRecipeImages } from './AddRecipeImages';
 
 type TRecipeFormProps = {
   updatedRecipeData?: TRecipe;
@@ -31,9 +31,9 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
   const { titleImgPath } = watch();
 
   return (
-    <div className="relative w-full p-3 md:p-6 bg-mainYellow bg-opacity-[0.3] rounded-md border border-grayStroke-80">
-      <h3 className="font-semibold text-md20 sm:text-md26 pb-2 mb-4 border-b-2 border-b-mainBlue">
-        {updatedRecipeData ? "Change recipe" : "Create recipe"}
+    <div className="relative w-full rounded-md border border-grayStroke-80 bg-mainYellow bg-opacity-[0.3] p-3 md:p-6">
+      <h3 className="mb-4 border-b-2 border-b-mainBlue pb-2 text-md20 font-semibold sm:text-md26">
+        {updatedRecipeData ? 'Change recipe' : 'Create recipe'}
       </h3>
       <FormProvider {...methods}>
         <form
@@ -43,14 +43,14 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
               : handleSubmit(updateRecipe)
           }
         >
-          <div className="flex flex-col justify-center items-stretch gap-4">
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex flex-col gap-4 w-full">
+          <div className="flex flex-col items-stretch justify-center gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
+              <div className="flex w-full flex-col gap-4">
                 <FormInput
                   type="text"
                   placeholder="Recipe title"
-                  register={register("title", {
-                    required: "Title is required!",
+                  register={register('title', {
+                    required: 'Title is required!',
                   })}
                   error={errors.title as FieldError}
                 />
@@ -62,14 +62,14 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
               </div>
               <TextArea
                 placeholder="Recipe description"
-                register={register("description", {
-                  required: "Description is required!",
+                register={register('description', {
+                  required: 'Description is required!',
                 })}
                 error={errors.description as FieldError}
                 rows={8}
               />
             </div>
-            <div className="flex flex-col sm:flex-row justify-between gap-3">
+            <div className="flex flex-col justify-between gap-3 sm:flex-row">
               <RecipeIngredients />
               <RecipeStages />
             </div>
@@ -78,7 +78,7 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
                 {isSubmitting ? (
                   <Loader classNameModificator="border-t-white" />
                 ) : (
-                  "Submit"
+                  'Submit'
                 )}
               </Button>
               <Button variant="outlined" onClick={() => reset()}>
