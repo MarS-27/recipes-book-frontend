@@ -16,12 +16,8 @@ export enum RecipeCategories {
   Beverages = 'Beverages',
   Breakfast = 'Breakfast',
   VeganHealthy = 'Vegan/Healthy',
-  Cakes = 'Cakes',
-  Cookies = 'Cookies',
-  PiesAndTarts = 'Pies and tarts',
   Baking = 'Baking',
-  Cupcakes = 'Cupcakes',
-  OtherDeserts = 'Other deserts',
+  Desserts = 'Desserts',
   Others = 'Others',
 }
 
