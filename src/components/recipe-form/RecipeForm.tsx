@@ -62,9 +62,7 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
               </div>
               <TextArea
                 placeholder="Recipe description"
-                register={register('description', {
-                  required: 'Description is required!',
-                })}
+                register={register('description')}
                 error={errors.description as FieldError}
                 rows={8}
               />

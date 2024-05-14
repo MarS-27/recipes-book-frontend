@@ -35,7 +35,7 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
   ]);
 
   const error = recipeData?.error;
-  const result = recipeData?.result;
+  const recipe = recipeData?.result;
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -45,8 +45,8 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
           <WarningMessage>{error}</WarningMessage>
         ) : (
           <>
-            {result?.ingredients ? (
-              <IngredientsList ingredients={result.ingredients} />
+            {recipe?.ingredients ? (
+              <IngredientsList ingredients={recipe.ingredients} />
             ) : null}
             <div className="flex w-full flex-col gap-3 md:pl-64">
               <div className="flex items-center justify-between gap-2">
@@ -56,22 +56,22 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
                     'w-full p-2 text-center text-md26 font-medium tracking-wider sm:text-l36',
                   )}
                 >
-                  {result?.title}
+                  {recipe?.title}
                 </h3>
                 <ControlRecipeButtons />
               </div>
-              {result?.titleImgPath ? (
+              {recipe?.titleImgPath ? (
                 <Image
                   width={1920}
                   height={1080}
-                  src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${result.titleImgPath}`}
+                  src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${recipe.titleImgPath}`}
                   className="mx-auto h-auto max-h-recipeTitleImage w-full max-w-fit rounded-md object-contain"
                   alt="Recipe title image"
                 />
               ) : null}
-              <p>{result?.description}</p>
-              {result?.stages ? (
-                <RecipeStagesList stages={result.stages} />
+              {recipe?.description ? <p>{recipe.description}</p> : null}
+              {recipe?.stages ? (
+                <RecipeStagesList stages={recipe.stages} />
               ) : null}
             </div>
           </>
