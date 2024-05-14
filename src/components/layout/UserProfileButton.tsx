@@ -33,8 +33,8 @@ export const UserProfileButton: FC = () => {
           onClick={openUserProfile}
         >
           <Image
-            width={44}
-            height={44}
+            width={1980}
+            height={1080}
             src={
               userProfile?.imgPath
                 ? `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${userProfile.imgPath}`

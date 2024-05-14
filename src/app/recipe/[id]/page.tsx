@@ -65,7 +65,7 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
                   width={1920}
                   height={1080}
                   src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${result.titleImgPath}`}
-                  className="h-auto max-h-recipeTitleImage w-full rounded-md object-cover"
+                  className="mx-auto h-auto max-h-recipeTitleImage w-full max-w-fit rounded-md object-contain"
                   alt="Recipe title image"
                 />
               ) : null}

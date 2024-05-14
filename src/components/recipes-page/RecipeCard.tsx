@@ -31,16 +31,16 @@ export const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
         }
         className={clsx(
           'w-full rounded-md',
-          !titleImgPath ? 'h-40 object-center' : 'h-recipeCard object-cover',
+          !titleImgPath ? 'h-60 object-center' : 'h-recipeCard object-cover',
         )}
-        width={300}
-        height={300}
+        width={1920}
+        height={1080}
         alt="Recipe title image"
       />
       <p
         className={clsx(
           pacifico.className,
-          'absolute bottom-0 left-0 line-clamp-1 w-full bg-lightYellow bg-opacity-70 p-2 text-md20 font-medium leading-[34px] hover:line-clamp-none md:text-md26 md:leading-[44px]',
+          'absolute bottom-0 left-0 line-clamp-1 w-full bg-lightYellow bg-opacity-70 p-2 text-md20 font-medium leading-[38px] hover:line-clamp-none md:text-md26 md:leading-[48px]',
         )}
       >
         {title}

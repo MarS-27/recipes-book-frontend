@@ -15,8 +15,8 @@ export const StageImage: FC<TStageImageProps> = ({ imgPath }) => {
     <>
       <div className="relative w-5/12">
         <Image
-          width={240}
-          height={240}
+          width={1920}
+          height={1080}
           src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${imgPath}`}
           className="h-auto max-h-recipeStageImage w-full rounded-md object-cover"
           alt="Recipe stage image"
@@ -31,8 +31,8 @@ export const StageImage: FC<TStageImageProps> = ({ imgPath }) => {
       {isModalShow ? (
         <ModalWindow>
           <Image
-            width={1280}
-            height={720}
+            width={1920}
+            height={1080}
             src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${imgPath}`}
             className="mx-auto h-auto w-full rounded-md object-cover sm:w-4/5"
             alt="Recipe stage image"

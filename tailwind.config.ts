@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       width: { ingredientsList: '250px' },
-      height: { recipeCard: '240px', searchImg: '60px' },
+      height: { recipeCard: '340px', searchImg: '60px' },
       maxHeight: {
         filterBar: '300px',
         recipeTitleImage: '400px',

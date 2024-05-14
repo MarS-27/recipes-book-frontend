@@ -44,7 +44,7 @@ const Recipes: FC<{ searchParams: TSearchParams }> = async ({
         {recipesData?.error && !recipesData.results.length ? (
           <WarningMessage>{recipesData.error}</WarningMessage>
         ) : (
-          <div className="grid flex-auto grid-cols-1 gap-5 py-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid flex-auto grid-cols-1 gap-5 py-5 min-[460px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {recipesData?.results.length ? (
               recipesData.results.map((recipe) => (
                 <RecipeCard key={recipe.id} recipe={recipe} />
