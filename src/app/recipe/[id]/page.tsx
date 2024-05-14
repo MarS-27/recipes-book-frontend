@@ -48,7 +48,7 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
             {recipe?.ingredients ? (
               <IngredientsList ingredients={recipe.ingredients} />
             ) : null}
-            <div className="flex w-full flex-col gap-3 md:pl-64">
+            <div className="flex w-full flex-col gap-3 md:pl-[270px]">
               <div className="flex items-center justify-between gap-2">
                 <h3
                   className={clsx(

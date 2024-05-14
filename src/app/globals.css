@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  &::-webkit-scrollbar {
+    width: 6px;
+    padding: 1px;
+    background-color: #ecf4f7;
+    border-radius: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #45abb8bc;
+    border-radius: 6px;
+  }
+}
+
 .loader-animation::before {
   animation: animloader 1s ease infinite;
 }
