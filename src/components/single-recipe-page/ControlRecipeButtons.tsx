@@ -10,12 +10,30 @@ import { useState, type FC } from 'react';
 import { Button } from '../ui/Button';
 import { IconButton } from '../ui/IconButton';
 import { Loader } from '../ui/Loader';
+import dynamic from 'next/dynamic';
+import RecipePdfDocumet from '../recipePdfDocument/RecipePdfDocumet';
+import { useQuery } from '@tanstack/react-query';
+import { type TGetRecipeByIdResult } from '@/types/recipe';
+import { PDFViewer } from '@react-pdf/renderer';
+
+const PDFDownloadLink = dynamic(
+  () => import('@react-pdf/renderer').then((mod) => mod.PDFDownloadLink),
+  {
+    ssr: false,
+  },
+);
 
 export const ControlRecipeButtons: FC = () => {
   const { ref, isOpenPopup, toggleOpenPopup } = useClosePopupOnClickOutside();
   const [isOpenDeletingAccept, setOpenDeletingAccept] = useState(false);
   const params = useParams<{ id: string }>();
   const { isDeleting, deleteRecipe } = useDeleteRecipe(params.id);
+
+  const { data } = useQuery<TGetRecipeByIdResult>({
+    queryKey: ['recipe', params.id],
+  });
+
+  const recipe = data?.result;
 
   return (
     <div ref={ref} className="relative h-6">
@@ -48,6 +66,25 @@ export const ControlRecipeButtons: FC = () => {
               <p className="w-full">Edit</p>
             </Button>
           </Link>
+
+          {recipe ? (
+            <PDFDownloadLink
+              document={<RecipePdfDocumet recipe={recipe} />}
+              fileName={`recipe_${params.id}.pdf`}
+            >
+              <Button variant="contained">
+                <Image
+                  width={24}
+                  height={24}
+                  src="/images/download-icon.svg"
+                  alt="Edit recipe"
+                  className="ml-1 min-w-6"
+                />
+                <p className="w-full">PDF</p>
+              </Button>
+            </PDFDownloadLink>
+          ) : null}
+
           {!isOpenDeletingAccept ? (
             <Button
               variant="outlined"
