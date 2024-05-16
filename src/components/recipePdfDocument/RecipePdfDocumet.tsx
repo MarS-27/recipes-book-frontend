@@ -15,11 +15,13 @@ const RecipePdfDocumet: FC<RecipePdfDocumetProps> = ({ recipe }) => {
             style={styles.titleImage}
             src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${recipe.titleImgPath}`}
           />
-          <View style={styles.columnSection}>
-            <Text style={styles.boldText}>Ingredients:</Text>
-            {recipe.ingredients.map((ingredient) => (
-              <Text key={ingredient}>{ingredient}</Text>
-            ))}
+          <View style={styles.ingredients}>
+            <View style={styles.columnSection}>
+              <Text style={styles.boldText}>Ingredients:</Text>
+              {recipe.ingredients.map((ingredient) => (
+                <Text key={ingredient}>{ingredient}</Text>
+              ))}
+            </View>
           </View>
         </View>
         <Text style={styles.description}>{recipe.description}</Text>
@@ -28,7 +30,7 @@ const RecipePdfDocumet: FC<RecipePdfDocumetProps> = ({ recipe }) => {
           {recipe.stages.map((stage) => (
             <View style={styles.stageItem} key={stage.stageNumber}>
               <View style={styles.stageText}>
-                <Text style={styles.boldText}>{stage.stageNumber}.</Text>{' '}
+                <Text style={styles.boldText}>{stage.stageNumber}.</Text>
                 <Text>{stage.description}</Text>
               </View>
               {stage.imgPath ? (

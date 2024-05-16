@@ -14,7 +14,8 @@ export const styles = StyleSheet.create({
   page: {
     fontFamily: 'Roboto-regular',
     flexDirection: 'column',
-    backgroundColor: '#E4E4E4',
+    backgroundColor: '#fafbfb',
+    color: '#231F20',
     padding: '30px',
     fontSize: '12px',
   },
@@ -23,6 +24,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
+    gap: '10px',
     width: '100%',
     marginVertical: '15px',
   },
@@ -31,6 +33,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     gap: '5px',
+  },
+  ingredients: {
+    width: '50%',
   },
   boldText: {
     fontFamily: 'Roboto-bold',
@@ -56,7 +61,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     paddingBottom: '5px',
-    borderBottom: '1px solid black',
+    borderBottom: '1px solid #dde1e5',
   },
   stageText: {
     display: 'flex',
