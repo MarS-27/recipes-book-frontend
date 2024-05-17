@@ -36,7 +36,7 @@ export const ControlRecipeButtons: FC = () => {
   const recipe = data?.result;
 
   return (
-    <div ref={ref} className="relative h-6">
+    <div ref={ref} className="relative h-8 pt-2">
       <IconButton
         iconSrc={isOpenPopup ? '/images/close.svg' : '/images/gear-icon.svg'}
         classNameModificator="w-6 h-6 min-w-6"

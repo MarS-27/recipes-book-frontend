@@ -15,7 +15,6 @@ export enum RecipeCategories {
   SideDishes = 'Side dishes',
   Beverages = 'Beverages',
   Breakfast = 'Breakfast',
-  VeganHealthy = 'Vegan/Healthy',
   Baking = 'Baking',
   Desserts = 'Desserts',
   Others = 'Others',
@@ -33,13 +32,14 @@ export type TRecipe = {
   category: RecipeCategories;
   titleImgPath: string | null;
   description: string;
+  isVeganHealthy: boolean;
   ingredients: string[];
   stages: TRecipeStage[];
 };
 
 export type TGetRecipeByIdResult = {
-  error?: string;
   result: TRecipe | undefined;
+  error?: string;
 };
 
 export type TGetRecipeInForm = TRecipe & TRecipeFiles;

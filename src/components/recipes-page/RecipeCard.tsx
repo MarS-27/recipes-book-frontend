@@ -19,7 +19,7 @@ export const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
     <Link
       href={`${ROUTE.RECIPE}/${recipe.id}`}
       className={clsx(
-        'relative h-recipeCard rounded-md shadow-lg transition-all duration-200 hover:scale-105',
+        'relative h-recipeCard overflow-hidden rounded-md shadow-lg transition-all duration-200 hover:scale-105',
         !titleImgPath ? 'bg-lightBlue p-2' : 'p-0',
       )}
     >
@@ -45,6 +45,17 @@ export const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
       >
         {title}
       </p>
+      {recipe.isVeganHealthy ? (
+        <div className="absolute right-1 top-1 h-14 w-14 rounded-md bg-mainGreen bg-opacity-70">
+          <Image
+            src="/images/healthy-logo.svg"
+            width={720}
+            height={480}
+            alt="Healthy/Vegan"
+            className="h-14 w-14 scale-150"
+          />
+        </div>
+      ) : null}
     </Link>
   );
 };
