@@ -2,7 +2,7 @@ import { RecipeCategories } from '@/types/recipe';
 import { type FC } from 'react';
 import { SelectCategory } from './SelectCategory';
 import { SearchBar } from './SearchBar';
-import { IsVeganHealthyCheckbox } from './IsVeganHealthyCheckbox';
+import { IsVeganHealthyFilter } from './IsVeganHealthyFilter';
 
 type FilterPanelProps = {
   category?: RecipeCategories;
@@ -18,7 +18,7 @@ export const FilterPanel: FC<FilterPanelProps> = ({
       {category && isVeganHealthy ? (
         <>
           <SelectCategory category={category} isVeganHealthy={isVeganHealthy} />
-          <IsVeganHealthyCheckbox
+          <IsVeganHealthyFilter
             category={category}
             isVeganHealthy={isVeganHealthy}
           />

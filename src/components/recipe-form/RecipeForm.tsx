@@ -28,7 +28,9 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
     watch,
   } = methods;
 
-  const { titleImgPath } = watch();
+  const { titleImgPath, isVeganHealthy } = watch();
+
+  console.log(isVeganHealthy);
 
   return (
     <div className="relative w-full rounded-md border border-grayStroke-80 bg-mainYellow bg-opacity-[0.3] p-3 md:p-6">
@@ -54,7 +56,14 @@ export const RecipeForm: FC<TRecipeFormProps> = ({ updatedRecipeData }) => {
                   })}
                   error={errors.title as FieldError}
                 />
-                <InputCategory />
+                <div className="flex flex-col gap-4 md:flex-row">
+                  <InputCategory />
+                  <FormInput
+                    type="checkbox"
+                    placeholder="Vegan/Healthy"
+                    register={register('isVeganHealthy')}
+                  />
+                </div>
                 <AddRecipeImages
                   fieldName="titleImgPath"
                   updatedImgPath={titleImgPath}

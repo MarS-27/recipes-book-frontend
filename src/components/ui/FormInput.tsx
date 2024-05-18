@@ -1,11 +1,15 @@
 import clsx from 'clsx';
-import { type FC, KeyboardEvent } from 'react';
-import { type FieldError, UseFormRegisterReturn } from 'react-hook-form';
+import {
+  type FC,
+  type KeyboardEvent,
+  type HTMLInputTypeAttribute,
+} from 'react';
+import { type FieldError, type UseFormRegisterReturn } from 'react-hook-form';
 
 type TFormInputProps = {
-  error?: FieldError;
   register: UseFormRegisterReturn<string>;
-  type: string;
+  type: HTMLInputTypeAttribute;
+  error?: FieldError;
   placeholder?: string;
   disabled?: boolean;
   onEnterKeyDown?: () => void;
@@ -28,13 +32,21 @@ export const FormInput: FC<TFormInputProps> = ({
   };
 
   return (
-    <label className="relative w-full">
+    <fieldset
+      className={clsx(
+        type === 'text' ? 'relative w-full' : null,
+        type === 'checkbox' ? 'flex items-center gap-2 p-1' : null,
+      )}
+    >
       <input
         className={clsx(
-          'w-full rounded-md border border-grayStroke-100 border-opacity-20 px-3.5 py-1.5 text-s14 font-medium outline-grayStroke-70',
+          type === 'text'
+            ? 'w-full rounded-md border border-grayStroke-100 border-opacity-20 px-3.5 py-1.5 text-s14 font-medium outline-grayStroke-70'
+            : null,
           error ? 'border-mainRed outline-mainRed' : null,
         )}
         type={type}
+        id={placeholder}
         placeholder={placeholder}
         disabled={disabled}
         onKeyDown={handleEnterDown}
@@ -45,6 +57,9 @@ export const FormInput: FC<TFormInputProps> = ({
           * {error.message}
         </span>
       ) : null}
-    </label>
+      {type === 'checkbox' ? (
+        <label htmlFor={placeholder}>{placeholder}</label>
+      ) : null}
+    </fieldset>
   );
 };

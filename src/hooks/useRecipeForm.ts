@@ -16,6 +16,7 @@ export const useRecipeForm = (updatedRecipeData: TRecipe | undefined) => {
     : {
         titleImgPath: '',
         ingredients: [''],
+        IsVeganHealthy: false,
         stages: [
           {
             stageNumber: '1',

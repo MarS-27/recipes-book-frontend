@@ -6,12 +6,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ROUTE } from '@/utils/routes';
 
-type IsVeganHealthyCheckboxProps = {
+type IsVeganHealthyFilterProps = {
   isVeganHealthy: string;
   category: RecipeCategories;
 };
 
-export const IsVeganHealthyCheckbox: FC<IsVeganHealthyCheckboxProps> = ({
+export const IsVeganHealthyFilter: FC<IsVeganHealthyFilterProps> = ({
   isVeganHealthy,
   category,
 }) => {
