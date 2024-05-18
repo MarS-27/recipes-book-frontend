@@ -17,6 +17,7 @@ import { type TPaginatedResult } from '@/types/types';
 type TSearchParams = {
   category: RecipeCategories;
   page: string;
+  isVeganHealthy: string;
 };
 
 const Recipes: FC<{ searchParams: TSearchParams }> = async ({
@@ -28,9 +29,11 @@ const Recipes: FC<{ searchParams: TSearchParams }> = async ({
 
   const queryClient = new QueryClient();
 
+  const { category, page, isVeganHealthy } = searchParams;
+
   await queryClient.prefetchQuery({
     queryKey: ['recipes'],
-    queryFn: () => getRecipes(searchParams.category, Number(searchParams.page)),
+    queryFn: () => getRecipes(category, Number(page), isVeganHealthy),
   });
 
   const recipesData = queryClient.getQueryData<TPaginatedResult<TRecipe>>([
@@ -40,7 +43,7 @@ const Recipes: FC<{ searchParams: TSearchParams }> = async ({
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <section className="flex w-full flex-col justify-between pb-5">
-        <FilterPanel category={searchParams.category} />
+        <FilterPanel category={category} isVeganHealthy={isVeganHealthy} />
         {recipesData?.error && !recipesData.results.length ? (
           <WarningMessage>{recipesData.error}</WarningMessage>
         ) : (

@@ -9,9 +9,13 @@ import { type FC } from 'react';
 
 type SelectCategoryProps = {
   category: RecipeCategories;
+  isVeganHealthy: string;
 };
 
-export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
+export const SelectCategory: FC<SelectCategoryProps> = ({
+  category,
+  isVeganHealthy,
+}) => {
   const { ref, isOpenPopup, toggleOpenPopup } = useClosePopupOnClickOutside();
   const categories = Object.values(RecipeCategories);
 
@@ -56,7 +60,7 @@ export const SelectCategory: FC<SelectCategoryProps> = ({ category }) => {
         >
           {categories.map((item) => (
             <Link
-              href={`${ROUTE.RECIPES}?category=${item}&page=1`}
+              href={`${ROUTE.RECIPES}?category=${item}&page=1&isVeganHealthy=${isVeganHealthy}`}
               key={item}
               className={clsx(
                 'relative mb-0.5 px-2 pb-1 transition-all duration-200 after:absolute after:left-0 after:top-full after:h-px after:w-0 after:bg-darkBlue after:transition-all after:duration-200',
