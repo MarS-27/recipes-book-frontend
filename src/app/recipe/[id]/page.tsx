@@ -50,16 +50,10 @@ const Recipe: FC<{ params: TParams }> = async ({ params }) => {
             ) : null}
             <div className="flex w-full flex-col gap-3 md:pl-[270px]">
               <div className="flex items-start justify-between gap-2">
-                {recipe?.isVeganHealthy ? (
-                  <div className="h-14 w-14 min-w-14 self-start overflow-hidden sm:h-20 sm:w-20 sm:min-w-20">
-                    <Image
-                      src="/images/healthy-logo.svg"
-                      width={720}
-                      height={480}
-                      alt="Healthy/Vegan"
-                      className="h-14 w-14 min-w-14 scale-150 sm:h-20 sm:w-20 sm:min-w-20"
-                    />
-                  </div>
+                {recipe?.isVegan ? (
+                  <p className="mt-2 self-start rounded-md bg-mainGreen bg-opacity-80 px-2 py-1 text-center text-s14 text-white">
+                    Vegan
+                  </p>
                 ) : null}
                 <h3
                   className={clsx(

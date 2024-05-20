@@ -32,7 +32,7 @@ export type TRecipe = {
   category: RecipeCategories;
   titleImgPath: string | null;
   description: string;
-  isVeganHealthy: boolean;
+  isVegan: boolean;
   ingredients: string[];
   stages: TRecipeStage[];
 };

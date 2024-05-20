@@ -9,18 +9,21 @@ import { type FC } from 'react';
 
 type SelectCategoryProps = {
   category: RecipeCategories;
-  isVeganHealthy: string;
+  isVegan: string;
 };
 
 export const SelectCategory: FC<SelectCategoryProps> = ({
   category,
-  isVeganHealthy,
+  isVegan,
 }) => {
   const { ref, isOpenPopup, toggleOpenPopup } = useClosePopupOnClickOutside();
   const categories = Object.values(RecipeCategories);
 
   return (
-    <div ref={ref} className="relative w-full md:max-w-filterBar">
+    <div
+      ref={ref}
+      className="relative w-full cursor-pointer md:max-w-filterBar"
+    >
       <div
         className={clsx(
           'flex items-center justify-between gap-2 rounded-md border-2 bg-lightYellow p-2 transition-all duration-200',
@@ -60,7 +63,7 @@ export const SelectCategory: FC<SelectCategoryProps> = ({
         >
           {categories.map((item) => (
             <Link
-              href={`${ROUTE.RECIPES}?category=${item}&page=1&isVeganHealthy=${isVeganHealthy}`}
+              href={`${ROUTE.RECIPES}?category=${item}&page=1&isVegan=${isVegan}`}
               key={item}
               className={clsx(
                 'relative mb-0.5 px-2 pb-1 transition-all duration-200 after:absolute after:left-0 after:top-full after:h-px after:w-0 after:bg-darkBlue after:transition-all after:duration-200',

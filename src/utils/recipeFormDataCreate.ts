@@ -5,7 +5,7 @@ export const recipeFormDataCreate = (data: TGetRecipeInForm) => {
     title,
     titleImgPath,
     description,
-    isVeganHealthy,
+    isVegan,
     category,
     ingredients,
     stages,
@@ -21,7 +21,7 @@ export const recipeFormDataCreate = (data: TGetRecipeInForm) => {
 
   formData.append('description', description);
   formData.append('category', category);
-  formData.append('isVeganHealthy', JSON.stringify(isVeganHealthy));
+  formData.append('isVegan', JSON.stringify(isVegan));
   formData.append('ingredients', JSON.stringify(ingredients));
   formData.append('stages', JSON.stringify(stages));
   recipeFiles?.forEach((file) => formData.append('files', file));

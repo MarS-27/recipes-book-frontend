@@ -2,26 +2,20 @@ import { RecipeCategories } from '@/types/recipe';
 import { type FC } from 'react';
 import { SelectCategory } from './SelectCategory';
 import { SearchBar } from './SearchBar';
-import { IsVeganHealthyFilter } from './IsVeganHealthyFilter';
+import { IsVeganFilter } from './IsVeganFilter';
 
 type FilterPanelProps = {
   category?: RecipeCategories;
-  isVeganHealthy?: string;
+  isVegan?: string;
 };
 
-export const FilterPanel: FC<FilterPanelProps> = ({
-  category,
-  isVeganHealthy,
-}) => {
+export const FilterPanel: FC<FilterPanelProps> = ({ category, isVegan }) => {
   return (
     <div className="flex justify-between gap-5 border-b-2 border-b-mainBlue px-5 pb-5 max-md:flex-col">
-      {category && isVeganHealthy ? (
+      {category && isVegan ? (
         <>
-          <SelectCategory category={category} isVeganHealthy={isVeganHealthy} />
-          <IsVeganHealthyFilter
-            category={category}
-            isVeganHealthy={isVeganHealthy}
-          />
+          <SelectCategory category={category} isVegan={isVegan} />
+          <IsVeganFilter category={category} isVegan={isVegan} />
         </>
       ) : null}
 

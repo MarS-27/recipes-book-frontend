@@ -11,7 +11,7 @@ import { getServerSession } from 'next-auth';
 export const getRecipes = async (
   category: RecipeCategories,
   page: number,
-  isVeganHealthy: string,
+  isVegan: string,
 ): Promise<TPaginatedResult<TRecipe>> => {
   const session = await getServerSession(authOptions);
   const limit = 12;
@@ -19,7 +19,7 @@ export const getRecipes = async (
 
   const result = await axios
     .get(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/recipe/paginated-recipes?category=${category}&limit=${limit}&skip=${skip}&isVeganHealthy=${isVeganHealthy}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/recipe/paginated-recipes?category=${category}&limit=${limit}&skip=${skip}&isVegan=${isVegan}`,
       {
         headers: {
           Authorization: `Bearer ${session?.user.token}`,

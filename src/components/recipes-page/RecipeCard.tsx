@@ -45,16 +45,10 @@ export const RecipeCard: FC<RecipeCardProps> = ({ recipe }) => {
       >
         {title}
       </p>
-      {recipe.isVeganHealthy ? (
-        <div className="absolute right-1 top-1 h-14 w-14 rounded-md bg-mainGreen bg-opacity-70">
-          <Image
-            src="/images/healthy-logo.svg"
-            width={720}
-            height={480}
-            alt="Healthy/Vegan"
-            className="h-14 w-14 scale-150"
-          />
-        </div>
+      {recipe.isVegan ? (
+        <p className="absolute right-1 top-1 rounded-md bg-mainGreen bg-opacity-80 px-2 py-1 text-center text-s14 text-white">
+          Vegan
+        </p>
       ) : null}
     </Link>
   );

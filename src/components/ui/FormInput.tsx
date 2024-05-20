@@ -34,15 +34,14 @@ export const FormInput: FC<TFormInputProps> = ({
   return (
     <fieldset
       className={clsx(
-        type === 'text' ? 'relative w-full' : null,
-        type === 'checkbox' ? 'flex items-center gap-2 p-1' : null,
+        type === 'checkbox' ? 'flex items-center gap-2 p-1' : 'relative w-full',
       )}
     >
       <input
         className={clsx(
-          type === 'text'
-            ? 'w-full rounded-md border border-grayStroke-100 border-opacity-20 px-3.5 py-1.5 text-s14 font-medium outline-grayStroke-70'
-            : null,
+          type === 'checkbox'
+            ? 'cursor-pointer'
+            : 'w-full rounded-md border border-grayStroke-100 border-opacity-20 px-3.5 py-1.5 text-s14 font-medium outline-grayStroke-70',
           error ? 'border-mainRed outline-mainRed' : null,
         )}
         type={type}
@@ -58,7 +57,9 @@ export const FormInput: FC<TFormInputProps> = ({
         </span>
       ) : null}
       {type === 'checkbox' ? (
-        <label htmlFor={placeholder}>{placeholder}</label>
+        <label className="cursor-pointer" htmlFor={placeholder}>
+          {placeholder}
+        </label>
       ) : null}
     </fieldset>
   );

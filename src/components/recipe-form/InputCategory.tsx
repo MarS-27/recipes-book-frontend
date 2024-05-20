@@ -20,7 +20,7 @@ export const InputCategory: FC = () => {
     (value) => value !== RecipeCategories.All,
   );
   return (
-    <div className="relative w-full text-s14 font-medium">
+    <div className="relative w-full cursor-pointer text-s14 font-medium">
       <div
         className={clsx(
           'flex items-center justify-between rounded-md bg-white px-3.5 py-1.5',
